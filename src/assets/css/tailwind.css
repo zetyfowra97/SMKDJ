@@ -1,0 +1,366 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    scroll-padding-top: 108px;
+}
+
+@layer utilities {
+    @variants responsive {
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none; 
+        }
+    }
+}
+
+@layer components {
+    html {
+        @apply scroll-smooth;
+    }
+
+    .btn {
+        @apply inline-block rounded-2xl bg-primary py-4 px-7 text-center text-sm font-extrabold uppercase text-black transition  hover:scale-105 hover:bg-secondary hover:text-white;
+    }
+    .heading {
+        @apply mb-10 lg:mb-14;
+    }
+    .heading h6 {
+        @apply mb-3 text-lg font-extrabold text-primary sm:mb-4;
+    }
+    .heading-mission h6 {
+        @apply mb-3 text-lg font-extrabold text-primary;
+    }
+    .heading h4 {
+        @apply text-2xl font-extrabold text-white dark:text-white sm:text-3xl lg:text-[40px] lg:!leading-[50px];
+    }
+    .portfolio-filter .filter.active button {
+        @apply bg-secondary text-white;
+    }
+    .home-filter .filter.active button {
+        @apply text-secondary;
+    }
+    .realestate-filter .filter.active button {
+        @apply scale-105 bg-primary text-white;
+    }
+
+    /* Header */
+
+    header .menus {
+        @apply fixed top-0 z-[52] h-screen w-full max-w-sm gap-9 bg-white transition-all duration-500 ltr:-right-full rtl:-left-full dark:bg-gray-dark lg:static lg:h-auto lg:max-w-none lg:bg-transparent dark:lg:bg-transparent;
+    }
+    header .menus > ul {
+        @apply relative flex  flex-col divide-y divide-gray/10  font-bold text-black  lg:flex-row lg:items-center lg:gap-11 lg:divide-y-0  lg:p-0 lg:text-white;
+    }
+    header .menus > ul li > a {
+        @apply flex items-center justify-between py-4 px-4 transition hover:text-secondary dark:text-white dark:hover:text-secondary lg:px-0 lg:py-10 hover:lg:scale-110;
+    }
+    header .menus > ul li > a.active {
+        @apply text-secondary lg:scale-110;
+    }
+    header .menus .submenu {
+        @apply invisible z-50 mt-5 hidden grid-cols-1 gap-x-4 whitespace-nowrap rounded-lg py-3 text-sm font-medium text-black opacity-0 transition-all dark:text-white lg:absolute lg:top-full lg:left-1/2 lg:grid lg:min-w-[480px] lg:-translate-x-1/2 lg:grid-cols-2 lg:bg-[#F0F4F7] lg:shadow-lg lg:dark:bg-gray-dark;
+    }
+    .submenu {
+        @apply group-hover:visible group-hover:mt-0 group-hover:grid group-hover:opacity-100;
+    }
+    header .menus .submenu a {
+        @apply block py-2.5 px-8 transition hover:text-secondary lg:px-5 hover:lg:scale-105;
+    }
+    header .menus .submenu a.active {
+        @apply text-secondary lg:scale-105;
+    }
+
+    /* Filter */
+    .project.hidden {
+        animation: hide 1s ease 0s 1 normal forwards;
+        transform-origin: center;
+    }
+    .project.block {
+        animation: show 1s ease 0s 1 normal forwards;
+        transform-origin: center;
+    }
+
+    @keyframes hide {
+        0% {
+            transform: scale(1);
+            visibility: visible;
+        }
+        100% {
+            transform: scale(0);
+            visibility: hidden;
+        }
+    }
+    @keyframes show {
+        0% {
+            transform: scale(0);
+            visibility: hidden;
+        }
+        100% {
+            transform: scale(1);
+            visibility: visible;
+        }
+    }
+}
+
+/* sticky header */
+.sticky-header {
+    @apply bg-black/90 shadow-lg;
+}
+
+/* apex chart */
+
+.dark .apexcharts-canvas .apexcharts-tooltip.apexcharts-theme-light,
+.dark .apexcharts-canvas .apexcharts-xaxistooltip.apexcharts-theme-light {
+    box-shadow: none;
+    @apply border-[#050717cc] bg-[#050717cc] text-white;
+}
+
+.dark .apexcharts-canvas .apexcharts-xaxistooltip-bottom:before,
+.dark .apexcharts-canvas .apexcharts-xaxistooltip-bottom:after {
+    @apply border-b-[#050717cc];
+}
+
+.dark .apexcharts-canvas .apexcharts-tooltip-series-group.apexcharts-active {
+    @apply text-white;
+}
+
+.dark .apexcharts-canvas .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+    @apply border-[#060818] bg-[#060818];
+}
+
+.dark .apexcharts-canvas .apexcharts-tooltip.apexcharts-theme-light {
+    box-shadow: none;
+}
+
+[dir='rtl'] .apexcharts-tooltip-marker {
+    @apply mr-0 ml-2.5;
+}
+
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(-45deg, #000000, #ffffff);
+    z-index: 2;
+    opacity: 0.5;
+    transform: skew(-45deg);
+    transform-origin: top left;
+}
+
+.gallery {
+    --s: 200px; /* control the size */
+    --g: 4px; /* control the gap */
+    display: grid;
+    margin: calc(var(--s) + var(--g));
+}
+
+.gallery > div {
+    grid-area: 1/1;
+    width: var(--s);
+    aspect-ratio: 0.9;
+    object-fit: cover;
+    clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0);
+    transform: translate(var(--_x, 0), var(--_y, 0)) scale(var(--_t, 0.9));
+    cursor: pointer;
+    /* filter: grayscale(80%); */
+    transition: 0.2s linear;
+}
+/* .gallery > div:hover {
+  filter: grayscale(0);
+  z-index: 1;
+  --_t: 1.2;
+} */
+
+.gallery > div:nth-child(1) {
+    --_x: calc(-100% - var(--g));
+}
+.gallery div:nth-child(2) {
+    scale: 1.2;
+}
+.gallery > div:nth-child(7) {
+    --_x: calc(100% + var(--g));
+}
+.gallery > div:nth-child(3),
+.gallery > div:nth-child(5) {
+    --_y: calc(-75% - 0.87 * var(--g));
+}
+.gallery > div:nth-child(4),
+.gallery > div:nth-child(6) {
+    --_y: calc(75% + 0.87 * var(--g));
+}
+.gallery > div:nth-child(3),
+.gallery > div:nth-child(4) {
+    --_x: calc(-50% - 0.5 * var(--g));
+}
+.gallery > div:nth-child(5),
+.gallery > div:nth-child(6) {
+    --_x: calc(50% + 0.5 * var(--g));
+}
+
+.image-container {
+    position: relative;
+}
+
+.image-container:hover .image-title {
+    opacity: 1;
+}
+
+.image-title {
+    position: absolute;
+    bottom: 10px; /* Adjust the positioning as needed */
+    left: 10px; /* Adjust the positioning as needed */
+    opacity: 0;
+    color: white; /* Adjust the text color as needed */
+    padding: 8px;
+
+    transition: opacity 0.3s ease;
+    font-size: 18px; /* Adjust the font size as needed */
+    font-family: 'Inter', sans-serif;
+}
+
+.hover-title {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.relative:hover .hover-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hover-title2 {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.relative:hover .hover-title2 {
+    opacity: 0;
+}
+
+@keyframes fade-up {
+    from {
+        transform: translateY(20px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+.bg-background-image {
+    background-image: url('/assets/images/VotingInFutureBg.png');
+    background-size: cover;
+    /* Additional background properties can be added here */
+}
+
+.bg-video {
+    position: relative;
+    overflow: hidden;
+}
+
+.video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tableFixHead {
+    overflow-y: auto;
+    max-height: 690px;
+    width: 100%; /* Set the desired width for the table container */
+    margin: 0 auto; /* Center the table horizontally */
+    scrollbar-width: none; /* Hide the scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide the scrollbar for IE and Edge */
+    border: 1px solid #5b5b5b;
+}
+
+.custom-table {
+    border-collapse: collapse; /* Make table borders collapse */
+    width: 100%;
+}
+
+.custom-table th,
+.custom-table td {
+    /* Other styles for table cells */
+    border-top: none;
+}
+
+.custom-table thead th {
+    @apply sticky top-[80px] z-[1] md:top-[100px];
+}
+
+.tableFixHead::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar for Chrome, Safari, and Opera */
+}
+
+.tableFixHead thead th {
+    position: sticky;
+    top: 0px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    padding: 8px 16px;
+    border: 1px solid #5b5b5b;
+    height: 150px;
+    width: 100px;
+}
+
+td {
+    padding: 8px 16px;
+    border: 1px solid #5b5b5b;
+    height: 110px;
+}
+
+th {
+    background: #eee;
+}
+
+.col-bg {
+    background-color: #2c2c2c; /* Replace with your desired background color */
+}
+
+.col-bg2 {
+    background-color: #1d1d1d; /* Replace with your desired background color */
+}
+
+.col-bg3 {
+    background-color: #4bbeeb; /* Replace with your desired background color */
+}
+
+.col-bg4 {
+    background-color: #78d8fe; /* Replace with your desired background color */
+}
+
+.tableFixHead thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2; /* Ensure the table header is stacked above other elements */
+}
+
+.tableFixHead thead th:after {
+    content: ''; /* Create a pseudo-element */
+    position: absolute;
+    bottom: -1px; /* Position it just below the th element */
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid #5b5b5b; /* Add a bottom border to the pseudo-element */
+}
+
+.input-box {
+    height: 200px; /* Adjust the height value as needed */
+}
