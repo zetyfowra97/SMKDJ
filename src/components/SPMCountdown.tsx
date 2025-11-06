@@ -52,20 +52,32 @@ const CountdownCard: React.FC<CountdownProps> = ({ title, targetDate, bgColor })
 const CountdownGrid: React.FC = () => {
   const subjects = [
     { title: "Bahasa Melayu", targetDate: "2025-11-25T00:00:00", bgColor: "#b0b0b0" }, // grey
-    { title: "Bahasa Inggeris", targetDate: "2025-11-26T00:00:00", bgColor: "#d4af37" }, // gold
-    { title: "Sejarah", targetDate: "2025-11-27T00:00:00", bgColor: "#b0b0b0" },
-    { title: "Matematik", targetDate: "2025-11-28T00:00:00", bgColor: "#d4af37" },
-    { title: "Pendidikan Islam", targetDate: "2025-11-29T00:00:00", bgColor: "#b0b0b0" },
-    { title: "Sains", targetDate: "2025-12-01T00:00:00", bgColor: "#d4af37" },
-    { title: "Fizik", targetDate: "2025-12-02T00:00:00", bgColor: "#b0b0b0" },
-    { title: "SRT", targetDate: "2025-12-03T00:00:00", bgColor: "#d4af37" },
-    { title: "PSV", targetDate: "2025-12-04T00:00:00", bgColor: "#b0b0b0" },
-    { title: "M3 Tambahan", targetDate: "2025-12-05T00:00:00", bgColor: "#d4af37" },
+    { title: "PSV", targetDate: "2025-11-25T00:00:00", bgColor: "#d4af37" }, // grey
+    { title: "Bahasa Inggeris", targetDate: "2025-11-26T00:00:00", bgColor: "#b0b0b0" }, // gold
+    { title: "Sejarah", targetDate: "2025-11-27T00:00:00", bgColor: "#d4af37" },
+    { title: "Matematik", targetDate: "2025-12-01T00:00:00", bgColor: "#b0b0b0" },
+    { title: "Pendidikan Islam // Moral", targetDate: "2025-12-02T00:00:00", bgColor: "#d4af37" },
+    { title: "Sains", targetDate: "2025-12-04T00:00:00", bgColor: "#b0b0b0" },
+    { title: "Fizik", targetDate: "2025-12-04T00:00:00", bgColor: "#d4af37" },
+     { title: "Kimia", targetDate: "2025-12-02T00:00:00", bgColor: "#b0b0b0" },
+      { title: "Biology", targetDate: "2025-12-10T00:00:00", bgColor: "#d4af37" },
+    { title: "Matematik Tambahan", targetDate: "2025-12-15T00:00:00", bgColor: "#b0b0b0" },
+    { title: "Account", targetDate: "2025-12-17T00:00:00", bgColor: "#d4af37" },
+     { title: "Sains Komputer", targetDate: "2025-12-18T00:00:00", bgColor: "#b0b0b0" },
+     { title: "Ekonomi", targetDate: "2025-12-22T00:00:00", bgColor: "#d4af37" },
+     { title: "Bahasa Cina", targetDate: "2025-12-23T00:00:00", bgColor: "#b0b0b0" },
+  
+    
+    
+   
+   
+    
+    
   ];
 
   return (
-    <div className="min-h-screen  bg-gradient-to-t from-white/[54%] to-transparent dark:bg-none flex flex-col items-center py-10 px-4">
-      <h1 className="text-5xl font-extrabold text-white mb-10 tracking-widest">SPM 2025</h1>
+    <div className="min-h-screen bg-white bg-gradient-to-t from-white/[54%] to-transparent dark:bg-none flex flex-col items-center py-10 px-4">
+      <h1 className="text-5xl font-extrabold text-white mb-10 tracking-widest text-[#90d6fa]">SPM 2025</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full max-w-7xl">
         {subjects.map((subject, index) => (
           <CountdownCard

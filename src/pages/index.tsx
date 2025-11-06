@@ -1,10 +1,7 @@
-import Feedback from '../components/Feedback';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../store';
 import Products from '../components/Products';
 import WhoWeAre from '../components/WhoWeAre';
-import BlogSlider from '../components/BlogSlider';
-import ReactPlayer from 'react-player';
 import { isMobile, isTablet, isDesktop } from 'react-device-detect';
 import Counter from '../components/Counter';
 import Careerss from '../components/Careerss';
@@ -12,6 +9,10 @@ import Pentadbir from '../components/Pentadbir';
 import AboutUs from '../components/AboutUs';
 import SPMCountdown from '../components/SPMCountdown';
 import Logo from '../components/Logo';
+import ProjectSlider from '../components/ProjectSlider';
+import CoreValue from '../components/CoreValue';
+import MdCert from '../components/MdCert';
+
 
 const Index = (props: any) => {
     document.title = 'Home | FPG Solution & Consultancy';
@@ -47,7 +48,7 @@ const Index = (props: any) => {
                             data-aos-duration="2000"
                             className="mt-4 text-white text-lg md:text-2xl font-bold"
                         >
-                            Sekolah Kluster Kecemerlangan Petaling Jayas
+                            Sekolah Kecemerlangan Petaling Jaya
                         </p>
                     </div>
 
@@ -96,16 +97,16 @@ const Index = (props: any) => {
 
             {/* ======= Other Sections ======= */}
             <Counter />
+            <ProjectSlider /> 
+            <WhoWeAre /> 
+            <Products />
+            <Logo />
             <Careerss />
             <Pentadbir />
             <AboutUs />
-            <WhoWeAre />
             <SPMCountdown />
-            <Logo />
-            <Products />
-            <BlogSlider />
-            <Feedback />
-           
+            <CoreValue />
+            <MdCert />
         </div>
     );
 };
