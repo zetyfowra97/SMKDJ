@@ -11,73 +11,73 @@ const Products = () => {
             id: 1,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ.jpg',
             title: 'Blockchain',
-            href: '/products#blockchain',
+            href: '/Kejayaan',
         },
         {
             id: 2,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ2.jpg',
             title: 'Enterprise Solutions',
-            href: '/products#enterprise-solutions',
+           href: '/Kejayaan',
         },
         {
             id: 3,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ3.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+            href: '/Kejayaan',
         },
         {
             id: 4,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ4.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+            href: '/Kejayaan',
         },
         {
             id: 5,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ5.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+            href: '/Kejayaan',
         },
         {
             id: 6,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ6.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+            href: '/Kejayaan',
         },
         {
             id: 7,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ7.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+           href: '/Kejayaan',
         },
         {
             id: 8,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ8.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+           href: '/Kejayaan',
         },
         {
             id: 9,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ9.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+            href: '/Kejayaan',
         },
         {
             id: 10,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ10.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+            href: '/Kejayaan',
         },
         {
             id: 11,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ11.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+            href: '/Kejayaan',
         },
         {
             id: 12,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ12.jpg',
             title: 'Voting Applications',
-            href: '/products#voting-applications',
+           href: '/Kejayaan',
         },
     ];
 
@@ -85,8 +85,8 @@ const Products = () => {
         <section className="dark:bg-none pt-20 pb-20">
             <div className="container">
                 <div className="heading mb-10 text-center text-3xl font-extrabold text-cyan lg:mb-14">
-                    <h6>Products</h6>
-                    <h4>Revolutionizing Trust with Blockchain Technology</h4>
+                    <h6>Permata DJ</h6>
+                    <h4>Kejayaan DJIANS</h4>
                 </div>
 
                 <Swiper

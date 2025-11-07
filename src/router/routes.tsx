@@ -1,6 +1,8 @@
 import { lazy } from 'react';
 import Disclaimer from '../pages/Disclaimer';
 import Policy from '../pages/Policy';
+import Makluman from '../pages/Makluman';
+import Kejayaan from '../pages/Kejayaan';
 const Index = lazy(() => import('../pages/index'));
 const Products = lazy(() => import('../pages/Products'));
 const Services = lazy(() => import('../pages/Services'));
@@ -40,6 +42,14 @@ const routes = [
     {
         path: '/careers',
         element: <Career />,
+    },
+     {
+        path: '/makluman',
+        element: <Makluman />,
+    },
+     {
+        path: '/Kejayaan',
+        element: <Kejayaan />,
     },
     {
         path: '/services-detail',

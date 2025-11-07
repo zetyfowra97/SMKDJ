@@ -1,12 +1,8 @@
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import Counter from '../components/Counter';
-import Testimonial from '../components/Feedback';
 import Mission from '../components/Mission';
 import CoreValue from '../components/CoreValue';
 import Milestone from '../components/Milestone';
-
-import BlogSlider from '../components/BlogSlider';
 import { IRootState } from '../store';
 import { useEffect } from 'react';
 import GroupOfCompanies from '../components/GroupOfCompanies';
@@ -60,7 +56,7 @@ const Aboutus = () => {
                     </div>
                 </div>
             </div>
-
+            +
             <section className="mt-10 bg-gradient-to-t from-white/[56%] to-white/0 dark:!bg-none md:mt-20">
                 <Mission />
             </section>
