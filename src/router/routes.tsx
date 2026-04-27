@@ -3,6 +3,18 @@ import Disclaimer from '../pages/Disclaimer';
 import Policy from '../pages/Policy';
 import Makluman from '../pages/Makluman';
 import Kejayaan from '../pages/Kejayaan';
+import SelamatBerkhidmat from '../pages/SelamatBerkhidmat';
+import SMKDJShines from '../pages/SMKDJShines';
+import RumahKesatria from '../pages/RumahKesatria';
+import Cemerlang from '../pages/Cemerlang';
+import AyunanRaket from '../pages/AyunanRaket';
+import Mesyuarat from '../pages/Mesyuarat';
+import Mesyuarat2025 from '../pages/Mesyuarat2025';
+import SchoolEmblem from '../components/SchoolEmblem';
+import NationalAnthems from '../components/NationalAnthems';
+import SchoolSong from '../components/SchoolSong';
+import VissionMissionMotto from '../components/Layouts/vissionmissionmotto';
+import GuidingPrinciple from '../components/GuidingPrinciple';
 const Index = lazy(() => import('../pages/index'));
 const Products = lazy(() => import('../pages/Products'));
 const Services = lazy(() => import('../pages/Services'));
@@ -94,6 +106,53 @@ const routes = [
     {
         path: '/jobapply',
         element: <Jobapply />,
+    },
+
+     // {
+    //     post
+    // },
+    {
+        path: '/SelamatBerkhidmat',
+        element: <SelamatBerkhidmat />,
+    },
+     {
+        path: '/SMKDJShines',
+        element: <SMKDJShines />,
+    },
+    {
+        path: '/RumahKesatria',
+        element: <RumahKesatria />,
+    },
+      {
+        path: '/Cemerlang',
+        element: <Cemerlang />,
+    },
+       {
+        path: '/AyunanRaket',
+        element: <AyunanRaket />,
+    },
+     {
+        path: '/Mesyuarat',
+        element: <Mesyuarat />,
+    },
+     {
+        path: '/Mesyuarat2025',
+        element: <Mesyuarat2025 />,
+    },  {
+        path: '/SchoolEmblem',
+        element: <SchoolEmblem />,
+    },{
+        path: '/NationalAnthems',
+        element: <NationalAnthems />,
+    },{
+        path: '/SchoolSong',
+        element: <SchoolSong />,
+    },{
+        path: '/vissionmissionmotto',
+        element: <VissionMissionMotto />,
+    },{
+        path: '/GuidingPrinciple',
+        element: <GuidingPrinciple />,
     },
 ];
 

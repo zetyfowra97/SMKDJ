@@ -54,7 +54,7 @@ const Header = (props: any) => {
                                 </li>
                                 <li className="group relative" onClick={(e) => e.stopPropagation()}>
                                     <Link
-                                        to="#"
+                                        to="/about-us"
                                         className={
                                             location.pathname === '/crypto' ||
                                             location.pathname === '/real-estate' ||
@@ -79,33 +79,42 @@ const Header = (props: any) => {
                                     </Link>
                                     <div className="submenu" onClick={() => toggleMenu()}>
                                         
-                                        <NavLink to="/modern-saas">
+                                        <NavLink to="/about-us">
                                             About
                                             <span className="ml-1 rounded bg-gradient-to-r from-[#ef4444] to-[#f97316] px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
                                                 New
                                             </span>
                                         </NavLink>
-                                        <NavLink to="/real-estate">
+                                        <NavLink to="/SchoolEmblem">
                                             School Emblem
                                             <span className="ml-1 rounded bg-gradient-to-r from-[#ef4444] to-[#f97316] px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
                                                 New
                                             </span>
                                         </NavLink>
-                                        <NavLink to="/healthcare">
+                                        <NavLink to="/NationalAnthems">
                                             National Anthems
                                             <span className="ml-1 rounded bg-gradient-to-r from-[#ef4444] to-[#f97316] px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
                                                 New
                                             </span>
                                         </NavLink>
-                                        <a href="#">
+                                        <a href="SchoolSong">
                                            School Song
                                             <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
                                         </a>
-                                        <a href="#">
-                                           Youtube Channel
+                                       <a 
+  href="https://www.youtube.com/channel/UCvTBr0RZGZYU-Ixz1Y8Xwqw" 
+  target="_blank" 
+  rel="noopener noreferrer"
+>
+  Youtube Channel
+  <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">
+    Coming Soon
+  </span>
+</a>
+                                        <a href="/vissionmissionmotto">
+                                            Vision, Mission, Motto
                                             <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
-                                        </a>
-                                        <a href="#">
+                                        </a> <a href="/GuidingPrinciple">
                                             Guiding Principle
                                             <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
                                         </a>

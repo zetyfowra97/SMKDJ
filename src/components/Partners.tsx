@@ -12,7 +12,7 @@ const Partners = () => {
             <div className="container">
                 <div className="heading text-center" style={{marginBottom:10}}>
                     <h6>TEAM. CUSTOMER. COMMUNITY</h6>
-                    <h4>We work with best partnerss</h4>
+                    <h4>We work with best partnersss</h4>
                 </div>
             </div>
             <div className="mx-auto w-4/5 py-10">

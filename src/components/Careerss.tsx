@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import 'react-18-image-lightbox/style.css';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Career = () => {
     const location = useLocation();
@@ -37,31 +37,33 @@ const Career = () => {
                         <h4>TRENDING</h4>
                     </div>
 
-                    <div className="grid grid-cols-12 gap-2 md:gap-6">
-                        {/* Row 1 */}
+                      <div className="grid grid-cols-12 gap-2 md:gap-6">
+                        {/* Row 1 - Linked Card */}
                         <div
                             className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4"
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
-                            <div className="group relative h-[300px] overflow-hidden rounded-xl text-xl font-medium md:h-full">
-                                <img
-                                    src="/assets/images/pengetua.jpg"
-                                    alt="gallery-1"
-                                    className="h-full w-full object-cover duration-500 group-hover:scale-110"
-                                />
-                                {/* Gradient overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                                {/* Text content */}
-                                <div className="absolute bottom-0 left-0 z-10 p-4">
-                                    <h2 className="text-2xl font-semibold text-white drop-shadow-[2px_2px_8px_rgba(0,0,0,0.9)]">
-                                        Selamat Berkhidmat Encik Aamanu bin Ibrahim
-                                    </h2>
-                                    <p className="mt-2 text-sm text-white drop-shadow-[1px_1px_4px_rgba(0,0,0,0.8)] md:hidden md:group-hover:block md:group-hover:animate-hex-up">
-                                        Kami warga SMK Damansara Jaya mengalu-alukan kedatangan Tuan Pengetua. Semoga kepimpinan Tuan membawa kejayaan gemilang dan inspirasi kepada seluruh warga SMK Damansara Jaya.
-                                    </p>
+                            <Link to="/selamatberkhidmat">
+                                <div className="group relative h-[300px] overflow-hidden rounded-xl text-xl font-medium md:h-full cursor-pointer">
+                                    <img
+                                        src="/assets/images/pengetua.jpg"
+                                        alt="gallery-1"
+                                        className="h-full w-full object-cover duration-500 group-hover:scale-110"
+                                    />
+                                    {/* Gradient overlay */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                                    {/* Text content */}
+                                    <div className="absolute bottom-0 left-0 z-10 p-4">
+                                        <h2 className="text-2xl font-semibold text- drop-shadow-[2px_2px_8px_rgba(0,0,0,0.9)]">
+                                            Selamat Berkhidmat Encik Aamanu bin Ibrahim
+                                        </h2>
+                                        <p className="mt-2 text-sm text-white drop-shadow-[1px_1px_4px_rgba(0,0,0,0.8)] md:hidden md:group-hover:block md:group-hover:animate-hex-up">
+                                            Kami warga SMK Damansara Jaya mengalu-alukan kedatangan Tuan Pengetua. Semoga kepimpinan Tuan membawa kejayaan gemilang dan inspirasi kepada seluruh warga SMK Damansara Jaya.
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
 
                         <div
@@ -69,6 +71,7 @@ const Career = () => {
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
+                            <Link to="/SMKDJShines">
                             <div className="group relative h-[300px] overflow-hidden rounded-xl text-xl font-medium md:h-full">
                                 <img
                                     src="/assets/images/shines.jpg"
@@ -85,6 +88,7 @@ const Career = () => {
                                     </p>
                                 </div>
                             </div>
+                            </Link>
                         </div>
 
                         {/* Row 2 */}
@@ -93,7 +97,8 @@ const Career = () => {
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
-                            <div className="group relative h-[300px] overflow-hidden rounded-xl text-xl font-medium md:h-full">
+                           < Link to="/RumahKesatria">
+                           <div className="group relative h-[300px] overflow-hidden rounded-xl text-xl font-medium md:h-full">
                                 <img
                                     src="/assets/images/juara.jpeg"
                                     alt="gallery-1"
@@ -109,6 +114,7 @@ const Career = () => {
                                     </p>
                                 </div>
                             </div>
+                            </Link> 
                         </div>
 
                         <div
@@ -116,6 +122,7 @@ const Career = () => {
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
+                            < Link to="/Cemerlang">
                              <div className="group relative h-[300px] md:h-[350px] overflow-hidden rounded-xl">
                                 <img
                                     src="/assets/images/cemerlang.jpeg"
@@ -132,6 +139,7 @@ const Career = () => {
                                     </p>
                                 </div>
                             </div>
+                            </Link>
                         </div>
 
                         <div
@@ -139,6 +147,7 @@ const Career = () => {
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
+                            < Link to="/AyunanRaket">
                              <div className="group relative h-[300px] md:h-[350px] overflow-hidden rounded-xl">
                                 <img
                                     src="/assets/images/poster.jpeg"
@@ -155,6 +164,7 @@ const Career = () => {
                                     </p>
                                 </div>
                             </div>
+                            </Link>
                         </div>
 
                         {/* Row 3 */}
@@ -163,6 +173,7 @@ const Career = () => {
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
+                            < Link to="/Mesyuarat">
                             <div className="group relative h-[300px] overflow-hidden rounded-xl text-xl font-medium md:h-full">
                                 <img
                                     src="/assets/images/mesyuaratagong.jpeg"
@@ -179,6 +190,7 @@ const Career = () => {
                                     </p>
                                 </div>
                             </div>
+                            </Link>
                         </div>
 
                         <div
@@ -186,6 +198,7 @@ const Career = () => {
                             data-aos="fade-up"
                             data-aos-duration="1000"
                         >
+                             < Link to="/Mesyuarat2025">
                             <div className="group relative h-[300px] overflow-hidden rounded-xl text-xl font-medium md:h-full">
                                 <img
                                     src="/assets/images/mesyuarat.jpg"
@@ -202,6 +215,7 @@ const Career = () => {
                                     </p>
                                 </div>
                             </div>
+                            </Link>
                         </div>
                     </div>
                 </div>
