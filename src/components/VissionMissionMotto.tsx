@@ -1,5 +1,4 @@
-import MdCert from '../MdCert';
-
+import MdCert from "./MdCert";
 
 const VissionMissionMotto = (props: any) => {
     document.title = 'Home | FPG Solution & Consultancy';
