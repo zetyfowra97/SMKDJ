@@ -1,29 +1,31 @@
-# FPGSC 🌐
+# SMKDJ 🌐 
 
-[![Website](https://img.shields.io/badge/website-live-brightgreen)](https://www.fpgsc.com/)  
-A professional and engaging website for FPGSC, designed to represent the company’s expertise in providing top-tier services and solutions.
+**SMK Damansara Jaya**
 
----
+[![Website](https://img.shields.io/badge/website-live-brightgreen)](https://smkdj.vercel.app/)
 
-## 🌟 Live Demo
-
-Explore the website here: [https://www.fpgsc.com/](https://www.fpgsc.com/)
+A modern school website designed for **SMK Damansara Jaya**, focusing on a clean interface, easy navigation, and improved accessibility for students, teachers, and visitors.
 
 ---
 
-## 📝 Project Description
+## 🌟 Live Site
 
-**FPGSC** stands for excellence in service and commitment. This website highlights the company's offerings, mission, and values while providing users with a seamless and intuitive browsing experience. It is built with a focus on accessibility, design, and functionality.
+👉 https://smkdj.vercel.app/
 
 ---
 
+## 📝 About The Project
+
+The **SMKDJ website** serves as a digital platform for presenting school-related information in a structured and user-friendly way. It is designed to improve communication and provide easy access to important updates and resources within the school community.
+
+---
 ## 🚀 Features
 
-- **Responsive Design**: Optimized for all devices, including desktops, tablets, and smartphones.  
-- **Professional UI/UX**: Clean and sophisticated design that reflects FPGSC’s brand identity.  
-- **Comprehensive Information**: Clear structure for services, about the company, and contact details.  
-- **Fast Load Times**: Deployed on a high-performance hosting platform.  
-- **SEO Optimized**: Designed for enhanced search engine visibility.  
+- School information display  
+- Announcements and updates section  
+- Simple and user-friendly interface  
+- Responsive layout (mobile & desktop friendly)  
+- Fast and lightweight performance  
 
 ---
 
@@ -31,8 +33,7 @@ Explore the website here: [https://www.fpgsc.com/](https://www.fpgsc.com/)
 
 - **Frontend**: HTML, CSS, JavaScript  
 - **Framework**: [React.js](https://reactjs.org/)  
-- **Backend**: Node.js (if applicable)  
-- **Hosting**: [Netlify](https://www.netlify.com/)  
+- **Hosting**: [Vercel](https://vercel.com/)  
 
 ---
 
@@ -40,7 +41,7 @@ Explore the website here: [https://www.fpgsc.com/](https://www.fpgsc.com/)
 
 | Desktop View | Mobile View |
 |--------------|-------------|
-| ![image](https://github.com/user-attachments/assets/4db9dd30-f8e3-4eec-950a-2f5855d6a507) | ![image](https://github.com/user-attachments/assets/b09533d5-1552-49e9-9f10-574c8cfeb3a3) |
+| <img width="1853" height="958" alt="image" src="https://github.com/user-attachments/assets/ccb30c72-3c41-4324-b198-123a0a304d01" /> | <img width="557" height="807" alt="image" src="https://github.com/user-attachments/assets/e03a1c1f-749b-47f5-8e92-8c1d437833a5" /> |
 
 ---
 
@@ -55,14 +56,16 @@ Explore the website here: [https://www.fpgsc.com/](https://www.fpgsc.com/)
 
 1. Clone this repository:  
    ```bash
-   git clone https://github.com/zetyfowra97/FPGSC.git
+   git clone https://github.com/zetyfowra97/RAZI-IRFAN-PORTFOLIO.git
 
-3. Install dependencies:
+2. Install dependencies:
    ```bash
    npm install
 
-4. Start the development server:
+3. Start the development server:
    ```bash
    npm start or npm run dev
 
 Finally, open http://localhost:3000 in your browser to view the website.
+
+
