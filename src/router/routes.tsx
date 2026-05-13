@@ -15,6 +15,10 @@ import NationalAnthems from '../components/NationalAnthems';
 import SchoolSong from '../components/SchoolSong';
 import GuidingPrinciple from '../components/GuidingPrinciple';
 import VissionMissionMotto from '../components/VissionMissionMotto';
+import Pentadbir from '../components/Pentadbir';
+import Shop from '../components/Shop';
+import Facilities from '../components/Facilities';
+import UpgradingofICT from '../pages/UpgradingofICT';
 const Index = lazy(() => import('../pages/index'));
 const Products = lazy(() => import('../pages/Products'));
 const Services = lazy(() => import('../pages/Services'));
@@ -153,7 +157,23 @@ const routes = [
     },{
         path: '/GuidingPrinciple',
         element: <GuidingPrinciple />,
+    },{
+        path: '/Pentadbir',
+        element: <Pentadbir />,
     },
+    {
+        path: '/Shop',
+        element: <Shop />,
+    },{
+        path: '/Facilities',
+        element: <Facilities />,
+    },
+    {
+        path: '/UpgradingofICT',
+        element: <UpgradingofICT />,
+    },
+
+
 ];
 
 export { routes };

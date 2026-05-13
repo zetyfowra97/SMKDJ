@@ -101,35 +101,52 @@ const Header = (props: any) => {
                                            School Song
                                             <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
                                         </a>
-                                       <a 
-  href="https://www.youtube.com/channel/UCvTBr0RZGZYU-Ixz1Y8Xwqw" 
-  target="_blank" 
-  rel="noopener noreferrer"
->
-  Youtube Channel
-  <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">
-    Coming Soon
-  </span>
-</a>
+                                       <a href="https://www.youtube.com/channel/UCvTBr0RZGZYU-Ixz1Y8Xwqw" 
+                                       target="_blank" 
+                                       rel="noopener noreferrer">
+                                        Youtube Channel
+                                        <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">
+                                            Coming Soon
+                                            </span>
+                                            </a>
                                         <a href="/vissionmissionmotto">
                                             Vision, Mission, Motto
-                                            <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
+                                            <span className="ml-1 rounded bg-gradient-to-r from-[#ef4444] to-[#f97316] px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
+                                                New
+                                            </span>
                                         </a> <a href="/GuidingPrinciple">
                                             Guiding Principle
                                             <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
                                         </a>
-                                        <a href="#">
+                                        <a href="/Pentadbir">
                                             Principal's Messege
-                                            <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
+                                             <span className="ml-1 rounded bg-gradient-to-r from-[#ef4444] to-[#f97316] px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
+                                                New
+                                            </span>
                                         </a>
-                                        <a href="#">
+                                        <a href="/Shop">
                                            Shop
                                             <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
                                         </a>
-                                        <a href="#">
-                                           Facilities
-                                            <span className="ml-1 rounded bg-secondary px-2 py-1 text-[9px] font-bold uppercase text-white">Coming Soon</span>
-                                        </a>
+                                        <div className="relative group/facility">
+                                            <div className="flex items-center justify-between cursor-pointer px-4 py-2 hover:bg-gray-100">
+                                                Facilities
+                                                <span className="ml-2">▶</span>
+                                            </div>
+
+                                            {/* SECOND LEVEL */}
+                                            <div className="absolute left-full top-0 hidden min-w-[200px] dark:bg-[#101926] shadow-lg group-hover/facility:block">
+                                                <NavLink to="/Facilities" className="block px-4 py-2 hover:bg-gray-100">
+                                                    Main Page 
+                                                </NavLink>
+                                                <NavLink to="/facilities/lab" className="block px-4 py-2 hover:bg-gray-100">
+                                                    Webmail
+                                                </NavLink>
+                                                <NavLink to="/facilities/sports" className="block px-4 py-2 hover:bg-gray-100">
+                                                   ICT Status and Tech Support
+                                                </NavLink>
+                                            </div>
+                                        </div>
                                     </div>
                                 </li>
                                <li>

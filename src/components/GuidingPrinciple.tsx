@@ -41,17 +41,37 @@ const GuidingPrinciple = () => {
 
                         {/* TITLE */}
                         <p className="text-black font-bold text-4xl">
-                            School Song
+                           DJIAN Qualities
                         </p>
 
                         <br /><br />
 
                         {/* LYRICS */}
                         <p className="text-black font-bold text-2xl">
-                            School Song
+                           Determined
                         </p>
-                        Berilmu untuk Berjasa <br /><br />
-                       
+                       Never giving up under tough and challenging situations. <br /><br />
+
+                        <p className="text-black font-bold text-2xl">
+                           Helpful
+                        </p>
+                       Always ready to lend a hand to those in need.<br /><br />
+                        <p className="text-black font-bold text-2xl">
+                           Confident
+                        </p>
+                       Not hesitant to share their thoughts and experience with others.<br /><br />
+                        <p className="text-black font-bold text-2xl">
+                          Outgoing
+                        </p>
+                      Actively participate in co-curricular and curricular activities.<br /><br />
+                        <p className="text-black font-bold text-2xl">
+                          Resourceful
+                        </p>
+                     Able to find solutions for different problems.<br /><br />
+                      <p className="text-black font-bold text-2xl">
+                          Creative
+                        </p>
+                    Always thinking out of the box through different perspectives.<br /><br />
 
                     </div>
                     
