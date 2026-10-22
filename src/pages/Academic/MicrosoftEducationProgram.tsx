@@ -89,7 +89,7 @@ const MicrosoftEducationProgram = () => {
                         <div>
                                 
                         <p className="text-sm font-semibold text-black md:text-lg text-justify pt-5">
-                        Rabu            
+                        Rabus            
                         </p>
                         
                         </div>
