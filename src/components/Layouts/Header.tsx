@@ -139,22 +139,23 @@ const Header = (props: any) => {
                                                 <NavLink to="/Facilities" className="block px-4 py-2 hover:bg-gray-100">
                                                     Main Page 
                                                 </NavLink>
-                                                <NavLink to="/facilities/lab" className="block px-4 py-2 hover:bg-gray-100">
+                                                <a href="https://outlook.office.com/?client_id=4345a7b9-9a63-4910-a426-35363201d503" className="block px-4 py-2 hover:bg-gray-100">
                                                     Webmail
-                                                </NavLink>
-                                                <NavLink to="/facilities/sports" className="block px-4 py-2 hover:bg-gray-100">
-                                                   ICT Status and Tech Support
-                                                </NavLink>
+                                                </a>
+                                                <a href="/ICTStatus" className="block px-4 py-2 hover:bg-gray-100">
+                                                    ICT Status and Tech Support
+                                                </a>
+                                               
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                                <li>
-                                    <NavLink to="/about-us">Events</NavLink>
+                                    <NavLink to="/Events">Events</NavLink>
                                 </li>
                                 <li className="group relative" onClick={(e) => e.stopPropagation()}>
                                     <Link
-                                        to="#"
+                                        to="/ImportantUpdates"
                                         className={
                                             location.pathname === '/crypto' ||
                                             location.pathname === '/real-estate' ||
@@ -179,13 +180,13 @@ const Header = (props: any) => {
                                     </Link>
                                     <div className="submenu" onClick={() => toggleMenu()}>
                                         
-                                        <NavLink to="/modern-saas">
+                                        <NavLink to="/OfficialSchoolTimetable">
                                            Official School Timetable
                                             <span className="ml-1 rounded bg-gradient-to-r from-[#ef4444] to-[#f97316] px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
                                                 New
                                             </span>
                                         </NavLink>
-                                        <NavLink to="/real-estate">
+                                        <NavLink to="/AcademicMenu">
                                            Academic
                                             <span className="ml-1 rounded bg-gradient-to-r from-[#ef4444] to-[#f97316] px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">
                                                 New

@@ -18,7 +18,41 @@ import VissionMissionMotto from '../components/VissionMissionMotto';
 import Pentadbir from '../components/Pentadbir';
 import Shop from '../components/Shop';
 import Facilities from '../components/Facilities';
-import UpgradingofICT from '../pages/UpgradingofICT';
+import UpgradingofICT from '../pages/facilities/UpgradingofICT';
+
+import GuidetoWIFI from '../pages/facilities/GuidetoWIFI';
+import MajlisPelancaranPapan from '../pages/facilities/MajlisPelancaranPapan';
+import ICTTHON from '../pages/facilities/ICTTHON';
+import UpgradingoftheSchoolHall from '../pages/facilities/UpgradingoftheSchoolHall';
+import ICTStatus from '../pages/facilities/ICTStatus';
+import Events from '../components/Events';
+import ImportantUpdates from '../components/ImportantUpdates';
+import MeluncurGagah from '../pages/Co-Curriculum/MeluncurGagah';
+import SepakanBerani from '../pages/Co-Curriculum/SepakanBerani';
+import SelamatMenduduki from '../pages/Academic/SelamatMenduduki';
+import ArenaHujah from '../pages/Co-Curriculum/ArenaHujah';
+import MaklumatPenundaan from '../pages/Co-Curriculum/MaklumatPenundaan';
+import MahkotaIlmu from '../pages/Academic/MahkotaIlmu';
+import DariTerjunan from '../pages/Academic/DariTerjunan';
+import LegasiKemenangan from '../pages/Academic/LegasiKemenangan';
+import OfficialSchoolTimetable from '../components/OfficialSchoolTimetable';
+import AcademicMenu from '../components/AcademicMenu';
+import LangkahKetiga from '../pages/Academic/LangkahKetiga';
+import ChessMasters from '../pages/Academic/ChessMasters';
+import BattleofPins from '../pages/Academic/BattleofPins';
+import JejakInovasi from '../pages/Academic/JejakInovasi';
+import LintasanBusur from '../pages/Academic/LintasanBusur';
+import GesekanSonata from '../pages/Academic/GesekanSonata';
+import BidikanMantap from '../pages/Academic/BidikanMantap';
+import JejakLarian from '../pages/Academic/JejakLarian';
+import JWUJIAN from '../pages/Academic/JWUJIAN';
+import JadualSPM2025 from '../pages/Academic/JadualSPM2025';
+import SenarainamamuridTingkatan1 from '../pages/Academic/SenarainamamuridTingkatan1';
+import HariOrientasiT1 from '../pages/Academic/HariOrientasiT1';
+import SuratHariOrientasiT1 from '../pages/Academic/SuratHariOrientasiT1';
+import SenaraiBuku from '../pages/Academic/SenaraiBuku';
+import MaklumatHariPendaftaran from '../pages/Academic/MaklumatHariPendaftaran';
+import ProgramSekolahkuSejahtera from '../pages/Academic/ProgramSekolahkuSejahtera';
 const Index = lazy(() => import('../pages/index'));
 const Products = lazy(() => import('../pages/Products'));
 const Services = lazy(() => import('../pages/Services'));
@@ -172,8 +206,142 @@ const routes = [
         path: '/UpgradingofICT',
         element: <UpgradingofICT />,
     },
+     {
+        path: '/UpgradingoftheSchoolHall',
+        element: <UpgradingoftheSchoolHall />,
+    },  {
+        path: '/GuidetoWIFI',
+        element: <GuidetoWIFI />,
+    },
+    {
+        path: '/MajlisPelancaranPapan',
+        element: <MajlisPelancaranPapan />,
+    },
+     {
+        path: '/ICTTHON',
+        element: <ICTTHON />,
+    },
+    {
+        path: '/ICTStatus',
+        element: <ICTStatus />,
+    },
+     {
+        path: '/Events',
+        element: <Events />,
+    },
+    {
+        path: '/ImportantUpdates',
+        element: <ImportantUpdates />,
+    },
 
+    {
+        path: '/MeluncurGagah',
+        element: <MeluncurGagah />,
+    },
 
+    {
+        path: '/SepakanBerani',
+        element: <SepakanBerani />,
+    },
+
+    {
+        path: '/SelamatMenduduki',
+        element: <SelamatMenduduki />,
+    },
+    {
+        path: '/ArenaHujah',
+        element: <ArenaHujah />,
+    },
+    {
+        path: '/MaklumatPenundaan',
+        element: <MaklumatPenundaan />,
+    },
+     {
+        path: '/MahkotaIlmu',
+        element: <MahkotaIlmu />,
+    },
+    {
+        path: '/DariTerjunan',
+        element: <DariTerjunan />,
+    },
+    {
+        path: '/LegasiKemenangan',
+        element: <LegasiKemenangan />,
+    },
+     {
+        path: '/OfficialSchoolTimetable',
+        element: <OfficialSchoolTimetable />,
+    },
+    {
+        path: '/AcademicMenu',
+        element: <AcademicMenu />,
+    },
+    {
+        path: '/LangkahKetiga',
+        element: <LangkahKetiga />,
+    },
+    {
+        path: '/ChessMasters',
+        element: <ChessMasters />,
+    },
+    {
+        path: '/BattleofPins',
+        element: <BattleofPins />,
+    },
+    {
+        path: '/JejakInovasi',
+        element: <JejakInovasi />,
+    },
+    {
+        path: '/LintasanBusur',
+        element: <LintasanBusur />,
+    },
+    {
+        path: '/GesekanSonata',
+        element: <GesekanSonata />,
+    },
+    {
+        path: '/BidikanMantap',
+        element: <BidikanMantap />,
+    },
+    {
+        path: '/JejakLarian',
+        element: <JejakLarian />,
+    },
+    {
+        path: '/JWUJIAN',
+        element: <JWUJIAN />,
+    },
+    {
+        path: '/JadualSPM2025',
+        element: <JadualSPM2025 />,
+    },
+    {
+        path: '/SenarainamamuridTingkatan1',
+        element: <SenarainamamuridTingkatan1 />,
+    },
+    {
+        path: '/HariOrientasiT1',
+        element: <HariOrientasiT1 />,
+    },
+    {
+        path: '/SuratHariOrientasiT1',
+        element: <SuratHariOrientasiT1 />,
+    },
+    {
+        path: '/SenaraiBuku',
+        element: <SenaraiBuku />,
+    },
+    {
+        path: '/MaklumatHariPendaftaran',
+        element: <MaklumatHariPendaftaran />,
+    },
+     {
+        path: '/ProgramSekolahkuSejahtera',
+        element: <ProgramSekolahkuSejahtera />,
+    },
+    
+     
 ];
 
 export { routes };

@@ -58,7 +58,7 @@ const Facilities = () => {
                         </div>
                          <div>
                         <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                            <a href="https://djians.sharepoint.com/sites/students/_layouts/15/stream.aspx?id=%2Fsites%2Fstudents%2FShared%20Documents%2FGeneral%2FAnthems%2FLAGU%5FSELANGOR%2D%28MINUS%5FONE%29%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E8e675b33%2Dd72d%2D47a5%2Da432%2Dbcaaed91cf67"
+                            <a  href="/UpgradingoftheSchoolHall"
                             target="_blank"
                             rel="noopener noreferrer">
                                   Upgrading of the school hall
@@ -73,7 +73,7 @@ const Facilities = () => {
                         </div>
                          <div>
                         <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                            <a href="https://djians.sharepoint.com/sites/students/_layouts/15/stream.aspx?id=%2Fsites%2Fstudents%2FShared%20Documents%2FGeneral%2FAnthems%2FLAGU%5FSELANGOR%2D%28MINUS%5FONE%29%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E8e675b33%2Dd72d%2D47a5%2Da432%2Dbcaaed91cf67"
+                            <a href="/GuidetoWIFI"
                             target="_blank"
                             rel="noopener noreferrer">
                                   Guide to WIFI @ DJ
@@ -88,8 +88,7 @@ const Facilities = () => {
                         </div>
                          <div>
                         <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                            <a href="https://djians.sharepoint.com/sites/students/_layouts/15/stream.aspx?id=%2Fsites%2Fstudents%2FShared%20Documents%2FGeneral%2FAnthems%2FLAGU%5FSELANGOR%2D%28MINUS%5FONE%29%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E8e675b33%2Dd72d%2D47a5%2Da432%2Dbcaaed91cf67"
-                            target="_blank"
+                            <a href="/MajlisPelancaranPapan"
                             rel="noopener noreferrer">
                                   Majlis Pelancaran Papan Tanda ‘We Love SMKDJ’ – Tajaan Sunway TES
                             </a>
@@ -103,8 +102,8 @@ const Facilities = () => {
                         </div>
                          <div>
                         <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                            <a href="https://djians.sharepoint.com/sites/students/_layouts/15/stream.aspx?id=%2Fsites%2Fstudents%2FShared%20Documents%2FGeneral%2FAnthems%2FLAGU%5FSELANGOR%2D%28MINUS%5FONE%29%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E8e675b33%2Dd72d%2D47a5%2Da432%2Dbcaaed91cf67"
-                            target="_blank"
+                           
+                            <a href="/ICTTHON"
                             rel="noopener noreferrer">
                                   ICT-THON 2018
                             </a>
