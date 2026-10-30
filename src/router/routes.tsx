@@ -129,6 +129,7 @@ import JEREBULINDUNGIDIRIJAGAKESIHATAN from '../pages/PENGURUSANSMKDJ/JEREBULIND
 import SelamatMendudukiPeperiksaanPercubaanBertulisbuatsemuaCalonSPM2026 from '../pages/Academic/SelamatMendudukiPeperiksaanPercubaanBertulisbuatsemuaCalonSPM2026';
 import IramaMenggetarkanPentas from '../pages/AdminAnnouncement/IramaMenggetarkanPentas';
 import MerentasCabaranMenjulangKejayaan from '../pages/AdminAnnouncement/MerentasCabaranMenjulangKejayaan';
+
 const Index = lazy(() => import('../pages/index'));
 const Products = lazy(() => import('../pages/Products'));
 const Services = lazy(() => import('../pages/Services'));
@@ -736,6 +737,7 @@ const routes = [
         path: '/MerentasCabaranMenjulangKejayaan',
         element: <MerentasCabaranMenjulangKejayaan />,
     },
+   
 ];
 
 export { routes };
