@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { useEffect } from 'react';
 
-
 const Events = () => {
     const { hash } = useLocation();
 
@@ -29,58 +28,28 @@ const Events = () => {
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 
     return (
-           <div className="bg-white w-full pb-20 pt-8 bg-cover bg-bottom bg-no-repeat">
-            <section
-                id="section-1"
-                className="items-center justify-center gap-10 md:gap-16 lg:gap-20 justify-items-center"
-            >
+        <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
+            <section id="section-1" className="items-center justify-center justify-items-center gap-10 md:gap-16 lg:gap-20">
                 {/* TEXT SECTION */}
-                 <div
-                    className="w-full md:w-1/2 px-5 md:px-0"
-                    data-aos="fade-right"
-                    data-aos-duration="1500"
-                >
+                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
-                       
-                       
-                        <p className="text-black font-bold text-4xl pt-10">Events</p>
+                        <p className="pt-10 text-4xl font-bold text-black">Events</p>
                         <div>
-                            
-                        
-                            
-                                
-                    
-
-                         <div>
-                                
-                       
-<p className="text-sm font-semibold text-black md:text-lg text-justify pt-10">
- 
-  <a
-    href="http://91510915685f.sn.mynetname.net/index.php/2020/12/18/jadual-waktu-peperiksaan-bertulis-spm-2020/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-blue-600 underline hover:text-blue-800"
-  >
- http://91510915685f.sn.mynetname.net/index.php/2020/12/18/jadual-waktu-peperiksaan-bertulis-spm-2020/
-  </a>{" "}
- 
-</p>
-
+                            <div>
+                                <p className="pt-10 text-justify text-sm font-semibold text-black md:text-lg">
+                                    <a
+                                        href="http://91510915685f.sn.mynetname.net/index.php/2020/12/18/jadual-waktu-peperiksaan-bertulis-spm-2020/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-600 hover:text-blue-800 underline"
+                                    >
+                                        http://91510915685f.sn.mynetname.net/index.php/2020/12/18/jadual-waktu-peperiksaan-bertulis-spm-2020/
+                                    </a>{' '}
+                                </p>
+                            </div>
                         </div>
-
-                        
-
-                        
-                        
-                        </div>
-
-                        
-                       
-
                     </div>
-                </div> 
-                
+                </div>
             </section>
         </div>
     );

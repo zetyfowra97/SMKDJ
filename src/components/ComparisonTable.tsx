@@ -31,7 +31,7 @@ const ComparisonTable = () => {
                 setContentHover(false);
             }}
         >
-            <div className={`container  w-[150%] ${(isMobile || isTablet) && 'no-scrollbar overflow-x-scroll'}`} >
+            <div className={`container  w-[150%] ${(isMobile || isTablet) && 'no-scrollbar overflow-x-scroll'}`}>
                 <div className="relative">
                     <div className="heading text-center">
                         <h6 className="!text-secondary">Comparison</h6>

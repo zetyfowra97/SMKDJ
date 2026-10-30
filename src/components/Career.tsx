@@ -36,8 +36,7 @@ const Career = () => {
     }, [hash]);
     document.title = 'Careers | FPG Solution & COnsultancy';
 
-    useEffect(() => {
-    }, []);
+    useEffect(() => {}, []);
 
     return (
         <div>
@@ -64,7 +63,7 @@ const Career = () => {
 
             <ProjectSlider />
 
-            <section className="mt-10 md:mt-20 bg-gradient-to-t from-white/[54%] to-transparent dark:bg-none ">
+            <section className="mt-10 bg-gradient-to-t from-white/[54%] to-transparent dark:bg-none md:mt-20 ">
                 <div className="container">
                     <div className="heading text-center">
                         <h6>Amazing Worklife</h6>
@@ -91,7 +90,7 @@ const Career = () => {
                             </div>
                         </div>
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-8" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/career-whyworkwithus-2.png"
                                     alt="gallery-1"
@@ -110,7 +109,7 @@ const Career = () => {
                         </div>
                         {/* whyworkwithus - Row 2 */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/career-whyworkwithus-3.png"
                                     alt="gallery-1"
@@ -128,7 +127,7 @@ const Career = () => {
                             </div>
                         </div>
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/career-whyworkwithus-4.png"
                                     alt="gallery-1"
@@ -146,7 +145,7 @@ const Career = () => {
                             </div>
                         </div>
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/career-whyworkwithus-5.png"
                                     alt="gallery-1"
@@ -166,7 +165,7 @@ const Career = () => {
                         </div>
                         {/* whyworkwithus - Row 3  */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-8" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/career-whyworkwithus-6.png"
                                     alt="gallery-1"
@@ -184,7 +183,7 @@ const Career = () => {
                             </div>
                         </div>
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/career-whyworkwithus-7.png"
                                     alt="gallery-1"

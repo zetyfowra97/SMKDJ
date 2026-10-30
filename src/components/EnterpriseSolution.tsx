@@ -1,5 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 
 const EnterpriseSolution = () => {
     return (
@@ -19,7 +17,7 @@ const EnterpriseSolution = () => {
                         <div className="overflow-hidden">
                             <img
                                 src="/assets/images/vote-board.jpg"
-                                className="h-[500px] object-cover w-full duration-200 group-hover:rotate-2 group-hover:scale-110"
+                                className="h-[500px] w-full object-cover duration-200 group-hover:rotate-2 group-hover:scale-110"
                                 alt=""
                             />
                         </div>
@@ -40,7 +38,7 @@ const EnterpriseSolution = () => {
                         <div className="overflow-hidden">
                             <img
                                 src="/assets/images/vote-agm.jpg"
-                                className="h-[500px] object-cover w-full duration-200 group-hover:rotate-2 group-hover:scale-110"
+                                className="h-[500px] w-full object-cover duration-200 group-hover:rotate-2 group-hover:scale-110"
                                 alt=""
                             />
                         </div>
@@ -61,7 +59,7 @@ const EnterpriseSolution = () => {
                         <div className="overflow-hidden">
                             <img
                                 src="/assets/images/vote-meeting.jpg"
-                                className="h-[500px] object-cover w-full duration-200 group-hover:rotate-2 group-hover:scale-110"
+                                className="h-[500px] w-full object-cover duration-200 group-hover:rotate-2 group-hover:scale-110"
                                 alt=""
                             />
                         </div>

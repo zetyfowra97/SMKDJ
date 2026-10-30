@@ -100,7 +100,7 @@ const Jobapply = (props: any) => {
         }
     };
 
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> ) => {
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
@@ -300,7 +300,7 @@ const Jobapply = (props: any) => {
                             name="message"
                             value={formData.message}
                             onChange={handleInputChange}
-                            className={`input-box w-full rounded-sm border-2 border-[#79D8FE] bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12 max-h-[200px]`}
+                            className={`input-box max-h-[200px] w-full rounded-sm border-2 border-[#79D8FE] bg-transparent p-4 font-bold outline-none transition focus:border-secondary ltr:pr-12 rtl:pl-12`}
                         />
                         <label
                             htmlFor=""

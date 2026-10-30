@@ -13,7 +13,6 @@ import ProjectSlider from '../components/ProjectSlider';
 import CoreValue from '../components/CoreValue';
 import MdCert from '../components/MdCert';
 
-
 const Index = (props: any) => {
     document.title = 'Home | FPG Solution & Consultancy';
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
@@ -23,13 +22,7 @@ const Index = (props: any) => {
             {/* ======= Desktop Hero Section ======= */}
             {isDesktop && (
                 <div className="relative h-screen w-screen overflow-hidden bg-black">
-                    <video
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="absolute inset-0 h-full w-full object-cover"
-                    >
+                    <video autoPlay loop muted playsInline className="absolute inset-0 h-full w-full object-cover">
                         <source src="assets/videos/home.mp4" type="video/mp4" />
                     </video>
 
@@ -38,36 +31,24 @@ const Index = (props: any) => {
                         <h4
                             data-aos="fade-down"
                             data-aos-duration="2000"
-                            className="heading text-white font-extrabold"
+                            className="heading font-extrabold text-white"
                             style={{ fontSize: '8rem', lineHeight: '1' }}
                         >
                             SMKDJ
                         </h4>
-                        <p
-                            data-aos="fade-up"
-                            data-aos-duration="2000"
-                            className="mt-4 text-white text-lg md:text-2xl font-bold"
-                        >
+                        <p data-aos="fade-up" data-aos-duration="2000" className="mt-4 text-lg font-bold text-white md:text-2xl">
                             Sekolah Kecemerlangan Petaling Jaya
                         </p>
                     </div>
 
                     {/* Optional dark gradient overlay for readability */}
-                   
                 </div>
             )}
 
             {/* ======= Mobile/Tablet Hero Section ======= */}
             {(isMobile || isTablet) && (
                 <div className="relative h-screen overflow-hidden bg-black">
-                    <video
-                        className="absolute inset-0 h-full w-full object-cover"
-                        style={{ filter: 'brightness(0.7)' }}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                    >
+                    <video className="absolute inset-0 h-full w-full object-cover" style={{ filter: 'brightness(0.7)' }} autoPlay muted loop playsInline>
                         <source src="/assets/videos/home.mp4" type="video/mp4" />
                     </video>
 
@@ -76,29 +57,24 @@ const Index = (props: any) => {
                         <h4
                             data-aos="fade-down"
                             data-aos-duration="2000"
-                            className="heading text-white font-extrabold"
+                            className="heading font-extrabold text-white"
                             style={{ fontSize: '3rem', lineHeight: '1' }}
                         >
                             SMKDJ
                         </h4>
-                        <p
-                            data-aos="fade-up"
-                            data-aos-duration="2000"
-                            className="mt-3 text-sm font-bold text-white md:text-lg"
-                        >
+                        <p data-aos="fade-up" data-aos-duration="2000" className="mt-3 text-sm font-bold text-white md:text-lg">
                             Sekolah Kluster Kecemerlangan Petaling Jaya
                         </p>
                     </div>
 
                     {/* Optional gradient for better contrast */}
-                   
                 </div>
             )}
 
             {/* ======= Other Sections ======= */}
             <Counter />
-            <ProjectSlider /> 
-            <WhoWeAre /> 
+            <ProjectSlider />
+            <WhoWeAre />
             <Products />
             <Logo />
             <Careerss />

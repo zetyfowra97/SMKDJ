@@ -295,8 +295,6 @@ const Portfoliodetail = () => {
             </section>
 
             <ProjectSlider title2="Related Projects" />
-
-            
         </div>
     );
 };

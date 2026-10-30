@@ -1,8 +1,6 @@
 import React from 'react';
 import 'react-vertical-timeline-component/style.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
 import { Navigation, Autoplay, Virtual } from 'swiper';
 import { Link } from 'react-router-dom';
 
@@ -10,7 +8,7 @@ const Partners = () => {
     return (
         <section className="mb-20">
             <div className="container">
-                <div className="heading text-center" style={{marginBottom:10}}>
+                <div className="heading text-center" style={{ marginBottom: 10 }}>
                     <h6>TEAM. CUSTOMER. COMMUNITY</h6>
                     <h4>We work with best partnersss</h4>
                 </div>

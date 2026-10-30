@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
 import { Navigation, Autoplay } from 'swiper';
 
 const Products = () => {
@@ -17,7 +15,7 @@ const Products = () => {
             id: 2,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ2.jpg',
             title: 'Enterprise Solutions',
-           href: '/Kejayaan',
+            href: '/Kejayaan',
         },
         {
             id: 3,
@@ -47,13 +45,13 @@ const Products = () => {
             id: 7,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ7.jpg',
             title: 'Voting Applications',
-           href: '/Kejayaan',
+            href: '/Kejayaan',
         },
         {
             id: 8,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ8.jpg',
             title: 'Voting Applications',
-           href: '/Kejayaan',
+            href: '/Kejayaan',
         },
         {
             id: 9,
@@ -77,12 +75,12 @@ const Products = () => {
             id: 12,
             img: '/assets/images/PENCAPAIANKOKURIKULUMSMKDJ12.jpg',
             title: 'Voting Applications',
-           href: '/Kejayaan',
+            href: '/Kejayaan',
         },
     ];
 
     return (
-        <section className="dark:bg-none pt-20 pb-20">
+        <section className="pt-20 pb-20 dark:bg-none">
             <div className="container">
                 <div className="heading mb-10 text-center text-3xl font-extrabold text-cyan lg:mb-14">
                     <h6>Permata DJ</h6>
@@ -114,9 +112,7 @@ const Products = () => {
                                             alt={product.title}
                                             className="h-full w-full object-cover duration-500 group-hover:scale-110 md:h-full"
                                         />
-                                        <div>
-                                            {product.title}
-                                        </div>
+                                        <div>{product.title}</div>
                                     </div>
                                 </Link>
                             </div>
@@ -130,13 +126,7 @@ const Products = () => {
                         type="button"
                         className="product-slider-prev flex h-10 w-10 items-center justify-center rounded-full bg-black/5 text-cyan transition hover:bg-secondary dark:bg-white/5"
                     >
-                        <svg
-                            width="7"
-                            height="12"
-                            viewBox="0 0 7 12"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M5.95007 1.2002L1.48924 5.3424C1.06317 5.73803 1.06317 6.41236 1.48924 6.80799L5.95007 10.9502"
                                 stroke="currentColor"
@@ -149,13 +139,7 @@ const Products = () => {
                         type="button"
                         className="product-slider-next flex h-10 w-10 items-center justify-center rounded-full bg-black/5 text-cyan transition hover:bg-secondary dark:bg-white/5"
                     >
-                        <svg
-                            width="7"
-                            height="12"
-                            viewBox="0 0 7 12"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M1.05005 10.7998L5.51089 6.6576C5.93695 6.26197 5.93695 5.58764 5.51089 5.19201L1.05005 1.0498"
                                 stroke="currentColor"

@@ -38,7 +38,7 @@ const Feedback = ({
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 
     return (
-        <section className={`relative bg-transparent dark:bg-transparent mt-10 md:mt-20 ${className}`}>
+        <section className={`relative mt-10 bg-transparent dark:bg-transparent md:mt-20 ${className}`}>
             {type.toLowerCase() === 'common' && (
                 <div className="absolute top-0 ltr:right-0 rtl:left-0">
                     <svg width="758" height="741" viewBox="0 0 758 741" fill="none" xmlns="http://www.w3.org/2000/svg">

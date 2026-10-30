@@ -6,11 +6,21 @@ import Footer from './Footer';
 import Header from './Header';
 import { useLocation } from 'react-router-dom';
 import CookiesModal from '../CookiesModal';
+import Sidebar from '../Sidebar';
+import AqiModal from '../AqiModal';
+
+// Pages that should NOT show the sidebar (these also use the original background)
+const NO_SIDEBAR_PATHS = ['/'];
+
+// Original site background (used by the homepage and the footer on every page)
+const ORIGINAL_BG = "bg-[url('background.png')] bg-cover dark:bg-none";
 
 const DefaultLayout = ({ children }: PropsWithChildren) => {
     const location = useLocation();
     const [showLoader, setShowLoader] = useState(true);
     const [showTopButton, setShowTopButton] = useState(false);
+
+    const isHome = NO_SIDEBAR_PATHS.includes(location.pathname);
 
     const goToTop = () => {
         document.body.scrollTop = 0;
@@ -34,14 +44,13 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
 
         const screenLoader = document.getElementsByClassName('screen_loader');
         if (screenLoader?.length) {
-            // screenLoader[0].classList.add("animate__fadeOut");
             setTimeout(() => {
                 setShowLoader(false);
             }, 200);
         }
 
         return () => {
-            window.removeEventListener('onscroll', onScrollHandler);
+            window.removeEventListener('scroll', onScrollHandler);
         };
     }, [location.pathname]);
 
@@ -118,14 +127,38 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
                     </div>
                 )}
 
-                <div className="bg-white font-mulish text-base text-gray antialiased dark:bg-[#101926]">
+                {/* Outer wrapper */}
+                <div className={`font-mulish text-base text-gray antialiased ${isHome ? 'bg-white dark:bg-[#101926]' : 'bg-white dark:bg-[#101926]'}`}>
                     <Header className={showTopButton ? 'sticky-header' : ''} />
 
-                    <div className=" bg-[url('background.png')] bg-cover dark:bg-none ">
-                        {children}
+                    {/* Homepage keeps one shared background for content + footer */}
+                    <div className={isHome ? ORIGINAL_BG : ''}>
+                        {isHome ? (
+                            // Homepage: full width, no sidebar
+                            children
+                        ) : (
+                            // Other pages: white content area with Recent Posts on the right
+                            <div className="bg-white">
+                                <div className="container py-10">
+                                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px]">
+                                        <div className="min-w-0 bg-white">{children}</div>
+                                        <Sidebar />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
-                        <Footer />
+                        {/* Footer: original background on every page */}
+                        {isHome ? (
+                            <Footer />
+                        ) : (
+                            <div className={ORIGINAL_BG}>
+                                <Footer />
+                            </div>
+                        )}
                     </div>
+
+                    <AqiModal />
                     <CookiesModal />
                 </div>
 
@@ -148,7 +181,7 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
                         </button>
                         <button type="button" className="fixed bottom-24 z-10 animate-small-bounce ltr:right-5 rtl:left-5" onClick={goToContactUs}>
                             <div className="group flex h-14 w-14 items-center justify-center rounded-full border border-black/20 bg-black text-white transition duration-500 hover:bg-secondary dark:bg-primary dark:hover:bg-secondary">
-                                <img className='w-[24px] h-[24px] text-white' src="/assets/images/icon-contact-us.png" alt="" />
+                                <img className="h-[24px] w-[24px] text-white" src="/assets/images/icon-contact-us.png" alt="" />
                             </div>
                         </button>
                     </>

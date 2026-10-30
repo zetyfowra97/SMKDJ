@@ -1,13 +1,11 @@
 import React from 'react';
 import 'react-vertical-timeline-component/style.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
 import { Navigation, Autoplay, Virtual } from 'swiper';
 
 const Logo = () => {
     return (
-        <div className="pb-20 pt-20 bg-white">
+        <div className="bg-white pb-20 pt-20">
             <section>
                 <div className="mx-auto w-4/5 py-10">
                     <Swiper
@@ -36,21 +34,16 @@ const Logo = () => {
                     >
                         {/* School Email */}
                         <SwiperSlide>
-                            <a 
-                                href="mailto:bea8658@moe.edu.my" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="flex items-center justify-center gap-3"
-                            >
+                            <a href="mailto:bea8658@moe.edu.my" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3">
                                 <img className="h-full" src="assets/images/SCHOOLEMAIL.png" alt="School Email" />
                             </a>
                         </SwiperSlide>
 
                         {/* DELIMa */}
                         <SwiperSlide>
-                            <a 
-                                href="https://delima.moe-dl.edu.my/" 
-                                target="_blank" 
+                            <a
+                                href="https://delima.moe-dl.edu.my/"
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center gap-3"
                             >
@@ -60,9 +53,9 @@ const Logo = () => {
 
                         {/* e-Pangkat */}
                         <SwiperSlide>
-                            <a 
-                                href="https://epangkat.moe.gov.my/login.php" 
-                                target="_blank" 
+                            <a
+                                href="https://epangkat.moe.gov.my/login.php"
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center gap-3"
                             >
@@ -72,9 +65,9 @@ const Logo = () => {
 
                         {/* SPLKPM */}
                         <SwiperSlide>
-                            <a 
-                                href="https://splkpm.moe.gov.my/index.cfm" 
-                                target="_blank" 
+                            <a
+                                href="https://splkpm.moe.gov.my/index.cfm"
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center gap-3"
                             >
@@ -84,21 +77,16 @@ const Logo = () => {
 
                         {/* APDM */}
                         <SwiperSlide>
-                            <a 
-                                href="https://apdm.moe.gov.my/" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-3"
-                            >
+                            <a href="https://apdm.moe.gov.my/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3">
                                 <img className="h-full" src="assets/images/APDM.png" alt="APDM" />
                             </a>
                         </SwiperSlide>
 
                         {/* HRMIS */}
                         <SwiperSlide>
-                            <a 
-                                href="https://hrmis2.eghrmis.gov.my/HRMISNET/Common/Main/Login.aspx" 
-                                target="_blank" 
+                            <a
+                                href="https://hrmis2.eghrmis.gov.my/HRMISNET/Common/Main/Login.aspx"
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center gap-3"
                             >
@@ -108,33 +96,23 @@ const Logo = () => {
 
                         {/* e-Operasi */}
                         <SwiperSlide>
-                            <a 
-                                href="https://eoperasi.moe.gov.my/" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-3"
-                            >
+                            <a href="https://eoperasi.moe.gov.my/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3">
                                 <img className="h-full" src="assets/images/e-operasi.png" alt="e-Operasi" />
                             </a>
                         </SwiperSlide>
 
                         {/* SAPS */}
                         <SwiperSlide>
-                            <a 
-                                href="https://sapsnkra.moe.gov.my/" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center gap-3"
-                            >
+                            <a href="https://sapsnkra.moe.gov.my/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3">
                                 <img className="h-full" src="assets/images/SAPS.png" alt="SAPS" />
                             </a>
                         </SwiperSlide>
 
                         {/* ANM */}
                         <SwiperSlide>
-                            <a 
-                                href="https://epenyatagaji-laporan.anm.gov.my/Layouts/Login/Login.aspx" 
-                                target="_blank" 
+                            <a
+                                href="https://epenyatagaji-laporan.anm.gov.my/Layouts/Login/Login.aspx"
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center gap-3"
                             >

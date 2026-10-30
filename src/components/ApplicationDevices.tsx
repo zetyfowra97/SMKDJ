@@ -1,6 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
 const ApplicationDevices = () => {
     return (
         <section className="bg-white/50 py-8 dark:bg-white/[0.03] lg:py-12">
@@ -15,7 +12,7 @@ const ApplicationDevices = () => {
                         background: 'radial-gradient(193.33% 779.99% at 81.67% -6.05%, rgba(71, 189, 255, 0.3) 0%, rgba(71, 189, 255, 0) 100%)',
                     }}
                 >
-                    <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right flex flex-col justify-center">
+                    <div className="heading mb-5 flex flex-col justify-center text-center ltr:lg:text-left rtl:lg:text-right">
                         <h4 className="">Voting Applications</h4>
                         <p className="mt-6 text-lg font-semibold  text-white">
                             The platform consists of a web application for creating votes (Organizer panel) and a voter application. No special knowledge is
@@ -23,14 +20,16 @@ const ApplicationDevices = () => {
                         </p>
                     </div>
                     <div className="lg:ltr:pl-24 lg:rtl:pr-24">
-                        <img src="/assets/images/voting-application-2.jpg" alt="" className="rounded-2xl h-[400px] object-cover" style={{filter:"brightness(0.8)"}}/>
+                        <img
+                            src="/assets/images/voting-application-2.jpg"
+                            alt=""
+                            className="h-[400px] rounded-2xl object-cover"
+                            style={{ filter: 'brightness(0.8)' }}
+                        />
                     </div>
                 </div>
-                <div
-                    className="mt-10 grid gap-4 rounded-2xl py-8 px-4 sm:p-10 lg:mt-16 lg:grid-cols-2 bg-black/60 "
-                    
-                >
-                    <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right flex flex-col justify-center">
+                <div className="mt-10 grid gap-4 rounded-2xl bg-black/60 py-8 px-4 sm:p-10 lg:mt-16 lg:grid-cols-2 ">
+                    <div className="heading mb-5 flex flex-col justify-center text-center ltr:lg:text-left rtl:lg:text-right">
                         <h4 className="">Organizer Application</h4>
                         <p className="mt-6 text-lg font-semibold  text-white">
                             All the participants in a vote can follow the turnout in real-time by viewing the vote monitoring application. Voters can also
@@ -39,7 +38,12 @@ const ApplicationDevices = () => {
                         </p>
                     </div>
                     <div className="lg:ltr:pl-24 lg:rtl:pr-24">
-                        <img src="/assets/images/voting-portal.jpg" alt="" className="rounded-2xl h-[400px] object-cover" style={{filter:"brightness(0.8)"}}/>
+                        <img
+                            src="/assets/images/voting-portal.jpg"
+                            alt=""
+                            className="h-[400px] rounded-2xl object-cover"
+                            style={{ filter: 'brightness(0.8)' }}
+                        />
                     </div>
                 </div>
                 <div
@@ -48,7 +52,7 @@ const ApplicationDevices = () => {
                         background: 'radial-gradient(193.33% 779.99% at 81.67% -6.05%, rgba(71, 189, 255, 0.3) 0%, rgba(71, 189, 255, 0) 100%)',
                     }}
                 >
-                    <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right flex flex-col justify-center">
+                    <div className="heading mb-5 flex flex-col justify-center text-center ltr:lg:text-left rtl:lg:text-right">
                         <h4 className="">Voting Devices</h4>
                         <p className="mt-6 text-lg font-semibold text-white">
                             Voting machines (terminals) operate in a single blockchain network with our applications and are created for in-person voting. All
@@ -56,7 +60,12 @@ const ApplicationDevices = () => {
                         </p>
                     </div>
                     <div className="lg:ltr:pl-24 lg:rtl:pr-24">
-                        <img src="/assets/images/voting-device.jpg" alt="" className="rounded-2xl h-[400px] object-cover" style={{filter:"brightness(0.8)"}} />
+                        <img
+                            src="/assets/images/voting-device.jpg"
+                            alt=""
+                            className="h-[400px] rounded-2xl object-cover"
+                            style={{ filter: 'brightness(0.8)' }}
+                        />
                     </div>
                 </div>
             </div>

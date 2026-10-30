@@ -23,30 +23,17 @@ const Shop = () => {
 
     document.title = 'School Song | SMKDJ';
 
-    const isRtl =
-        useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
+    const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 
     return (
-        <div className="bg-white w-full pb-20 pt-8 bg-cover bg-bottom bg-no-repeat">
-            <section
-                id="section-1"
-                className="items-center justify-center gap-10 md:gap-16 lg:gap-20 justify-items-center"
-            >
-                <div
-                    className="w-full md:w-1/2 px-5 md:px-0"
-                    data-aos="fade-right"
-                    data-aos-duration="1500"
-                >
-                    <div className="heading pb-40 mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
-
+        <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
+            <section id="section-1" className="items-center justify-center justify-items-center gap-10 md:gap-16 lg:gap-20">
+                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                    <div className="heading mt-10 pb-40 text-center ltr:lg:text-left rtl:lg:text-right">
                         {/* TITLE */}
-                        <p className="text-black font-bold text-4xl">
-                          Shop
-                        </p>
+                        <p className="text-4xl font-bold text-black">Shop</p>
                     </div>
-                    
-                        
-                    </div>
+                </div>
             </section>
         </div>
     );

@@ -51,7 +51,7 @@ const Newsdetail = () => {
             <section className="bg-gradient-to-t to-transparent py-14 dark:bg-none md:py-[100px]">
                 <div className="container">
                     <div className="prose max-w-full dark:prose-invert">
-                        <p className=" !text-white text-justify text-base sm:text-lg">
+                        <p className=" text-justify text-base !text-white sm:text-lg">
                             The coronavirus pandemic has profoundly impacted our daily routines, forcing many to work and spend leisure time at home. This shift
                             has presented challenges in organizing workspaces, maintaining productivity, and staying focused. Moreover, the restrictions on
                             social contact have disrupted collective decision-making processes, ranging from local voting procedures to national referendums. As
@@ -60,8 +60,8 @@ const Newsdetail = () => {
                             virtual board meetings, and adapting NGOs' operations.
                         </p>
 
-                        <h2 className='!text-secondary'>Choosing Governments Online:</h2>
-                        <p className="!text-white sm:px-4 text-justify text-base sm:text-lg">
+                        <h2 className="!text-secondary">Choosing Governments Online:</h2>
+                        <p className="text-justify text-base !text-white sm:px-4 sm:text-lg">
                             Traditional elections held at polling stations can pose health risks and contribute to the spread of viruses. As seen during the
                             initial stages of the pandemic, low turnout and logistical challenges were encountered in some countries. While a viable alternative
                             is mail voting, critics highlight increased costs and potential errors in the process. Online voting emerges as a promising
@@ -71,8 +71,8 @@ const Newsdetail = () => {
                             and ensuring a smooth transition when traditional voting is not possible.
                         </p>
 
-                        <h2 className='!text-secondary'>Board of Directors' Meetings:</h2>
-                        <p className="!text-white sm:px-4 text-justify text-base sm:text-lg">
+                        <h2 className="!text-secondary">Board of Directors' Meetings:</h2>
+                        <p className="text-justify text-base !text-white sm:px-4 sm:text-lg">
                             During a pandemic, business operations may be disrupted, necessitating swift decision-making by company boards of directors.
                             Although physical gatherings are restricted, critical decisions can be made through online board meetings and e-voting. To implement
                             this effectively, companies should ensure compliance with local legislation, update internal procedures, and address cybersecurity
@@ -80,8 +80,8 @@ const Newsdetail = () => {
                             prevent cybercrime.
                         </p>
 
-                        <h2 className='!text-secondary'>NGOs:</h2>
-                        <p className="!text-white sm:px-4 text-justify text-base sm:text-lg">
+                        <h2 className="!text-secondary">NGOs:</h2>
+                        <p className="text-justify text-base !text-white sm:px-4 sm:text-lg">
                             Non-governmental organizations (NGOs) have also been affected by the pandemic, leading to the postponement of crucial events like
                             General Meetings. This disruption can exacerbate societal problems, leaving vulnerable communities unsupported. To maintain
                             continuity, NGOs can transfer their events online without altering the essential structure. Collaborative online conference services
@@ -117,8 +117,8 @@ const Newsdetail = () => {
                             </div>
                         </div> */}
 
-                        <h2 className='!text-secondary'>The Future of Democracy:</h2>
-                        <p className="!text-white sm:px-4 text-justify text-base sm:text-lg">
+                        <h2 className="!text-secondary">The Future of Democracy:</h2>
+                        <p className="text-justify text-base !text-white sm:px-4 sm:text-lg">
                             The necessity of social distancing has accelerated the shift towards a more digital society. The increased interest in e-voting
                             among regional parliaments and boards of directors highlights the growing demand for remote decision-making. Prior to the pandemic,
                             online voting was often considered an optional feature, with the associated costs and labor outweighing the benefits. However, the
@@ -155,7 +155,7 @@ const Newsdetail = () => {
                             </div>
                         </div> */}
 
-                        <p className='!text-white pt-10 text-justify text-base sm:text-lg'>
+                        <p className="pt-10 text-justify text-base !text-white sm:text-lg">
                             The coronavirus pandemic has prompted a reevaluation of how we approach collective decision-making. As we navigate a post-pandemic
                             world, it is crucial to learn from the challenges faced during the crisis and prepare for similar situations in the future.
                             Embracing online voting for governments, virtual board meetings, and adapting NGO operations will enable us to overcome the

@@ -24,46 +24,25 @@ const SMKDJShines = () => {
     }, []);
 
     return (
-        <div className="bg-white w-full pb-20 pt-8 bg-cover bg-bottom bg-no-repeat">
-            <section
-                id="section-1"
-                className="items-center justify-center gap-10 md:gap-16 lg:gap-20 justify-items-center"
-            >
+        <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
+            <section id="section-1" className="items-center justify-center justify-items-center gap-10 md:gap-16 lg:gap-20">
                 {/* TEXT SECTION */}
-                <div
-                    className="w-full md:w-1/2 px-5 md:px-0"
-                    data-aos="fade-right"
-                    data-aos-duration="1500"
-                >
+                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
-                                                   <h6 className="!text-secondary">Admin-Announcements, Clubs & Societies, Main Page, Robotics</h6>
-                                                   <p className="text-black font-bold text-4xl">SMKDJ SHINES AT THE MALAYSIA TECHNOLOGY EXPO 2025</p>
-                        <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify">
-                            Congratulations to 4 of our students who managed to win the Gold Award in the Asian Youth Innovation Awards (Junior) competition at the Malaysia Technology Expo 2025 which was held at the World Trade Center Kuala Lumpur between 20-22 February 2025.
-                            
+                        <h6 className="!text-secondary">Admin-Announcements, Clubs & Societies, Main Page, Robotics</h6>
+                        <p className="text-4xl font-bold text-black">SMKDJ SHINES AT THE MALAYSIA TECHNOLOGY EXPO 2025</p>
+                        <p className="mt-4 text-justify text-sm font-semibold text-black md:text-lg">
+                            Congratulations to 4 of our students who managed to win the Gold Award in the Asian Youth Innovation Awards (Junior) competition at
+                            the Malaysia Technology Expo 2025 which was held at the World Trade Center Kuala Lumpur between 20-22 February 2025.
                         </p>
                     </div>
                 </div>
 
                 {/* IMAGE SECTION */}
-                <div
-                    className="w-full md:w-1/2 flex justify-center flex-col gap-10"
-                    data-aos="fade-left"
-                    data-aos-duration="1500"
-                >
-                    <img
-                        src="/assets/images/GOLDAWARD.jpg"
-                        alt="Pengetua"
-                        className="rounded-2xl shadow-lg w-3/4 sm:w-2/3 md:w-full object-cover"
-                    /><img
-                        src="/assets/images/GOLDAWARD2.jpg"
-                        alt="Pengetua"
-                        className="rounded-2xl shadow-lg w-3/4 sm:w-2/3 md:w-full object-cover"
-                    /><img
-                        src="/assets/images/GOLDAWARD3.jpg"
-                        alt="Pengetua"
-                        className="rounded-2xl shadow-lg w-3/4 sm:w-2/3 md:w-full object-cover"
-                    />
+                <div className="flex w-full flex-col justify-center gap-10 md:w-1/2" data-aos="fade-left" data-aos-duration="1500">
+                    <img src="/assets/images/GOLDAWARD.jpg" alt="Pengetua" className="w-3/4 rounded-2xl object-cover shadow-lg sm:w-2/3 md:w-full" />
+                    <img src="/assets/images/GOLDAWARD2.jpg" alt="Pengetua" className="w-3/4 rounded-2xl object-cover shadow-lg sm:w-2/3 md:w-full" />
+                    <img src="/assets/images/GOLDAWARD3.jpg" alt="Pengetua" className="w-3/4 rounded-2xl object-cover shadow-lg sm:w-2/3 md:w-full" />
                 </div>
             </section>
         </div>

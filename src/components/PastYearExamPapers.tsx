@@ -1,0 +1,104 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import 'react-18-image-lightbox/style.css';
+
+const PastYearExamPapers = () => {
+    const location = useLocation();
+    const hash = location.hash;
+
+    const handleClickScroll = () => {
+        const element = document.getElementById('section-1');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    useEffect(() => {
+        if (hash === '#section-1') {
+            setTimeout(() => handleClickScroll(), 800);
+        }
+    }, [hash]);
+
+    useEffect(() => {
+        document.title = 'SchoolEmblem | SMK Damansara Jaya';
+    }, []);
+
+    return (
+        <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
+            <section id="section-1" className="container items-center justify-center gap-10 md:gap-16 lg:gap-20">
+                {/* TEXT SECTION */}
+                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                    <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right ">
+                        <h4 className="!text-secondary">Past Year Exam Papers</h4>
+                        <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                            <a
+                                href="https://djians-my.sharepoint.com/personal/tongjin_smkdj_edu_my/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ftongjin%5Fsmkdj%5Fedu%5Fmy%2FDocuments%2FThiseus%20Systems%20Sdn%20Bhd%2FProjects%2FSchools%2FSMKDJ%2FOld%2FExam%20Papers%2FSMKDJ%2FForm%201&ga=1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Form 1
+                            </a>
+
+                            <br />
+                            <br />
+                        </p>
+
+                        <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                            <a
+                                href="https://djians-my.sharepoint.com/personal/tongjin_smkdj_edu_my/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ftongjin%5Fsmkdj%5Fedu%5Fmy%2FDocuments%2FThiseus%20Systems%20Sdn%20Bhd%2FProjects%2FSchools%2FSMKDJ%2FOld%2FExam%20Papers%2FSMKDJ%2FForm%202&ga=1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Form 2
+                            </a>
+
+                            <br />
+                            <br />
+                        </p>
+
+                        <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                            <a
+                                href="https://djians-my.sharepoint.com/personal/tongjin_smkdj_edu_my/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ftongjin%5Fsmkdj%5Fedu%5Fmy%2FDocuments%2FThiseus%20Systems%20Sdn%20Bhd%2FProjects%2FSchools%2FSMKDJ%2FOld%2FExam%20Papers%2FSMKDJ%2FForm%203&ga=1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Form 3
+                            </a>
+
+                            <br />
+                            <br />
+                        </p>
+
+                        <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                            <a
+                                href="https://djians-my.sharepoint.com/personal/tongjin_smkdj_edu_my/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ftongjin%5Fsmkdj%5Fedu%5Fmy%2FDocuments%2FThiseus%20Systems%20Sdn%20Bhd%2FProjects%2FSchools%2FSMKDJ%2FOld%2FExam%20Papers%2FSMKDJ%2FForm%204&ga=1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Form 4
+                            </a>
+
+                            <br />
+                            <br />
+                        </p>
+
+                        <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                            <a
+                                href="https://djians-my.sharepoint.com/personal/tongjin_smkdj_edu_my/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Ftongjin%5Fsmkdj%5Fedu%5Fmy%2FDocuments%2FThiseus%20Systems%20Sdn%20Bhd%2FProjects%2FSchools%2FSMKDJ%2FOld%2FExam%20Papers%2FSMKDJ%2FForm%205&ga=1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Form 5
+                            </a>
+
+                            <br />
+                            <br />
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    );
+};
+
+export default PastYearExamPapers;

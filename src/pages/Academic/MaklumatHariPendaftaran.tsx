@@ -1,4 +1,3 @@
-
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IRootState } from '../../store';
@@ -29,72 +28,36 @@ const MaklumatHariPendaftaran = () => {
         document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
     }, []);
 
-    const isRtl =
-        useSelector(
-            (state: IRootState) => state.themeConfig.direction
-        ) === 'rtl';
+    const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 
-    const pdfUrl =
-        'https://www.smkdj.edu.my/wp-content/uploads/2023/02/surat-BC-1.pdf';
+    const pdfUrl = 'https://www.smkdj.edu.my/wp-content/uploads/2023/02/surat-BC-1.pdf';
 
-    const pdfUrl2 =
-        'https://www.smkdj.edu.my/wp-content/uploads/2023/02/CamScanner-02-20-2023-12.15.pdf';
-    
-    const pdfUrl3 =
-        'https://www.smkdj.edu.my/wp-content/uploads/2023/02/BORANG-MAKLUMAT-MURID.pdf';
+    const pdfUrl2 = 'https://www.smkdj.edu.my/wp-content/uploads/2023/02/CamScanner-02-20-2023-12.15.pdf';
+
+    const pdfUrl3 = 'https://www.smkdj.edu.my/wp-content/uploads/2023/02/BORANG-MAKLUMAT-MURID.pdf';
 
     return (
         <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
-            <section
-                id="section-1"
-                className="flex flex-col items-center justify-center gap-10 md:gap-16 lg:gap-20"
-            >
+            <section id="section-1" className="flex flex-col items-center justify-center gap-10 md:gap-16 lg:gap-20">
                 {/* TEXT SECTION */}
-                <div
-                    className="w-full px-5 md:w-1/2 md:px-0"
-                    data-aos="fade-right"
-                    data-aos-duration="1500"
-                >
-                    <div
-                        className={`heading mt-10 text-center ${
-                            isRtl
-                                ? 'rtl:lg:text-right'
-                                : 'ltr:lg:text-left'
-                        }`}
-                    >
-                        <h6 className="!text-secondary">
-                            Academic, Academic-Announcements, Main Page, Tingkatan 1
-                        </h6>
+                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                    <div className={`heading mt-10 text-center ${isRtl ? 'rtl:lg:text-right' : 'ltr:lg:text-left'}`}>
+                        <h6 className="!text-secondary">Academic, Academic-Announcements, Main Page, Tingkatan 1</h6>
 
-                        <p className="text-3xl font-bold text-black md:text-4xl">
-                            Maklumat Hari Pendaftaran Murid Tingkatan 1 2023 SMK Damansara Jaya
-                        </p>
+                        <p className="text-3xl font-bold text-black md:text-4xl">Maklumat Hari Pendaftaran Murid Tingkatan 1 2023 SMK Damansara Jaya</p>
 
                         {/* AUTHOR AND DATE */}
                         <div className="mt-4 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
                             <div className="flex items-center gap-1">
-                                <img
-                                    src="/assets/images/userimages.png"
-                                    alt="Author"
-                                    className="h-6 w-6 object-contain"
-                                />
+                                <img src="/assets/images/userimages.png" alt="Author" className="h-6 w-6 object-contain" />
 
-                                <p className="text-xs font-semibold text-black">
-                                    SMKDJ
-
-                                </p>
+                                <p className="text-xs font-semibold text-black">SMKDJ</p>
                             </div>
 
                             <div className="flex items-center gap-1">
-                                <img
-                                    src="/assets/images/dateandtime.png"
-                                    alt="Date"
-                                    className="h-4 w-4 object-contain"
-                                />
+                                <img src="/assets/images/dateandtime.png" alt="Date" className="h-4 w-4 object-contain" />
 
-                                <p className="text-xs font-semibold text-black">
-                                    February 20, 2023
-                                </p>
+                                <p className="text-xs font-semibold text-black">February 20, 2023</p>
                             </div>
                         </div>
                     </div>
@@ -102,11 +65,9 @@ const MaklumatHariPendaftaran = () => {
 
                 {/* PDF DOCUMENT SECTION */}
                 <div className="container mx-auto w-full px-4 md:px-5">
-                   
-
                     {/* PDF VIEWER */}
                     <div
-                        className="mt-6 w-full overflow-hidden rounded-lg border border-gray-300 bg-gray-100 shadow-md"
+                        className="border-gray-300 bg-gray-100 mt-6 w-full overflow-hidden rounded-lg border shadow-md"
                         data-aos="fade-up"
                         data-aos-duration="1000"
                     >
@@ -123,7 +84,7 @@ const MaklumatHariPendaftaran = () => {
                         />
                     </div>
                     <div
-                        className="mt-6 w-full overflow-hidden rounded-lg border border-gray-300 bg-gray-100 shadow-md"
+                        className="border-gray-300 bg-gray-100 mt-6 w-full overflow-hidden rounded-lg border shadow-md"
                         data-aos="fade-up"
                         data-aos-duration="1000"
                     >
@@ -141,7 +102,7 @@ const MaklumatHariPendaftaran = () => {
                     </div>
 
                     <div
-                        className="mt-6 w-full overflow-hidden rounded-lg border border-gray-300 bg-gray-100 shadow-md"
+                        className="border-gray-300 bg-gray-100 mt-6 w-full overflow-hidden rounded-lg border shadow-md"
                         data-aos="fade-up"
                         data-aos-duration="1000"
                     >
@@ -160,16 +121,14 @@ const MaklumatHariPendaftaran = () => {
 
                     {/* PDF FOOTER */}
                     <div className="mt-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-                        <p className="text-sm font-medium text-gray-600">
-                            surat-BC-1
-                        </p>
+                        <p className="text-gray-600 text-sm font-medium">surat-BC-1</p>
 
                         <div className="flex flex-wrap gap-3">
                             <a
                                 href={pdfUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-gray-100"
+                                className="border-gray-300 hover:bg-gray-100 inline-flex items-center justify-center rounded-lg border bg-white px-4 py-2 text-sm font-semibold text-black transition"
                             >
                                 View PDF
                             </a>
@@ -177,24 +136,22 @@ const MaklumatHariPendaftaran = () => {
                             <a
                                 href={pdfUrl}
                                 download="2026-JW-PEP-SPMC.pdf"
-                                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+                                className="bg-blue-600 hover:bg-blue-700 inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-white transition"
                             >
                                 Download PDF
                             </a>
                         </div>
                     </div>
 
-                      <div className="mt-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-                        <p className="text-sm font-medium text-gray-600">
-                            CamScanner-02-20-2023-12.15
-                        </p>
+                    <div className="mt-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+                        <p className="text-gray-600 text-sm font-medium">CamScanner-02-20-2023-12.15</p>
 
                         <div className="flex flex-wrap gap-3">
                             <a
                                 href={pdfUrl2}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-gray-100"
+                                className="border-gray-300 hover:bg-gray-100 inline-flex items-center justify-center rounded-lg border bg-white px-4 py-2 text-sm font-semibold text-black transition"
                             >
                                 View PDF
                             </a>
@@ -202,24 +159,22 @@ const MaklumatHariPendaftaran = () => {
                             <a
                                 href={pdfUrl2}
                                 download="2026-JW-PEP-SPMC.pdf"
-                                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+                                className="bg-blue-600 hover:bg-blue-700 inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-white transition"
                             >
                                 Download PDF
                             </a>
                         </div>
                     </div>
 
-                      <div className="mt-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-                        <p className="text-sm font-medium text-gray-600">
-                            BORANG-MAKLUMAT-MURID
-                        </p>
+                    <div className="mt-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+                        <p className="text-gray-600 text-sm font-medium">BORANG-MAKLUMAT-MURID</p>
 
                         <div className="flex flex-wrap gap-3">
                             <a
                                 href={pdfUrl3}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-gray-100"
+                                className="border-gray-300 hover:bg-gray-100 inline-flex items-center justify-center rounded-lg border bg-white px-4 py-2 text-sm font-semibold text-black transition"
                             >
                                 View PDF
                             </a>
@@ -227,7 +182,7 @@ const MaklumatHariPendaftaran = () => {
                             <a
                                 href={pdfUrl3}
                                 download="2026-JW-PEP-SPMC.pdf"
-                                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-700"
+                                className="bg-blue-600 hover:bg-blue-700 inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold text-white transition"
                             >
                                 Download PDF
                             </a>

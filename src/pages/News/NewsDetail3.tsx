@@ -50,30 +50,30 @@ const Newsdetail = () => {
             <section className="bg-gradient-to-t to-transparent py-14 dark:bg-none md:py-[100px]">
                 <div className="container">
                     <div className="prose max-w-full dark:prose-invert">
-                        <h2 className='text-secondary'>Democrat Party's First Use of Blockchain in a Large-Scale Political Election</h2>
+                        <h2 className="text-secondary">Democrat Party's First Use of Blockchain in a Large-Scale Political Election</h2>
                         <ul>
-                            <li className="!text-white text-justify text-base sm:text-lg">
+                            <li className="text-justify text-base !text-white sm:text-lg">
                                 From November 1st to November 9th, a significant surge in transactions was observed on Zcoin's blockchain. The reason behind
                                 this surge can now be revealed. In October, Mr. Korn Chatikavanij, the former Minister of Finance, hinted that political parties
                                 in Thailand were leveraging blockchain technology for selecting party leaders.
                             </li>
-                            <li className="!text-white text-justify text-base sm:text-lg">
+                            <li className="text-justify text-base !text-white sm:text-lg">
                                 The Thai Democrat Party, which holds the distinction of being Thailand's oldest political party, recently conducted a primary
                                 election to choose its new party leader. Unlike previous methods where the leader was selected by the party's MPs and chairman,
                                 this time, all members of the Democrat party were eligible to vote. This marked the first instance in Thai politics where a
                                 political party involved its grassroots members in the leadership selection process.
                             </li>
-                            <li className="!text-white text-justify text-base sm:text-lg">
+                            <li className="text-justify text-base !text-white sm:text-lg">
                                 The primary election concluded with an impressive total of 127,479 votes from all across Thailand, making it the world's first
                                 large-scale application of blockchain technology in a political election. Previous instances of voting on the blockchain were
                                 either small-scale tests or had limited participation, if any.
                             </li>
                         </ul>
 
-                        <h2 className='text-secondary'>A Milestone in Real-World Adoption of Blockchain-Based E-Voting</h2>
+                        <h2 className="text-secondary">A Milestone in Real-World Adoption of Blockchain-Based E-Voting</h2>
 
                         <ul>
-                            <li className="!text-white text-justify text-base sm:text-lg">
+                            <li className="text-justify text-base !text-white sm:text-lg">
                                 The uniqueness of this leadership race lay in the stakeholders' desire to ensure that the votes remained untampered with. While
                                 most e-voting systems rely on a centralized database controlled by an administrator, the stakeholders were unwilling to rely on
                                 such a system. Therefore, it was unanimously agreed to utilize Zcoin's public blockchain, which operates without a central
@@ -83,14 +83,14 @@ const Newsdetail = () => {
                             </li>
                         </ul>
                         <ul>
-                            <li className="!text-white text-justify text-base sm:text-lg">
+                            <li className="text-justify text-base !text-white sm:text-lg">
                                 The electronic voting took place through two methods:
                                 <br /> voting stations spread nationwide that employed a Raspberry Pi-based system, and a mobile voting app called D-Elect,
                                 which required voters to submit their photo ID.
                             </li>
                         </ul>
                         <ul>
-                            <li className="!text-white text-justify text-base sm:text-lg">
+                            <li className="text-justify text-base !text-white sm:text-lg">
                                 Two sets of data were involved in this process:
                                 <br /> identification documents and voting tallies. These datasets were encrypted and stored on IPFS, a decentralized and
                                 distributed file storage system. The IPFS hashes were then recorded on the Zcoin blockchain, which acted as a decentralized and
@@ -98,7 +98,7 @@ const Newsdetail = () => {
                             </li>
                         </ul>
                         <ul>
-                            <li className="!text-white text-justify text-base sm:text-lg">
+                            <li className="text-justify text-base !text-white sm:text-lg">
                                 To protect voter privacy, the identification documents and voting tallies were encrypted in a manner that required the agreement
                                 and presence of all stakeholders to decrypt the complete set of voting data. Shamir's Secret Sharing Scheme, a cryptographic
                                 method, was employed to split the encryption keys. Only a member of the Election Commission or a representative of the Democrat
@@ -109,15 +109,15 @@ const Newsdetail = () => {
                             </li>
                         </ul>
                         <ul>
-                            <li className="!text-white text-justify text-base sm:text-lg">
+                            <li className="text-justify text-base !text-white sm:text-lg">
                                 Remarkably, despite a large number of voters from various parts of Thailand, the final results were available in less than 12
                                 hours. This achievement represents a significant milestone in the real-world adoption of blockchain-based e-voting. The
                                 experience gained from this endeavor will contribute valuable insights to enhance the system further, including the utilization
                                 of zero-knowledge proof systems to facilitate anonymous yet verifiable voting on the blockchain.
                             </li>
                         </ul>
-                        
-                        <p className="!text-white pt-10 text-justify text-base sm:text-lg">
+
+                        <p className="pt-10 text-justify text-base !text-white sm:text-lg">
                             The pursuit of electronic voting faces numerous challenges. However, endeavors like these are crucial in making voting and polling
                             easier, more cost-effective, and, most importantly, trusted by the voters. In this particular case, blockchain technology proved to
                             be a suitable solution due to its ability to maintain the integrity of the vote database without a central administrator. Moreover,

@@ -351,7 +351,7 @@ const WhyBlockchain = () => {
                 <div className="container">
                     <div className="relative">
                         <div className="">
-                            <div className="heading flex flex-col items-center text-center px-6">
+                            <div className="heading flex flex-col items-center px-6 text-center">
                                 <h6 className="!text-secondary" data-aos="fade-down" data-aos-duration="2000">
                                     Why Blockchain
                                 </h6>
@@ -383,12 +383,12 @@ const WhyBlockchain = () => {
                 <div className="container z-20 h-full w-full">
                     <div className=" h-full w-full">
                         <div className="flex h-full w-full items-center lg:w-1/2">
-                            <div className="heading mb-5 text-center ltr:lg:text-left rtl:lg:text-right px-6" data-aos="fade-right" data-aos-duration="2000">
+                            <div className="heading mb-5 px-6 text-center ltr:lg:text-left rtl:lg:text-right" data-aos="fade-right" data-aos-duration="2000">
                                 <h6 className="!text-secondary">How to Ensure Vote Privacy</h6>
                                 <h4 className="text-3xl font-semibold text-white text-['27.65px']">
                                     A pair of keys (Public & Private) is generated - for Vote encryption and decryption.
                                 </h4>
-                                <p className="mt-4 text-center text-sm font-semibold text-white lg:text-left md:text-lg">
+                                <p className="mt-4 text-center text-sm font-semibold text-white md:text-lg lg:text-left">
                                     The secret key is held by the vote organizer or divided among multiple organizers, while the public key is made available on
                                     the blockchain. Blockchain voting is a modern approach to voting that uses blockchain technology for transparency and
                                     security. Each vote is encrypted and recorded as a transaction on a decentralized ledger, ensuring tamper-resistance and

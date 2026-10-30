@@ -28,118 +28,112 @@ const Facilities = () => {
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 
     return (
-           <div className="bg-white w-full pb-20 pt-8 bg-cover bg-bottom bg-no-repeat">
-            <section
-                id="section-1"
-                className="items-center justify-center gap-10 md:gap-16 lg:gap-20 justify-items-center"
-            >
+        <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
+            <section id="section-1" className="items-center justify-center justify-items-center gap-10 md:gap-16 lg:gap-20">
                 {/* TEXT SECTION */}
-                <div
-                    className="w-full md:w-1/2 px-5 md:px-0"
-                    data-aos="fade-right"
-                    data-aos-duration="1500"
-                >
+                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
-                        <p className="text-black font-bold text-4xl">Facilities</p>
+                        <p className="text-4xl font-bold text-black">Facilities</p>
                         <div>
-                        <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                            <a href="/UpgradingofICT"
-                            target="_blank"
-                            rel="noopener noreferrer">
-                                  Upgrading of ICT Infrastructure
-                            </a>
+                            <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                                <a href="/UpgradingofICT" target="_blank" rel="noopener noreferrer">
+                                    Upgrading of ICT Infrastructure
+                                </a>
                             </p>
-                            <p className="text-[12px] font-semibold text-black text-justify">
-                           January 1, 2021 <br/><br/>
-                        </p>
-                            <p className="text-sm font-semibold text-black md:text-lg text-justify">
-                            The existing computer network infrastructure in SMKDJ is almost 12 years old. We have legacy equipment from even when the school was first established. As part of the improvement program in 2020, PIBG together with volunteer parents and teachers have embarked on a modernisation program to bring up the school to the new digital age.                      
-                        </p>
-                        </div>
-                         <div>
-                        <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                            <a  href="/UpgradingoftheSchoolHall"
-                            target="_blank"
-                            rel="noopener noreferrer">
-                                  Upgrading of the school hall
-                            </a>
+                            <p className="text-justify text-[12px] font-semibold text-black">
+                                January 1, 2021 <br />
+                                <br />
                             </p>
-                            <p className="text-[12px] font-semibold text-black text-justify">
-                           November 12, 2020 <br/><br/>
-                        </p>
-                            <p className="text-sm font-semibold text-black md:text-lg text-justify">
-                            One of the important projects taken up by the PIBG was to upgrade the Dewan Sekolah. Besides a new coat of paint, the new hall will be fully air-conditioned, with brighter lighting and new furnishing. The electricals will be upgraded and there will be WIFI connectivity throughout.                   
-                        </p>
-                        </div>
-                         <div>
-                        <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                            <a href="/GuidetoWIFI"
-                            target="_blank"
-                            rel="noopener noreferrer">
-                                  Guide to WIFI @ DJ
-                            </a>
+                            <p className="text-justify text-sm font-semibold text-black md:text-lg">
+                                The existing computer network infrastructure in SMKDJ is almost 12 years old. We have legacy equipment from even when the school
+                                was first established. As part of the improvement program in 2020, PIBG together with volunteer parents and teachers have
+                                embarked on a modernisation program to bring up the school to the new digital age.
                             </p>
-                            <p className="text-[12px] font-semibold text-black text-justify">
-                           September 12, 2020 <br/><br/>
-                        </p>
-                            <p className="text-sm font-semibold text-black md:text-lg text-justify">
-                            Great news ! Took us awhile, but we now have school wide access to WIFI ! For all Admin and Academic staff, you will be given a new SSID ( smkdj ) and password. For students and visitors, you can register with our Guest WIFI y5@smkdj. Register using your email address and enjoy free wireless                      
-                        </p>
                         </div>
-                         <div>
-                        <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                            <a href="/MajlisPelancaranPapan"
-                            rel="noopener noreferrer">
-                                  Majlis Pelancaran Papan Tanda ‘We Love SMKDJ’ – Tajaan Sunway TES
-                            </a>
+                        <div>
+                            <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                                <a href="/UpgradingoftheSchoolHall" target="_blank" rel="noopener noreferrer">
+                                    Upgrading of the school hall
+                                </a>
                             </p>
-                            <p className="text-[12px] font-semibold text-black text-justify">
-                           February 28, 2020 <br/><br/>
-                        </p>
-                            <p className="text-sm font-semibold text-black md:text-lg text-justify">
-                            Majlis Pelancaran Papan Tanda We Love ???? SMKDJ, tajaan Sunway TES. Majlis ini disempurnakan oleh Encik Teo Ee Sing, Executive Director Sunway TES pada 28 Februari 2020                     
-                        </p>
-                        </div>
-                         <div>
-                        <p className="mt-4 text-sm font-semibold text-black md:text-lg text-justify underline underline-offset-1">
-                           
-                            <a href="/ICTTHON"
-                            rel="noopener noreferrer">
-                                  ICT-THON 2018
-                            </a>
+                            <p className="text-justify text-[12px] font-semibold text-black">
+                                November 12, 2020 <br />
+                                <br />
                             </p>
-                            <p className="text-[12px] font-semibold text-black text-justify">
-                           August 11, 2018 <br/><br/>
-                        </p>
-                            <p className="text-sm font-semibold text-black md:text-lg text-justify">
-                            Karnival ICT-Thon telah diadakan pada 11 Ogos 2018 di SMK Damansara Jaya. Objektif Karnival ICT-Thon SMKDJ 2018: Menggantikan 40 buah komputer lama yang tidak dapat menampung keperluan semasa yang lebih canggih bagi membantu pengajaran dan pembelajaran Komputer Sains (SPM) dan Asas Sains Komputer (Ting. 1, 2, 3). Menyediakan awning dan penutup longkang di kawasan sekolah                  
-                        </p>
+                            <p className="text-justify text-sm font-semibold text-black md:text-lg">
+                                One of the important projects taken up by the PIBG was to upgrade the Dewan Sekolah. Besides a new coat of paint, the new hall
+                                will be fully air-conditioned, with brighter lighting and new furnishing. The electricals will be upgraded and there will be
+                                WIFI connectivity throughout.
+                            </p>
                         </div>
-
+                        <div>
+                            <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                                <a href="/GuidetoWIFI" target="_blank" rel="noopener noreferrer">
+                                    Guide to WIFI @ DJ
+                                </a>
+                            </p>
+                            <p className="text-justify text-[12px] font-semibold text-black">
+                                September 12, 2020 <br />
+                                <br />
+                            </p>
+                            <p className="text-justify text-sm font-semibold text-black md:text-lg">
+                                Great news ! Took us awhile, but we now have school wide access to WIFI ! For all Admin and Academic staff, you will be given a
+                                new SSID ( smkdj ) and password. For students and visitors, you can register with our Guest WIFI y5@smkdj. Register using your
+                                email address and enjoy free wireless
+                            </p>
+                        </div>
+                        <div>
+                            <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                                <a href="/MajlisPelancaranPapan" rel="noopener noreferrer">
+                                    Majlis Pelancaran Papan Tanda ‘We Love SMKDJ’ – Tajaan Sunway TES
+                                </a>
+                            </p>
+                            <p className="text-justify text-[12px] font-semibold text-black">
+                                February 28, 2020 <br />
+                                <br />
+                            </p>
+                            <p className="text-justify text-sm font-semibold text-black md:text-lg">
+                                Majlis Pelancaran Papan Tanda We Love ???? SMKDJ, tajaan Sunway TES. Majlis ini disempurnakan oleh Encik Teo Ee Sing, Executive
+                                Director Sunway TES pada 28 Februari 2020
+                            </p>
+                        </div>
+                        <div>
+                            <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">
+                                <a href="/ICTTHON" rel="noopener noreferrer">
+                                    ICT-THON 2018
+                                </a>
+                            </p>
+                            <p className="text-justify text-[12px] font-semibold text-black">
+                                August 11, 2018 <br />
+                                <br />
+                            </p>
+                            <p className="text-justify text-sm font-semibold text-black md:text-lg">
+                                Karnival ICT-Thon telah diadakan pada 11 Ogos 2018 di SMK Damansara Jaya. Objektif Karnival ICT-Thon SMKDJ 2018: Menggantikan 40
+                                buah komputer lama yang tidak dapat menampung keperluan semasa yang lebih canggih bagi membantu pengajaran dan pembelajaran
+                                Komputer Sains (SPM) dan Asas Sains Komputer (Ting. 1, 2, 3). Menyediakan awning dan penutup longkang di kawasan sekolah
+                            </p>
+                        </div>
                     </div>
-                </div> 
+                </div>
                 <div className="container">
                     <div className="grid grid-cols-12 gap-2 md:gap-6">
-                         
                         {/* 1 */}
-                       
-                         <div className="relative col-span-12 md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-    <div className="image-container group rounded-xl overflow-hidden w-full h-full">
-        <img
-            src="/assets/images/1exercisearea.JPEG"
-            alt="gallery-1"
-            className="w-full h-full object-cover aspect-[4/3] md:aspect-auto transition-transform duration-500 group-hover:scale-110"
-        />
-        <div className="absolute bottom-0 left-0 p-4">
-            <h2 className="bg-gray-100/75 text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-               Exercise Area
-            </h2>
-        </div>
-    </div>
-</div>
-                          {/* 2 */}
+
+                        <div className="relative col-span-12 md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group h-full w-full overflow-hidden rounded-xl">
+                                <img
+                                    src="/assets/images/1exercisearea.JPEG"
+                                    alt="gallery-1"
+                                    className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 md:aspect-auto"
+                                />
+                                <div className="absolute bottom-0 left-0 p-4">
+                                    <h2 className="bg-gray-100/75 text-[27px] font-semibold text-white md:group-hover:animate-hex-up">Exercise Area</h2>
+                                </div>
+                            </div>
+                        </div>
+                        {/* 2 */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/2biologylab.JPEG"
                                     alt="gallery-1"
@@ -152,9 +146,9 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                          {/*3*/}
+                        {/*3*/}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/3gazebo.JPEG"
                                     alt="gallery-1"
@@ -168,9 +162,9 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                          {/* 4*/}
-                          <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                        {/* 4*/}
+                        <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/4spbtroom.JPEG"
                                     alt="gallery-1"
@@ -178,14 +172,14 @@ const Facilities = () => {
                                 />
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                                       SPBT Room
+                                        SPBT Room
                                     </h2>
                                 </div>
                             </div>
                         </div>
-                          {/* 5 */}
+                        {/* 5 */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/5pavilion.JPEG"
                                     alt="gallery-1"
@@ -198,25 +192,23 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                          {/*6 */}
-                       
-                         <div className="relative col-span-12 md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-    <div className="image-container group rounded-xl overflow-hidden w-full h-full">
-        <img
-            src="/assets/images/6staffroom.JPEG"
-            alt="gallery-1"
-            className="w-full h-full object-cover aspect-[4/3] md:aspect-auto transition-transform duration-500 group-hover:scale-110"
-        />
-        <div className="absolute bottom-0 left-0 p-4">
-            <h2 className="bg-gray-100/75 text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                Staff Room
-            </h2>
-        </div>
-    </div>
-</div>
-                          {/* 7 */}
-                          <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                        {/*6 */}
+
+                        <div className="relative col-span-12 md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group h-full w-full overflow-hidden rounded-xl">
+                                <img
+                                    src="/assets/images/6staffroom.JPEG"
+                                    alt="gallery-1"
+                                    className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 md:aspect-auto"
+                                />
+                                <div className="absolute bottom-0 left-0 p-4">
+                                    <h2 className="bg-gray-100/75 text-[27px] font-semibold text-white md:group-hover:animate-hex-up">Staff Room</h2>
+                                </div>
+                            </div>
+                        </div>
+                        {/* 7 */}
+                        <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/7ictlabs.JPEG"
                                     alt="gallery-1"
@@ -224,14 +216,14 @@ const Facilities = () => {
                                 />
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                                       ICT Labs
+                                        ICT Labs
                                     </h2>
                                 </div>
                             </div>
                         </div>
                         {/* 8 */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/8screeningroom.JPEG"
                                     alt="gallery-1"
@@ -239,14 +231,14 @@ const Facilities = () => {
                                 />
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                                      Screening Room
+                                        Screening Room
                                     </h2>
                                 </div>
                             </div>
                         </div>
                         {/* 9 */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/9chemistrylab.JPEG"
                                     alt="gallery-1"
@@ -260,9 +252,9 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                         {/* 10 */}
-                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                        {/* 10 */}
+                        <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/10maingate.JPEG"
                                     alt="gallery-1"
@@ -270,14 +262,14 @@ const Facilities = () => {
                                 />
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                                       Main Gate
+                                        Main Gate
                                     </h2>
                                 </div>
                             </div>
                         </div>
                         {/* 11 */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/11futsalcourt.JPEG"
                                     alt="gallery-1"
@@ -292,7 +284,7 @@ const Facilities = () => {
                         </div>
                         {/* 12 */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/12tamanleo.JPEG"
                                     alt="gallery-1"
@@ -306,9 +298,9 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                         {/* 13 */}
-                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                        {/* 13 */}
+                        <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/13garden.JPEG"
                                     alt="gallery-1"
@@ -316,29 +308,27 @@ const Facilities = () => {
                                 />
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                                       Garden
-                                    </h2> 
+                                        Garden
+                                    </h2>
                                 </div>
                             </div>
                         </div>
-                         {/* 14 */}
+                        {/* 14 */}
                         <div className="relative col-span-12 md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-    <div className="image-container group rounded-xl overflow-hidden w-full h-full">
-        <img
-            src="/assets/images/14mainentrance.JPEG"
-            alt="gallery-1"
-            className="w-full h-full object-cover aspect-[4/3] md:aspect-auto transition-transform duration-500 group-hover:scale-110"
-        />
-        <div className="absolute bottom-0 left-0 p-4">
-            <h2 className="bg-gray-100/75 text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                Main Entrance
-            </h2>
-        </div>
-    </div>
-</div>
-                         {/* 15 */}
+                            <div className="image-container group h-full w-full overflow-hidden rounded-xl">
+                                <img
+                                    src="/assets/images/14mainentrance.JPEG"
+                                    alt="gallery-1"
+                                    className="aspect-[4/3] h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 md:aspect-auto"
+                                />
+                                <div className="absolute bottom-0 left-0 p-4">
+                                    <h2 className="bg-gray-100/75 text-[27px] font-semibold text-white md:group-hover:animate-hex-up">Main Entrance</h2>
+                                </div>
+                            </div>
+                        </div>
+                        {/* 15 */}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/15schoolbackfeild.JPEG"
                                     alt="gallery-1"
@@ -347,14 +337,14 @@ const Facilities = () => {
 
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                                       School Back Field
+                                        School Back Field
                                     </h2>
                                 </div>
                             </div>
                         </div>
-                         {/* 16 */}
-                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                        {/* 16 */}
+                        <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/16coveredwalkaway.JPEG"
                                     alt="gallery-1"
@@ -363,14 +353,13 @@ const Facilities = () => {
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
                                         Covered Walkway
-
                                     </h2>
                                 </div>
                             </div>
                         </div>
-                         {/* 17*/}
+                        {/* 17*/}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/17schoolcanteen.JPEG"
                                     alt="gallery-1"
@@ -385,7 +374,7 @@ const Facilities = () => {
                         </div>
                         {/* 18*/}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/18library.JPEG"
                                     alt="gallery-1"
@@ -399,9 +388,9 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                         {/* 19*/}
-                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                        {/* 19*/}
+                        <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/19artroom.JPEG"
                                     alt="gallery-1"
@@ -414,9 +403,9 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                         {/* 20*/}
+                        {/* 20*/}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/20coveredtaylor'swalk.JPEG"
                                     alt="gallery-1"
@@ -429,9 +418,9 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                         {/* 21*/}
+                        {/* 21*/}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/21schoolhall.JPEG"
                                     alt="gallery-1"
@@ -445,9 +434,9 @@ const Facilities = () => {
                                 </div>
                             </div>
                         </div>
-                         {/* 21*/}
-                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                        {/* 21*/}
+                        <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/21schoolhall.JPEG"
                                     alt="gallery-1"
@@ -455,14 +444,14 @@ const Facilities = () => {
                                 />
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                                       School Hall
+                                        School Hall
                                     </h2>
                                 </div>
                             </div>
                         </div>
                         {/* 22*/}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/22LanguageLab.jpg"
                                     alt="gallery-1"
@@ -477,7 +466,7 @@ const Facilities = () => {
                         </div>
                         {/* 23*/}
                         <div className="relative col-span-12 mx-auto w-full overflow-hidden md:col-span-4" data-aos="fade-up" data-aos-duration="1000">
-                            <div className="image-container group text-xl font-medium rounded-xl overflow-hidden">
+                            <div className="image-container group overflow-hidden rounded-xl text-xl font-medium">
                                 <img
                                     src="/assets/images/23rbtlab.JPEG"
                                     alt="gallery-1"
@@ -486,7 +475,7 @@ const Facilities = () => {
 
                                 <div className="absolute bottom-0 left-0 p-4">
                                     <h2 className="bg-gray-100 bg-opacity-75  text-2xl text-[27px] font-semibold text-white md:group-hover:animate-hex-up">
-                                       RBT Lab
+                                        RBT Lab
                                     </h2>
                                 </div>
                             </div>

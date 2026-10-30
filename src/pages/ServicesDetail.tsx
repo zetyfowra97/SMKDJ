@@ -612,7 +612,10 @@ const Servicesdetail = () => {
                                 </svg>
                             </div>
                             <div className="mt-10 text-center ltr:lg:text-right rtl:lg:text-left">
-                                <button type="button" className="btn bg-gray px-12 capitalize text-white dark:bg-primary dark:text-black dark:hover:bg-secondary">
+                                <button
+                                    type="button"
+                                    className="btn bg-gray px-12 capitalize text-white dark:bg-primary dark:text-black dark:hover:bg-secondary"
+                                >
                                     Send Message
                                 </button>
                             </div>

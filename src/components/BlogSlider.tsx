@@ -1,6 +1,4 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
 import { Navigation, Autoplay } from 'swiper';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -47,8 +45,8 @@ const BlogSlider = ({
         <section className={`mt-10 md:mt-20 ${className}`}>
             <div className="container">
                 <div className={`heading text-center `}>
-                     <h6>Blogs</h6>
-                     <h4>Latest News</h4>
+                    <h6>Blogs</h6>
+                    <h4>Latest News</h4>
                     {/* {title1.length > 0 && <h6 className={type.toLowerCase() === 'modern-saas' ? '!text-secondary' : ''}>{title1}</h6>}
                     {title2.length > 0 && <h4>{title2}</h4>} */}
                 </div>

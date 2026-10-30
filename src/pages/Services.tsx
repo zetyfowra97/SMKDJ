@@ -3,8 +3,6 @@ import Testimonial from '../components/Feedback';
 import ProjectSlider from '../components/ProjectSlider';
 import Modal from '../components/Modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
 import { Navigation, Autoplay, Virtual } from 'swiper';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';

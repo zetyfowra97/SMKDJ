@@ -26,7 +26,7 @@ const CookiesModal = () => {
     }
 
     return (
-        <div className="border-gray-200 fixed left-10 bottom-10 rounded-2xl bg-black p-4  lg:ml-0 lg:mb-0 lg:mr-0 w-[300px] lg:w-[400px] z-30">
+        <div className="border-gray-200 fixed left-10 bottom-10 z-30 w-[300px] rounded-2xl  bg-black p-4 lg:ml-0 lg:mb-0 lg:mr-0 lg:w-[400px]">
             <h2 className="text-gray-800 font-semibold dark:text-white">🍪 We use cookies!</h2>
 
             <p className="text-gray-600 dark:text-gray-300 mt-4 text-sm">
