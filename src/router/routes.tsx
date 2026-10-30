@@ -707,7 +707,7 @@ const routes = [
         path: '/PindaanJadualUjianAkhirSesiAkademikUASA2026bagiTingkatan1dan3',
         element: <PindaanJadualUjianAkhirSesiAkademikUASA2026bagiTingkatan1dan3 />,
     },
-    
+
     {
         path: '/JADUALPENGGILIRANSEMASAPEPERIKSAANSPM2026',
         element: <JADUALPENGGILIRANSEMASAPEPERIKSAANSPM2026 />,
@@ -736,8 +736,6 @@ const routes = [
         path: '/MerentasCabaranMenjulangKejayaan',
         element: <MerentasCabaranMenjulangKejayaan />,
     },
-    
-    
 ];
 
 export { routes };

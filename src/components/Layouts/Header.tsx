@@ -221,7 +221,13 @@ const MobileNode = ({ node, level = 0 }: { node: NavNode; level?: number }) => {
         <div className={wrapCls}>
             <div className="flex items-center" style={pad}>
                 <LeafLink node={node} className={rowCls} />
-                <button type="button" aria-label={`Toggle ${node.label}`} aria-expanded={open} onClick={() => setOpen((v) => !v)} className="px-4 py-3 text-white">
+                <button
+                    type="button"
+                    aria-label={`Toggle ${node.label}`}
+                    aria-expanded={open}
+                    onClick={() => setOpen((v) => !v)}
+                    className="px-4 py-3 text-white"
+                >
                     <svg
                         className={`h-5 w-5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
                         viewBox="0 0 24 24"
@@ -786,7 +792,9 @@ const Header = (props: any) => {
             {/* Dark overlay (tap to close) */}
             <div
                 onClick={closeMenu}
-                className={`fixed inset-0 z-[51] bg-black/60 transition-opacity duration-300 lg:hidden ${showMenu ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+                className={`fixed inset-0 z-[51] bg-black/60 transition-opacity duration-300 lg:hidden ${
+                    showMenu ? 'opacity-100' : 'pointer-events-none opacity-0'
+                }`}
             />
 
             <aside
@@ -802,7 +810,14 @@ const Header = (props: any) => {
                 {/* Close button */}
                 <div className="sticky top-0 z-10 border-b border-white/10 bg-[#101926] ltr:text-right rtl:text-left">
                     <button type="button" aria-label="Close menu" onClick={closeMenu} className="p-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6 text-white">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="h-6 w-6 text-white"
+                        >
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -815,7 +830,11 @@ const Header = (props: any) => {
                         placeholder="Search"
                         className="w-full border-b border-white bg-transparent py-1 text-white outline-none ltr:pl-2 ltr:pr-8 rtl:pl-8 rtl:pr-2"
                     />
-                    <button type="submit" aria-label="Search" className="absolute top-1/2 -translate-y-1/2 text-white hover:text-primary ltr:right-4 rtl:left-4">
+                    <button
+                        type="submit"
+                        aria-label="Search"
+                        className="absolute top-1/2 -translate-y-1/2 text-white hover:text-primary ltr:right-4 rtl:left-4"
+                    >
                         <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M18.7363 17.4637L14.6512 13.3785C15.6799 12.0753 16.3 10.4347 16.3 8.65C16.3 4.4317 12.8683 1 8.65 1C4.4317 1 1 4.4317 1 8.65C1 12.8683 4.4317 16.3 8.65 16.3C10.4356 16.3 12.0754 15.6808 13.3786 14.6512L17.4637 18.7363C17.6392 18.9118 17.8696 19 18.1 19C18.3304 19 18.5608 18.9118 18.7363 18.7363C19.0882 18.3844 19.0882 17.8156 18.7363 17.4637ZM2.8 8.65C2.8 5.4244 5.4244 2.8 8.65 2.8C11.8756 2.8 14.5 5.4244 14.5 8.65C14.5 11.8756 11.8756 14.5 8.65 14.5C5.4244 14.5 2.8 11.8756 2.8 8.65Z"

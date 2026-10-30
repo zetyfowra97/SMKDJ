@@ -16,8 +16,12 @@ type Comment = {
 
 // Replace with your real posts and links
 const POSTS: Post[] = [
-    { id: 1, title: 'Selamat Menduduki Ujian Bertutur Bahasa Melayu Calon SPM 2026!', to: '/SelamatMendudukiPeperiksaanPercubaanBertulisbuatsemuaCalonSPM2026' },
-   
+    {
+        id: 1,
+        title: 'Selamat Menduduki Ujian Bertutur Bahasa Melayu Calon SPM 2026!',
+        to: '/SelamatMendudukiPeperiksaanPercubaanBertulisbuatsemuaCalonSPM2026',
+    },
+
     { id: 2, title: 'JADUAL PENGGILIRAN SEMASA PEPERIKSAAN SPM 2026', to: '/JADUALPENGGILIRANSEMASAPEPERIKSAANSPM2026' },
     { id: 3, title: 'Tangkas Beraksi, Pingat Diraih!', to: '/TangkasBeraksiPingatDiraih' },
     { id: 4, title: 'Penampilan Rapi, Sahsiah Terpuji.', to: '/PenampilanRapiSahsiahTerpuji' },
@@ -31,7 +35,6 @@ const COMMENTS: Comment[] = [
         postTitle: 'Program Sekolahku Sejahtera: Sepakat dan Selamat (Kesedaran Hentikan Buli).',
         to: '/ProgramSekolahkuSejahtera',
     },
-    
 ];
 
 const SectionTitle = ({ children }: { children: string }) => (
@@ -47,7 +50,7 @@ const SectionTitle = ({ children }: { children: string }) => (
 
 const RecentPosts = () => {
     return (
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="border-gray-200 rounded-xl border bg-white p-5 shadow-sm">
             <SectionTitle>Recent Posts</SectionTitle>
 
             <ul className="mt-6 space-y-4">
@@ -75,7 +78,7 @@ const SearchBox = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex overflow-hidden rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+        <form onSubmit={handleSubmit} className="border-gray-200 flex overflow-hidden rounded-xl border bg-white p-5 shadow-sm">
             <input
                 type="text"
                 value={query}
@@ -92,7 +95,7 @@ const SearchBox = () => {
 
 const RecentComments = () => {
     return (
-        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
+        <div className="border-gray-200 rounded-xl border bg-white p-5 shadow-sm">
             <SectionTitle>Recent Comments</SectionTitle>
 
             {COMMENTS.length === 0 ? (
