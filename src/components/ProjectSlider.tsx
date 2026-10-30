@@ -34,7 +34,7 @@ const ProjectSlider = () => {
         <section className="mt-10 w-full px-0 pb-20 md:mt-20">
             {/* Heading */}
             <div className="heading mb-10 text-center">
-                <h6 className="text-gray-400 text-sm md:text-base">HEBAHAN TERKINIsSSSSSSSSSS</h6>
+                <h6 className="text-gray-400 text-sm md:text-base">HEBAHAN TERKINI</h6>
                 <h4 className="text-2xl font-bold text-white md:text-3xl">MAKLUMAT</h4>
             </div>
 
