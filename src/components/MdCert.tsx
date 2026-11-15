@@ -2,11 +2,36 @@ import React, { useRef, useState } from 'react';
 import Lightbox from 'react-18-image-lightbox';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+
+
 
 const MdCert = () => {
     const [isOpen, setIsOpen] = useState<any>(false);
     const [photoIndex, setPhotoIndex] = useState<any>(0);
 
+ const location = useLocation();
+    const hash = location.hash;
+
+    const handleClickScroll = () => {
+        const element = document.getElementById('section-1');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    useEffect(() => {
+        if (hash === '#section-1') {
+            setTimeout(() => handleClickScroll(), 800);
+        }
+    }, [hash]);
+
+    useEffect(() => {
+        document.title = 'School Emblem | SMK Damansara Jaya';
+    }, []);
+    
     return (
         <div className="bg-white">
             <div className="container pt-20 pb-20">
