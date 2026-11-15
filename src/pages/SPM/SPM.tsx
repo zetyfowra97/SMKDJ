@@ -264,8 +264,8 @@ const SPM = () => {
                                     <a href="/JadualWaktuPeperiksaanBertulisSPM2020" className="text-blue-600 hover:text-blue-800 underline">
                                         Jadual Waktu Peperiksaan Bertulis SPM 2020
                                     </a>{' '}
-                                    <p className="mt-2 text-sm text-black md:text-base">by SMKDJ</p>
-                                    <p className="mt-2 text-sm text-gray md:text-base">February 2, 2021</p>
+                                    <p className="mt-2 text-sm text-black md:text-base">TJ Ooi</p>
+                                    <p className="mt-2 text-sm text-gray md:text-base">October 13, 2022</p>
                                 </div>
 
                                 {/* RIGHT IMAGE */}

@@ -7,7 +7,7 @@ import SelamatBerkhidmat from '../pages/SelamatBerkhidmat';
 import SMKDJShines from '../pages/SMKDJShines';
 import RumahKesatria from '../pages/RumahKesatria';
 import Cemerlang from '../pages/Cemerlang';
-import AyunanRaket from '../pages/AyunanRaket';
+
 import Mesyuarat from '../pages/Mesyuarat';
 import Mesyuarat2025 from '../pages/Mesyuarat2025';
 import SchoolEmblem from '../components/SchoolEmblem';
@@ -60,7 +60,6 @@ import InternationalResearch from '../pages/Academic/InternationalResearch';
 import PelancaranProgramNILAM2022 from '../pages/Academic/PelancaranProgramNILAM2022';
 import PastYearExamPapers from '../components/PastYearExamPapers';
 import FormatSPM2021 from '../components/FormatSPM2021';
-import SPM from '../components/SPM';
 import PercubaanJadualUjianLisan from '../pages/Academic/PercubaanJadualUjianLisan';
 import JadualWaktuPentaksiranPercubaanSPM2021 from '../pages/Academic/JadualWaktuPentaksiranPercubaanSPM2021';
 import SuratPeringatanTatacara from '../pages/Academic/SuratPeringatanTatacara';
@@ -129,12 +128,30 @@ import JEREBULINDUNGIDIRIJAGAKESIHATAN from '../pages/PENGURUSANSMKDJ/JEREBULIND
 import SelamatMendudukiPeperiksaanPercubaanBertulisbuatsemuaCalonSPM2026 from '../pages/Academic/SelamatMendudukiPeperiksaanPercubaanBertulisbuatsemuaCalonSPM2026';
 import IramaMenggetarkanPentas from '../pages/AdminAnnouncement/IramaMenggetarkanPentas';
 import MerentasCabaranMenjulangKejayaan from '../pages/AdminAnnouncement/MerentasCabaranMenjulangKejayaan';
+import PindaanJadualPenggiliranKehadiranMuridSemasaUjianBertuturBahasaInggerisUBBISPM2026 from '../pages/Academic/PindaanJadualPenggiliranKehadiranMuridSemasaUjianBertuturBahasaInggerisUBBISPM2026';
+import AcademicList from '../pages/Category/AcademicList';
+import AcademicAnnouncementList from '../pages/Category/AcademicAnnouncementList';
+import Tingkatan1List from '../pages/Category/Tingkatan1List';
+import SPMList from '../pages/Category/SPMList';
+import CoCurriculumList from '../pages/Category/CoCurriculumList';
+import GalleryList from '../pages/Category/GalleryList';
+import PIBGList from '../pages/Category/PIBGList';
+import MainPageList from '../pages/Category/MainPageList';
+import LibrarianList from '../pages/Category/LibrarianList';
+import ClubsSocietiesList from '../pages/Category/ClubsSocietiesList';
+import SchoolTimetableJan2021 from '../pages/Tingkatan1/SchoolTimetableJan2021';
+import SPM from '../pages/SPM/SPM';
+import AyunanRaket from '../pages/ClubsSocieties/AyunanRaket';
+import AGMSUKANPERMAINANSEPAKTAKRAW from '../pages/Galeri/AGMSUKANPERMAINANSEPAKTAKRAW';
+import PIBGFundraisingVideo from '../pages/PIBG/PIBGFundraisingVideo';
+import JubliDelimaDinner from '../pages/MainPage/JubliDelimaDinner';
+import NewAdditionstotheeLibrary from '../pages/Librarian/NewAdditionstotheeLibrary';
+import Careerss from '../components/Careerss';
 
 const Index = lazy(() => import('../pages/index'));
 const Products = lazy(() => import('../pages/Products'));
 const Services = lazy(() => import('../pages/Services'));
 const AboutUs = lazy(() => import('../pages/AboutUs'));
-const Career = lazy(() => import('../components/Career'));
 const ServicesDetail = lazy(() => import('../pages/ServicesDetail'));
 const PortfolioDetail = lazy(() => import('../pages/PortfolioDetail'));
 const NewsDetail1 = lazy(() => import('../pages/News/NewsDetail1'));
@@ -165,10 +182,6 @@ const routes = [
     {
         path: '/about-us',
         element: <AboutUs />,
-    },
-    {
-        path: '/careers',
-        element: <Career />,
     },
     {
         path: '/makluman',
@@ -737,7 +750,77 @@ const routes = [
         path: '/MerentasCabaranMenjulangKejayaan',
         element: <MerentasCabaranMenjulangKejayaan />,
     },
-   
+    {
+        path: '/PindaanJadualPenggiliranKehadiranMuridSemasaUjianBertuturBahasaInggerisUBBISPM2026',
+        element: <PindaanJadualPenggiliranKehadiranMuridSemasaUjianBertuturBahasaInggerisUBBISPM2026 />,
+    },
+    {
+        path: '/AcademicList',
+        element: <AcademicList />,
+    },
+    {
+        path: '/AcademicAnnouncementList',
+        element: <AcademicAnnouncementList />,
+    },
+    {
+        path: '/Tingkatan1List',
+        element: <Tingkatan1List />,
+    },
+    {
+        path: '/SPMList',
+        element: <SPMList />,
+    },
+    {
+        path: '/CoCurriculumList',
+        element: <CoCurriculumList />,
+    },
+    {
+        path: '/GalleryList',
+        element: <GalleryList />,
+    },
+    {
+        path: '/PIBGList',
+        element: <PIBGList />,
+    },
+
+    {
+        path: '/MainPageList',
+        element: <MainPageList />,
+    },
+    {
+        path: '/LibrarianList',
+        element: <LibrarianList />,
+    },
+    {
+        path: '/ClubsSocietiesList',
+        element: <ClubsSocietiesList />,
+    },
+    {
+        path: '/SchoolTimetableJan2021',
+        element: <SchoolTimetableJan2021 />,
+    },
+    {
+        path: '/AGMSUKANPERMAINANSEPAKTAKRAW',
+        element: <AGMSUKANPERMAINANSEPAKTAKRAW />,
+    },
+    {
+        path: '/PIBGFundraisingVideo',
+        element: <PIBGFundraisingVideo />,
+    },
+    {
+        path: '/JubliDelimaDinner',
+        element: <JubliDelimaDinner />,
+    },
+    {
+        path: '/NewAdditionstotheeLibrary',
+        element: <NewAdditionstotheeLibrary />,
+    },
+    {
+        path: '/Careerss',
+        element: <Careerss />,
+    },
+    
+    
 ];
 
 export { routes };

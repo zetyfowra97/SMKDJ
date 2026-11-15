@@ -67,6 +67,306 @@ const LIBRARY_PSS: MenuItem[] = [
     },
 ];
 
+/* ------------------------------------------------------------------ */
+/* SIDE PANEL TYPES (Recent Posts / Most Used Categories)              */
+/* The Recent Posts list itself is automatic, see "RECENT POSTS" below.*/
+/* ------------------------------------------------------------------ */
+
+type SidebarLink = { label: string; to: string; external?: boolean };
+type CategoryItem = { label: string; to: string; count: number; child?: boolean };
+
+/* ------------------------------------------------------------------ */
+/* CATEGORY POST COUNTS (automatic, read from the page files)          */
+/*                                                                     */
+/* HOW IT WORKS                                                        */
+/* 1. Vite reads the source text of every post file in src/pages/.     */
+/* 2. From each file it takes the category line:                       */
+/*       <h6 className="!text-secondary">Facilities, Gallery, PIBG</h6>*/
+/*    (or <CategoryLine names={['Facilities', 'Gallery', 'PIBG']} />). */
+/* 3. A post counts once for EVERY category it names, no matter if     */
+/*    that category is first, in the middle or last.                   */
+/* 4. The folder the file sits in also counts as one of its categories */
+/*    (so Gallery/Something.tsx counts for Gallery even without a tag).*/
+/*                                                                     */
+/* Add, edit or delete a post file and every number updates by itself. */
+/*                                                                     */
+/* Index pages, the Category/ list pages and any *List.tsx file are    */
+/* skipped because they are not posts. Change the patterns below if    */
+/* your folder layout is different.                                    */
+/* ------------------------------------------------------------------ */
+
+const POST_SOURCES = import.meta.glob<string>(
+    ['../../pages/**/*.tsx', '!../../pages/**/index.tsx', '!../../pages/Category/**', '!../../pages/**/*List.tsx'],
+    // If your Vite is older than v5 and this line errors, use:  { as: 'raw', eager: true }
+    { query: '?raw', import: 'default', eager: true }
+);
+
+// "Clubs & Societies", "clubs-societies" and "ClubsSocieties" all become "clubssocieties"
+const keyOf = (s: string) =>
+    s
+        .toLowerCase()
+        .replace(/&amp;/g, '&')
+        .replace(/[^a-z0-9]+/g, '');
+
+// Pulls the category names out of one page's source text
+const extractTags = (src: string): string[] => {
+    // 1) <h6 className="!text-secondary">Academic, Gallery, PIBG</h6>
+    const h6 = src.match(/<h6[^>]*text-secondary[^>]*>([\s\S]*?)<\/h6>/);
+    if (h6) {
+        return h6[1]
+            .replace(/\{[^}]*\}/g, ' ') // drops things like {' '}
+            .replace(/<[^>]+>/g, ' ') // drops tags such as <span>
+            .replace(/&amp;/g, '&')
+            .split(/[,·|;]/)
+            .map((t) => t.trim())
+            .filter(Boolean);
+    }
+
+    // 2) <CategoryLine names={['Academic', 'Gallery']} />
+    const line = src.match(/<CategoryLine[^>]*names=\{\[([\s\S]*?)\]\}/);
+    if (line) {
+        return Array.from(line[1].matchAll(/(['"`])(.*?)\1/g)).map((m) => m[2].trim());
+    }
+
+    return [];
+};
+
+// One entry per post file: the set of category keys it belongs to (its tags + its folder)
+const POST_KEYS: Set<string>[] = Object.entries(POST_SOURCES).map(([path, src]) => {
+    const keys = new Set<string>();
+    extractTags(src).forEach((t) => keys.add(keyOf(t)));
+
+    // ../../pages/Gallery/Post.tsx -> "Gallery"
+    const folder = path.split('/')[3];
+    if (folder && !folder.endsWith('.tsx')) keys.add(keyOf(folder));
+
+    return keys;
+});
+
+// How many posts belong to ANY of these names (a post is never counted twice)
+const countByNames = (names: string[]): number => {
+    const wanted = names.map(keyOf);
+    return POST_KEYS.filter((keys) => wanted.some((w) => keys.has(w))).length;
+};
+
+/* ------------------------------------------------------------------ */
+/* RECENT POSTS (automatic: the 5 latest posts from ANY category)      */
+/*                                                                     */
+/* HOW IT WORKS                                                        */
+/* 1. Every post file that has a category line (see above) is a post.  */
+/* 2. TITLE = the first <p>...</p> after the category line             */
+/*    (e.g. <p className="text-4xl font-bold text-black">Title</p>).   */
+/*    If none is found, the file name is used as a fallback.           */
+/* 3. DATE  = the first date found after the category line. These      */
+/*    formats are understood (any year, 2027 and above too):           */
+/*       12 November 2020   |  March 10, 2025  |  10 Mac 2025          */
+/*       2025-03-10         |  10/03/2025                              */
+/*    English and Malay month names both work.                         */
+/* 4. LINK  = "/" + the file name (TangkasBeraksi.tsx -> /TangkasBeraksi) */
+/* 5. Newest date first, and only the top RECENT_COUNT are shown.      */
+/*    Posts without a readable date go to the bottom.                  */
+/*                                                                     */
+/* Add a new post file and it appears here by itself.                  */
+/* ------------------------------------------------------------------ */
+
+const RECENT_COUNT = 5;
+
+const MONTHS: Record<string, number> = {
+    jan: 1,
+    january: 1,
+    januari: 1,
+    feb: 2,
+    february: 2,
+    februari: 2,
+    mar: 3,
+    march: 3,
+    mac: 3,
+    apr: 4,
+    april: 4,
+    may: 5,
+    mei: 5,
+    jun: 6,
+    june: 6,
+    jul: 7,
+    july: 7,
+    julai: 7,
+    aug: 8,
+    august: 8,
+    ogos: 8,
+    sep: 9,
+    sept: 9,
+    september: 9,
+    oct: 10,
+    october: 10,
+    okt: 10,
+    oktober: 10,
+    nov: 11,
+    november: 11,
+    dec: 12,
+    december: 12,
+    dis: 12,
+    disember: 12,
+};
+// longest names first so "september" is tried before "sep"
+const MONTH_RE = Object.keys(MONTHS)
+    .sort((a, b) => b.length - a.length)
+    .join('|');
+
+const DATE_PATTERNS: { re: RegExp; read: (m: RegExpMatchArray) => [number, number, number] }[] = [
+    // 12 November 2020 / 12th Nov, 2020
+    {
+        re: new RegExp(`\\b(\\d{1,2})(?:st|nd|rd|th)?\\s+(${MONTH_RE})\\.?,?\\s+(\\d{4})\\b`, 'i'),
+        read: (m) => [+m[3], MONTHS[m[2].toLowerCase()], +m[1]],
+    },
+    // March 10, 2025 / Mar 10th 2025
+    {
+        re: new RegExp(`\\b(${MONTH_RE})\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?,?\\s+(\\d{4})\\b`, 'i'),
+        read: (m) => [+m[3], MONTHS[m[1].toLowerCase()], +m[2]],
+    },
+    // 2025-03-10
+    { re: /\b(\d{4})-(\d{1,2})-(\d{1,2})\b/, read: (m) => [+m[1], +m[2], +m[3]] },
+    // 10/03/2025, 10-03-2025, 10.03.2025 (day first)
+    { re: /\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})\b/, read: (m) => [+m[3], +m[2], +m[1]] },
+];
+
+// Where the category line ends (0 if the page has none)
+const categoryLineEnd = (src: string): number => {
+    const h6 = src.match(/<h6[^>]*text-secondary[^>]*>[\s\S]*?<\/h6>/);
+    if (h6 && h6.index !== undefined) return h6.index + h6[0].length;
+    const line = src.match(/<CategoryLine[^>]*\/>/);
+    if (line && line.index !== undefined) return line.index + line[0].length;
+    return 0;
+};
+
+const cleanText = (s: string) =>
+    s
+        .replace(/\{[^}]*\}/g, ' ')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&amp;/g, '&')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+// First <p> after the category line = the big post title
+const readTitle = (src: string, fileName: string): string => {
+    const p = src.slice(categoryLineEnd(src)).match(/<p[^>]*>([\s\S]*?)<\/p>/);
+    const title = p ? cleanText(p[1]) : '';
+    return title || fileName.replace(/([a-z])([A-Z])/g, '$1 $2');
+};
+
+// First date after the category line, as a number like 20250310 (0 = not found)
+const readDate = (src: string): number => {
+    const part = src.slice(categoryLineEnd(src));
+    let best: { idx: number; value: number } | null = null;
+
+    for (const { re, read } of DATE_PATTERNS) {
+        const m = part.match(re);
+        if (!m || m.index === undefined) continue;
+        const [y, mo, d] = read(m);
+        if (!mo || mo < 1 || mo > 12 || d < 1 || d > 31) continue;
+        if (!best || m.index < best.idx) best = { idx: m.index, value: y * 10000 + mo * 100 + d };
+    }
+
+    return best ? best.value : 0;
+};
+
+const RECENT_POSTS: SidebarLink[] = Object.entries(POST_SOURCES)
+    .filter(([, src]) => extractTags(src).length > 0) // only real posts (they have a category line)
+    .map(([path, src]) => {
+        const file = (path.split('/').pop() || '').replace(/\.tsx$/, '');
+        return { label: readTitle(src, file), to: '/' + file, date: readDate(src) };
+    })
+    .sort((a, b) => b.date - a.date || a.to.localeCompare(b.to))
+    .slice(0, RECENT_COUNT)
+    .map(({ label, to }) => ({ label, to }));
+
+/* ------------------------------------------------------------------ */
+/* CATEGORY LIST (names + links)                                       */
+/*                                                                     */
+/* `match` = every name that counts for this category. Spelling,       */
+/* capitals, spaces, "-" and "&" do not matter.                        */
+/* A parent lists its children's names too, so its number = its own    */
+/* posts + all children (like WordPress category counts).              */
+/* ------------------------------------------------------------------ */
+
+type CategoryDef = { label: string; to: string; match: string[]; child?: boolean };
+
+const CATEGORY_DEFS: CategoryDef[] = [
+    {
+        label: 'Academic',
+        to: '/AcademicList',
+        match: ['Academic', 'Academic-Announcements', 'Admin-Announcements', 'AcademicAnnouncement', 'Tingkatan 1', 'SPM'],
+    },
+    {
+        label: 'Academic-Announcements',
+        to: '/AcademicAnnouncementList',
+        match: ['Academic-Announcements', 'Admin-Announcements', 'AcademicAnnouncement'],
+        child: true,
+    },
+    { label: 'Tingkatan 1', to: '/Tingkatan1List', match: ['Tingkatan 1'], child: true },
+    { label: 'SPM', to: '/SPMList', match: ['SPM'], child: true },
+    {
+        label: 'Co-Curriculum',
+        to: '/CoCurriculumList',
+        match: ['Co-Curriculum', 'CoCurriculum', 'Clubs & Societies', 'Clubs', 'Societies'],
+    },
+    { label: 'Clubs & Societies', to: '/ClubsSocietiesList', match: ['Clubs & Societies', 'Clubs', 'Societies'], child: true },
+    { label: 'Gallery', to: '/GalleryList', match: ['Gallery'] },
+    { label: 'PIBG', to: '/PIBGList', match: ['PIBG'] },
+    { label: 'Main Page', to: '/MainPageList', match: ['Main Page'] },
+    { label: 'Librarian', to: '/LibrarianList', match: ['Librarian'] },
+];
+
+const CATEGORIES: CategoryItem[] = CATEGORY_DEFS.map((d) => ({
+    label: d.label,
+    to: d.to,
+    child: d.child,
+    count: countByNames(d.match),
+}));
+
+/* ------------------------------------------------------------------ */
+/* CATEGORY LABEL LINE WITH COUNTS (automatic)                         */
+/*                                                                     */
+/* Turns                                                               */
+/*   Academic, Academic-Announcements, Co-Curriculum, Lembaga, Librarian */
+/* into                                                                */
+/*   Academic (12), Academic-Announcements (3), Co-Curriculum (20),    */
+/*   Lembaga (4), Librarian (2)                                        */
+/*                                                                     */
+/* Works for EVERY name, including the last one, and also for names    */
+/* that are not in "Most Used Categories" (Lembaga, Facilities,        */
+/* Sepak Takraw ...): any name used in any post's category line is     */
+/* counted automatically.                                              */
+/*                                                                     */
+/* Usage in any page:                                                  */
+/*   import { CategoryLine } from '../../components/Layouts/Header';   */
+/*   <CategoryLine names={['Academic', 'Lembaga', 'Librarian']} />     */
+/*                                                                     */
+/* Leave out `names` to list every category.                           */
+/* ------------------------------------------------------------------ */
+
+// Count for one category name. Uses the rules above if it is in CATEGORY_DEFS, otherwise counts posts that use that name.
+export const getCategoryCount = (label: string): number => {
+    const def = CATEGORY_DEFS.find((d) => keyOf(d.label) === keyOf(label));
+    return countByNames(def ? def.match : [label]);
+};
+
+// "Academic (12), Academic-Announcements (3), ..., Librarian (2)"
+export const formatCategoryLine = (names: string[]): string => names.map((n) => `${n} (${getCategoryCount(n)})`).join(', ');
+
+export const CategoryLine = ({ names, className = '!text-secondary' }: { names?: string[]; className?: string }) => (
+    <h6 className={className}>{formatCategoryLine(names ?? CATEGORY_DEFS.map((c) => c.label))}</h6>
+);
+
+const SidebarHeading = ({ children }: { children: ReactNode }) => (
+    <div className="mb-6">
+        <h3 className="mb-3 text-2xl font-bold text-[#3b3f4a]">{children}</h3>
+        <div className="bg-gray-200 relative h-[3px]">
+            <span className="absolute top-0 h-full w-16 bg-[#e98f35] ltr:left-0 rtl:right-0" />
+        </div>
+    </div>
+);
+
 const NewBadge = () => (
     <span className="ml-1 rounded bg-gradient-to-r from-[#ef4444] to-[#f97316] px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">New</span>
 );
@@ -434,9 +734,12 @@ const NestedMenu = ({
 
 /* ------------------------------------------------------------------ */
 /* HEADER                                                              */
-/* - lg+ (website): the original header, menu and sizes                */
-/* - below lg (tablet / mobile): logo + direction toggle + round menu  */
-/*   button, with the full menu in a side drawer                       */
+/* - lg+ (website): the original header and menu, plus a 3-line button */
+/*   that opens the Recent Posts / Most Used Categories side panel     */
+/* - below lg (tablet / mobile, 0px to 1023px):                        */
+/*     LEFT   = original navbar button (opens the menu drawer)         */
+/*     MIDDLE = logo                                                   */
+/*     RIGHT  = Recent Posts / Most Used Categories button             */
 /* ------------------------------------------------------------------ */
 
 const Header = (props: any) => {
@@ -444,24 +747,30 @@ const Header = (props: any) => {
     const dispatch = useDispatch();
     const location = useLocation();
 
+    // Mobile / tablet (below lg) navbar drawer
     const [showMenu, setShowMenu] = useState(false);
     const toggleMenu = () => setShowMenu((v) => !v);
     const closeMenu = () => setShowMenu(false);
 
-    // Lock page scroll behind the mobile / tablet drawer so only the menu scrolls
+    // Recent Posts / Most Used Categories side panel (all screen sizes)
+    const [showSidebar, setShowSidebar] = useState(false);
+    const closeSidebar = () => setShowSidebar(false);
+
+    // Lock page scroll behind the drawer / side panel so only the panel scrolls
     useEffect(() => {
-        document.body.style.overflow = showMenu ? 'hidden' : '';
+        document.body.style.overflow = showMenu || showSidebar ? 'hidden' : '';
         return () => {
             document.body.style.overflow = '';
         };
-    }, [showMenu]);
+    }, [showMenu, showSidebar]);
 
-    // Close the drawer when the page changes
+    // Close the drawer / side panel when the page changes
     useEffect(() => {
         setShowMenu(false);
+        setShowSidebar(false);
     }, [location.pathname]);
 
-    // Close the drawer if the screen grows to desktop size
+    // The navbar drawer only exists below the desktop breakpoint, so close it when crossing into desktop
     useEffect(() => {
         const onResize = () => {
             if (window.innerWidth >= 1024) setShowMenu(false);
@@ -498,14 +807,38 @@ const Header = (props: any) => {
         </div>
     );
 
+    // The 3-line icon (shared by the left navbar button and the right sidebar button)
+    const hamburgerPaths = (
+        <>
+            <path d="M2 15H11C11.552 15 12 15.447 12 16C12 16.553 11.552 17 11 17H2C1.448 17 1 16.553 1 16C1 15.447 1.448 15 2 15Z" fill="currentColor" />
+            <path d="M2 8H20C20.552 8 21 8.447 21 9C21 9.553 20.552 10 20 10H2C1.448 10 1 9.553 1 9C1 8.447 1.448 8 2 8Z" fill="currentColor" />
+            <path d="M21 2C21 1.447 20.552 1 20 1H7C6.448 1 6 1.447 6 2C6 2.553 6.448 3 7 3H20C20.552 3 21 2.553 21 2Z" fill="currentColor" />
+        </>
+    );
+
     return (
         // Solid dark background
         <header className={`sticky top-0 z-50 bg-[#101926] transition duration-300 ${props.className ?? ''}`}>
             <div className="container">
                 <div className="flex items-center justify-between py-5 lg:py-0">
+                    {/* MOBILE / TABLET (below lg): LEFT = original navbar button */}
+                    <button
+                        type="button"
+                        aria-label="Open menu"
+                        aria-expanded={showMenu}
+                        onClick={toggleMenu}
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-primary lg:hidden"
+                    >
+                        <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                            {hamburgerPaths}
+                        </svg>
+                    </button>
+
+                    {/* LOGO (centered on mobile because both side buttons are 40px wide) */}
                     <Link to="/">
                         <img className="h-20 w-20" src="/assets/images/SMKDJlogo.png" alt="logo" />
                     </Link>
+
                     <div className="flex items-center">
                         {/* ============================================================ */}
                         {/* WEBSITE VIEW (lg+): ORIGINAL MENU                             */}
@@ -719,66 +1052,16 @@ const Header = (props: any) => {
                             </div>
                         </div>
 
-                        {/* DIRECTION TOGGLE */}
-                        <ul className="flex items-center gap-5 ltr:pr-5 rtl:pl-5 ltr:lg:pl-5 ltr:lg:pr-0 rtl:lg:pr-5 rtl:lg:pl-0">
-                            <li>
-                                <button
-                                    type="button"
-                                    className="flex h-5 w-5 items-center text-white hover:text-primary rtl:text-primary"
-                                    onClick={() => dispatch(toggleDirection(`${themeConfig.direction === 'rtl' ? 'ltr' : 'rtl'}`))}
-                                >
-                                    <svg width="17" height="22" viewBox="0 0 17 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M16 18.9439H7.72074" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path
-                                            d="M13.8571 21L16 18.9439L13.8571 16.8879"
-                                            stroke="currentColor"
-                                            strokeWidth="1.4"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path d="M1 16.4206H9.27926" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path
-                                            d="M3.14287 18.4766L1 16.4206L3.14287 14.3645"
-                                            stroke="currentColor"
-                                            strokeWidth="1.4"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path
-                                            d="M12.7855 1H5.82118C4.82662 1 3.87279 1.37909 3.16952 2.05387C2.46626 2.72865 2.07117 3.64385 2.07117 4.59813C2.07117 5.55242 2.46626 6.46761 3.16952 7.14239C3.87279 7.81717 4.82662 8.19626 5.82118 8.19626H6.3569"
-                                            stroke="currentColor"
-                                            strokeWidth="1.4"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                        />
-                                        <path d="M10.6426 12.3084V1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M6.3573 12.3084V1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </button>
-                            </li>
-                        </ul>
-
-                        {/* MOBILE / TABLET MENU BUTTON (below lg) */}
+                        {/* RIGHT BUTTON -> RECENT POSTS / MOST USED CATEGORIES PANEL (all screen sizes) */}
                         <button
                             type="button"
-                            aria-label="Open menu"
-                            aria-expanded={showMenu}
-                            className="flex h-10 w-10 items-center justify-center rounded-full bg-primary lg:hidden"
-                            onClick={toggleMenu}
+                            aria-label="Open sidebar"
+                            aria-expanded={showSidebar}
+                            onClick={() => setShowSidebar(true)}
+                            className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white lg:rounded-none lg:bg-transparent lg:hover:text-primary ltr:lg:ml-5 rtl:lg:mr-5"
                         >
-                            <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
-                                <path
-                                    d="M2 15H11C11.552 15 12 15.447 12 16C12 16.553 11.552 17 11 17H2C1.448 17 1 16.553 1 16C1 15.447 1.448 15 2 15Z"
-                                    fill="currentColor"
-                                />
-                                <path
-                                    d="M2 8H20C20.552 8 21 8.447 21 9C21 9.553 20.552 10 20 10H2C1.448 10 1 9.553 1 9C1 8.447 1.448 8 2 8Z"
-                                    fill="currentColor"
-                                />
-                                <path
-                                    d="M21 2C21 1.447 20.552 1 20 1H7C6.448 1 6 1.447 6 2C6 2.553 6.448 3 7 3H20C20.552 3 21 2.553 21 2Z"
-                                    fill="currentColor"
-                                />
+                            <svg width="24" height="20" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                {hamburgerPaths}
                             </svg>
                         </button>
                     </div>
@@ -786,7 +1069,7 @@ const Header = (props: any) => {
             </div>
 
             {/* ============================================================ */}
-            {/* MOBILE / TABLET DRAWER (below lg only)                        */}
+            {/* MOBILE / TABLET NAVBAR DRAWER (below lg only, opens on LEFT)  */}
             {/* ============================================================ */}
 
             {/* Dark overlay (tap to close) */}
@@ -803,8 +1086,8 @@ const Header = (props: any) => {
                 onClick={(e) => {
                     if ((e.target as HTMLElement).closest('a')) closeMenu();
                 }}
-                className={`fixed top-0 z-[52] h-full w-[85%] max-w-sm overflow-y-auto overflow-x-hidden overscroll-contain scroll-smooth bg-[#101926] pb-24 shadow-2xl transition-[transform,visibility] duration-300 ltr:right-0 rtl:left-0 lg:hidden ${
-                    showMenu ? 'visible translate-x-0' : 'invisible ltr:translate-x-full rtl:-translate-x-full'
+                className={`fixed top-0 z-[52] h-full w-[85%] max-w-sm overflow-y-auto overflow-x-hidden overscroll-contain scroll-smooth bg-[#101926] pb-24 shadow-2xl transition-[transform,visibility] duration-300 ltr:left-0 rtl:right-0 lg:hidden ${
+                    showMenu ? 'visible translate-x-0' : 'invisible ltr:-translate-x-full rtl:translate-x-full'
                 }`}
             >
                 {/* Close button */}
@@ -850,6 +1133,92 @@ const Header = (props: any) => {
                         <MobileNode key={node.label} node={node} />
                     ))}
                 </nav>
+            </aside>
+
+            {/* ============================================================ */}
+            {/* RECENT POSTS / MOST USED CATEGORIES PANEL (all screen sizes, */}
+            {/* opens on the RIGHT)                                          */}
+            {/* ============================================================ */}
+
+            {/* Dark overlay (click to close) */}
+            <div
+                onClick={closeSidebar}
+                className={`fixed inset-0 z-[51] bg-black/60 transition-opacity duration-300 ${showSidebar ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+            />
+
+            <aside
+                aria-hidden={!showSidebar}
+                // closes the panel after clicking any link
+                onClick={(e) => {
+                    if ((e.target as HTMLElement).closest('a')) closeSidebar();
+                }}
+                className={`fixed top-0 z-[52] h-full w-[360px] max-w-[88%] bg-white shadow-2xl transition-[transform,visibility] duration-300 ltr:right-0 rtl:left-0 ${
+                    showSidebar ? 'visible translate-x-0' : 'invisible ltr:translate-x-full rtl:-translate-x-full'
+                }`}
+            >
+                {/* Close button: inside the panel on mobile, outside the panel edge on desktop */}
+                <button
+                    type="button"
+                    aria-label="Close sidebar"
+                    onClick={closeSidebar}
+                    className="bg-gray-100 absolute top-3 z-10 flex h-11 w-11 items-center justify-center rounded-md text-[#1b2230] ltr:right-3 rtl:left-3 lg:top-14 lg:bg-white lg:shadow-md ltr:lg:right-full rtl:lg:left-full"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="h-5 w-5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+
+                {/* Scrollable content */}
+                <div className="h-full overflow-y-auto overscroll-contain px-7 pb-12 pt-16 [scrollbar-width:thin] lg:py-12">
+                    {/* RECENT POSTS (automatic: 5 latest posts from any category) */}
+                    <SidebarHeading>Recent Posts</SidebarHeading>
+                    <ul className="mb-14 space-y-4">
+                        {RECENT_POSTS.map((post, i) => (
+                            <li key={post.to + i}>
+                                {post.external ? (
+                                    <a
+                                        href={post.to}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="leading-8 text-[#e98f35] underline hover:text-primary"
+                                    >
+                                        {post.label}
+                                    </a>
+                                ) : (
+                                    <Link to={post.to} className="leading-8 text-[#4a4f5a] hover:text-[#e98f35]">
+                                        {post.label}
+                                    </Link>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* MOST USED CATEGORIES */}
+                    <SidebarHeading>Most Used Categories</SidebarHeading>
+                    <ul>
+                        {CATEGORIES.map((cat) => (
+                            <li key={cat.label + cat.to} className="flex items-center justify-between py-2.5">
+                                <Link to={cat.to} className={`text-[#4a4f5a] hover:text-[#e98f35] ${cat.child ? 'text-[15px] ltr:pl-3 rtl:pr-3' : ''}`}>
+                                    {cat.child ? '- ' : ''}
+                                    {cat.label}
+                                </Link>
+                                <span className="min-w-[34px] rounded-md bg-[#e98f35] px-2 py-1 text-center text-xs font-bold text-white">{cat.count}</span>
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* DIRECTION TOGGLE (lives inside the side panel on every screen size) */}
+                    <div className="border-gray-200 mt-10 flex items-center justify-between border-t pt-6">
+                        <span className="text-[#4a4f5a]">Text direction ({themeConfig.direction.toUpperCase()})</span>
+                        <button
+                            type="button"
+                            className="rounded-md bg-[#101926] px-4 py-2 text-sm font-semibold text-white hover:bg-primary"
+                            onClick={() => dispatch(toggleDirection(`${themeConfig.direction === 'rtl' ? 'ltr' : 'rtl'}`))}
+                        >
+                            Switch to {themeConfig.direction === 'rtl' ? 'LTR' : 'RTL'}
+                        </button>
+                    </div>
+                </div>
             </aside>
         </header>
     );

@@ -4,6 +4,7 @@ import 'aos/dist/aos.css';
 import App from '../../App';
 import Footer from './Footer';
 import Header from './Header';
+import TrendingSlider from './TrendingSlider';
 import { useLocation } from 'react-router-dom';
 import CookiesModal from '../CookiesModal';
 import Sidebar from '../Sidebar';
@@ -130,6 +131,13 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
                 {/* Outer wrapper */}
                 <div className={`font-mulish text-base text-gray antialiased ${isHome ? 'bg-white dark:bg-[#101926]' : 'bg-white dark:bg-[#101926]'}`}>
                     <Header className={showTopButton ? 'sticky-header' : ''} />
+
+                    {/* Trending news ticker: full-width white strip, separate from the header */}
+                    <div className="w-full bg-white">
+                        <div className="container py-3">
+                            <TrendingSlider />
+                        </div>
+                    </div>
 
                     {/* Homepage keeps one shared background for content + footer */}
                     <div className={isHome ? ORIGINAL_BG : ''}>

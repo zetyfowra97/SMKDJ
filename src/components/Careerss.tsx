@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import 'react-18-image-lightbox/style.css';
 import { Link, useLocation } from 'react-router-dom';
 
-const Career = () => {
+const Careerss = () => {
     const location = useLocation();
     const hash = location.hash;
 
@@ -22,7 +22,7 @@ const Career = () => {
         }
     };
 
-    document.title = 'Careers | FPG Solution & Consultancy';
+    document.title = 'Pentadbir | FPG Solution & Consultancy';
 
     useEffect(() => {}, []);
 
@@ -202,4 +202,4 @@ const Career = () => {
     );
 };
 
-export default Career;
+export default Careerss;
