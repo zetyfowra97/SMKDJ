@@ -24,7 +24,7 @@ const Robotics = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Robotics | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 

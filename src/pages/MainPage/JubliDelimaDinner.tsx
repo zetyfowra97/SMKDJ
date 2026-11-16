@@ -23,7 +23,7 @@ const JubliDelimaDinner = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Jubli Delima Dinner | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

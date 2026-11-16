@@ -26,7 +26,7 @@ const JEREBULINDUNGIDIRIJAGAKESIHATAN = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'JEREBU: LINDUNGI DIRI, JAGA KESIHATAN | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

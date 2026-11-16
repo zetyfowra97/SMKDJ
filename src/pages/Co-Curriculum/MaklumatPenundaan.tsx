@@ -25,7 +25,7 @@ const MaklumatPenundaan = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Maklumat Penundaan Perjumpaan Kokurikulum | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

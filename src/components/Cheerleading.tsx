@@ -24,7 +24,7 @@ const Cheerleading = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Cheerleading | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 
@@ -34,7 +34,7 @@ const Cheerleading = () => {
                 {/* HEADING */}
                 <div className="mx-auto w-full max-w-7xl px-2" data-aos="fade-right" data-aos-duration="1500">
                     <div className={`heading mt-10 text-center ${isRtl ? 'lg:text-right' : 'lg:text-left'}`}>
-                        <h4 className="!text-secondary">Bahasa & Warisan</h4>
+                        <h4 className="!text-secondary">Cheerleading</h4>
                     </div>
                 </div>
             </section>

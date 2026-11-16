@@ -20,7 +20,7 @@ const ClubsSocieties = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'SchoolEmblem | SMK Damansara Jaya';
+        document.title = 'Clubs & Societies | SMKDJ';
     }, []);
 
     return (

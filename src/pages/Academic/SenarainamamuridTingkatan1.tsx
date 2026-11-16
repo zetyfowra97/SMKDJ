@@ -25,7 +25,7 @@ const SenarainamamuridTingkatan1 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Senarai nama murid Tingkatan 1 mengikut kumpulan yang terkini. | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

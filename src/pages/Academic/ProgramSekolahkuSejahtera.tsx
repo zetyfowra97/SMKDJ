@@ -23,7 +23,7 @@ const ProgramSekolahkuSejahtera = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Program Sekolahku Sejahtera: Sepakat dan Selamat (Kesedaran Hentikan Buli). | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

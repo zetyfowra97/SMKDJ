@@ -25,7 +25,7 @@ const JadualWaktuPeperiksaanBertulisSPM2020 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Jadual Waktu Peperiksaan Bertulis SPM 2020 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

@@ -25,7 +25,7 @@ const OfficialSchoolTimetable = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Official School Timetable | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

@@ -23,7 +23,7 @@ const HariIniDalamSejarah = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = '“Hari Ini Dalam Sejarah” Lawatan Rasmi Pengarah JPNS ke Pusat Peperiksaan SPM SMKDJ | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

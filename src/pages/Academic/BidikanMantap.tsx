@@ -23,7 +23,7 @@ const BidikanMantap = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Bidikan Mantap dari Lim Shyee Qing (1 Angsana) | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

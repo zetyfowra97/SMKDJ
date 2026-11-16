@@ -15,7 +15,7 @@ interface FormData {
     message: string;
 }
 const Jobapply = (props: any) => {
-    document.title = 'Job Application | FPG Solution & COnsultancy';
+    document.title = 'Job Application | SMKDJ';
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
     // const { jobTitle } = useParams<{ jobTitle: string }>();
     const location = useLocation();

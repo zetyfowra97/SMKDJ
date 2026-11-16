@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
+import 'react-18-image-lightbox/style.css';
 
 const TOTAL_IMAGES = 26;
 const SLIDE_INTERVAL = 3000;
@@ -19,6 +21,9 @@ const Icon = ({ children, className = 'h-6 w-6' }) => (
 );
 
 const Gallery = () => {
+    const location = useLocation();
+    const hash = location.hash;
+
     const [failed, setFailed] = useState([]);
     const [activeIndex, setActiveIndex] = useState(null); // null = lightbox closed
     const [isPlaying, setIsPlaying] = useState(false);
@@ -33,6 +38,26 @@ const Gallery = () => {
     const images = allImages.filter((image) => !failed.includes(image));
     const isOpen = activeIndex !== null;
     const currentImage = isOpen ? images[activeIndex] : null;
+
+    const handleClickScroll = () => {
+        const element = document.getElementById('section-1');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    // Scroll to #section-1 when the URL hash matches
+    useEffect(() => {
+        if (hash === '#section-1') {
+            const timer = setTimeout(handleClickScroll, 800);
+            return () => clearTimeout(timer);
+        }
+    }, [hash]);
+
+    // Page title
+    useEffect(() => {
+        document.title = 'Gallery | SMKDJ';
+    }, []);
 
     const close = useCallback(() => {
         setActiveIndex(null);
@@ -112,7 +137,7 @@ const Gallery = () => {
     const controlBtn = 'flex h-10 w-10 items-center justify-center rounded text-white/90 transition hover:bg-white/20 hover:text-white';
 
     return (
-        <div className="w-full">
+        <div id="section-1" className="w-full">
             {/* Grid */}
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5 lg:grid-cols-4">
                 {images.map((image, index) => (

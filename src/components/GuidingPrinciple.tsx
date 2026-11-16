@@ -21,7 +21,7 @@ const GuidingPrinciple = () => {
         }
     }, [hash]);
 
-    document.title = 'School Song | SMKDJ';
+    document.title = 'DJIAN Qualities | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 

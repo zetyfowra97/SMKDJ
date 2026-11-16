@@ -25,7 +25,7 @@ const PercubaanJadualUjianLisan = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Percubaan Jadual Ujian Lisan (Bertutur) dan Mendengar SPM 2021 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

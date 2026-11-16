@@ -5,14 +5,11 @@ import 'react-medium-image-zoom/dist/styles.css';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-
-
-
 const MdCert = () => {
     const [isOpen, setIsOpen] = useState<any>(false);
     const [photoIndex, setPhotoIndex] = useState<any>(0);
 
- const location = useLocation();
+    const location = useLocation();
     const hash = location.hash;
 
     const handleClickScroll = () => {
@@ -29,9 +26,9 @@ const MdCert = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'School Emblem | SMK Damansara Jaya';
+        document.title = 'Vision, Mission, Motto | SMKDJ';
     }, []);
-    
+
     return (
         <div className="bg-white">
             <div className="container pt-20 pb-20">

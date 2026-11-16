@@ -20,7 +20,7 @@ const AGMSUKANPERMAINANSEPAKTAKRAW = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'AGM SUKAN PERMAINAN SEPAK TAKRAW | SMKDJ';
     }, []);
 
     return (

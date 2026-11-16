@@ -25,7 +25,7 @@ const PelancaranProgramNILAM2022 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Koleksi Video Majlis Anugerah Cemerlang 2020 & Mesyuarat Agung PIBG 38 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

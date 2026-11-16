@@ -20,7 +20,7 @@ const BalapanPadang = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'SchoolEmblem | SMK Damansara Jaya';
+        document.title = 'Balapan & Padang / QM | SMKDJ';
     }, []);
 
     return (

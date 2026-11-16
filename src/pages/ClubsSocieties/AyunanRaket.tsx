@@ -20,7 +20,7 @@ const AyunanRaket = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'Ayunan Raket | SMKDJ';
     }, []);
 
     return (

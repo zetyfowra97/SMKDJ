@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { IRootState } from '../store';
 
 const Privacypolicy = () => {
-    document.title = 'Privacy Policy | FPG Solution & Consultancy';
+    document.title = 'Privacy Policy | SMKDJ';
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 
     return (

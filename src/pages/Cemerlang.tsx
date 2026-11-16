@@ -20,7 +20,7 @@ const Cemerlang = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'Cemerlang | SMKDJ';
     }, []);
 
     return (

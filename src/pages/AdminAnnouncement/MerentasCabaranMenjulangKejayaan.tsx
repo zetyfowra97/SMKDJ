@@ -23,7 +23,7 @@ const MerentasCabaranMenjulangKejayaan = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Merentas Cabaran, Menjulang Kejayaan! | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

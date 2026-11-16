@@ -20,7 +20,7 @@ const Announcements = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'SchoolEmblem | SMK Damansara Jaya';
+        document.title = 'Announcements | SMKDJ';
     }, []);
 
     return (

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 const Error404 = (props: any) => {
-    document.title = '404 | FPG Solution & Consultancy';
+    document.title = '404 | SMKDJ';
     return (
         <div className="pt-[82px] lg:pt-[106px]">
             <div className="flex min-h-[500px] items-center justify-center">

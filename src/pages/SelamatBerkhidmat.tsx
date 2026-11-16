@@ -20,7 +20,7 @@ const SelamatBerkhidmat = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'Selamat Berkhidmat Encik Aamanu bin Ibrahim | SMKDJ';
     }, []);
 
     return (

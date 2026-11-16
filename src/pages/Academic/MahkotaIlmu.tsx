@@ -23,7 +23,7 @@ const MahkotaIlmu = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Mahkota Ilmu Diraja milik Choo En Li! | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

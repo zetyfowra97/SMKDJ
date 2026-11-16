@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { IRootState } from '../../store';
 
 const Blogdetail = () => {
-    document.title = 'Blog Detail | FPG Solution & Consultancy';
+    document.title = 'Blog Detail  Solution & Consultancy';
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 
     return (

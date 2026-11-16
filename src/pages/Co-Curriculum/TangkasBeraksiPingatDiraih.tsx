@@ -23,7 +23,7 @@ const TangkasBeraksiPingatDiraih = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Tangkas Beraksi, Pingat Diraih! | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

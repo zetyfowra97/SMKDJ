@@ -25,7 +25,7 @@ const SMKDJNews = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'SMKDJ News | SMKDJ';
     }, []);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const SMKDJNews = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

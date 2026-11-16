@@ -20,7 +20,7 @@ const UniformUnits = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'SchoolEmblem | SMK Damansara Jaya';
+        document.title = 'Uniform Units | SMKDJ';
     }, []);
 
     return (

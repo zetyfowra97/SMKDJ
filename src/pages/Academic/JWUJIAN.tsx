@@ -25,7 +25,7 @@ const JWUJIAN = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'JW UJIAN PERTENGAHAN SESI AKADEMIK 2026 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

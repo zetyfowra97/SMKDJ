@@ -20,7 +20,7 @@ const AyunanRaket = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'Mesyuarat Agung Tahunan PIBG 41/2024 | SMKDJ';
     }, []);
 
     return (

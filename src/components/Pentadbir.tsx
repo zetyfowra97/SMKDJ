@@ -20,7 +20,7 @@ const Pentadbir = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'Pentadbir | SMKDJ';
     }, []);
 
     return (

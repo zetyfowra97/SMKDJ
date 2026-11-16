@@ -23,7 +23,7 @@ const PindaanJadualPenggiliranKehadiranMuridSemasaUjianBertuturBahasaInggerisUBB
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = ' Pindaan Jadual Penggiliran Kehadiran Murid Semasa Ujian Bertutur Bahasa Inggeris (UBBI) SPM 2026 | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

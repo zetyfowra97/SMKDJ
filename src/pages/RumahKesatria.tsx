@@ -20,7 +20,7 @@ const SelamatBerkhidmat = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'RUMAH KESATRIA JUARA ROAD RUN 2025 | SMKDJ';
     }, []);
 
     return (

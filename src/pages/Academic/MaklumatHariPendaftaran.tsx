@@ -25,7 +25,7 @@ const MaklumatHariPendaftaran = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Maklumat Hari Pendaftaran Murid Tingkatan 1 2023 SMK Damansara Jaya | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

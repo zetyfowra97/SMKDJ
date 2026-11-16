@@ -25,7 +25,7 @@ const JADUALPENGGILIRANSEMASAPEPERIKSAANSPM2026 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'JADUAL PENGGILIRAN SEMASA PEPERIKSAAN SPM 2026 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

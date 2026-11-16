@@ -21,7 +21,7 @@ const KoleksiVideoMajlisAnugerahCemerlang2020 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'SchoolEmblem | SMK Damansara Jaya';
+        document.title = 'Koleksi Video Majlis Anugerah Cemerlang 2020 & Mesyuarat Agung PIBG 38 | SMKDJ';
     }, []);
 
     const videos = [

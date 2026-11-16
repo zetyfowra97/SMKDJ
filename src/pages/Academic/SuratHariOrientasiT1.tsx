@@ -25,7 +25,7 @@ const SuratHariOrientasiT1 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Surat Hari Orientasi T1 SMK Damansara Jaya 2023 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

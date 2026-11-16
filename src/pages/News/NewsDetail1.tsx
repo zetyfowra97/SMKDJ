@@ -3,7 +3,7 @@ import { IRootState } from '../../store';
 import { Link } from 'react-router-dom';
 
 const Newsdetail = () => {
-    document.title = 'News Detail | FPG Solution & COnsultancy';
+    document.title = 'News Detail | SMKDJ';
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 
     return (

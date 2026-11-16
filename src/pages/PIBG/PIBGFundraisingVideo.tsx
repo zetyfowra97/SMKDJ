@@ -47,7 +47,7 @@ const PIBGFundraisingVideo = () => {
         };
     }, [isVideoOpen]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'PIBG Fundraising Video | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

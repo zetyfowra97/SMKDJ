@@ -24,7 +24,7 @@ const PingPong = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Ping Pong | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 
@@ -34,7 +34,7 @@ const PingPong = () => {
                 {/* HEADING */}
                 <div className="mx-auto w-full max-w-7xl px-2" data-aos="fade-right" data-aos-duration="1500">
                     <div className={`heading mt-10 text-center ${isRtl ? 'lg:text-right' : 'lg:text-left'}`}>
-                        <h4 className="!text-secondary">PingPong</h4>
+                        <h4 className="!text-secondary">Ping Pong</h4>
                     </div>
                 </div>
             </section>

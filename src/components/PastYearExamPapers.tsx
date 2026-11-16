@@ -20,7 +20,7 @@ const PastYearExamPapers = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'SchoolEmblem | SMK Damansara Jaya';
+        document.title = 'Past Year Exam Papers | SMKDJ';
     }, []);
 
     return (

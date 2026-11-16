@@ -1,7 +1,7 @@
 import MdCert from './MdCert';
 
 const VissionMissionMotto = (props: any) => {
-    document.title = 'Home | FPG Solution & Consultancy';
+    document.title = 'Vission Mission Motto | SMKDJ';
 
     function setIsOpen(arg0: boolean): void {
         throw new Error('Function not implemented.');

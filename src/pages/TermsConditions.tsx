@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { IRootState } from '../store';
 
 const Termsandcondition = () => {
-    document.title = 'Terms & Condition | FPG Solution & Consultancy';
+    document.title = 'Terms & Condition | SMKDJ';
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 
     return (

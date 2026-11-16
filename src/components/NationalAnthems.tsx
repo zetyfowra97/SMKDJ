@@ -20,7 +20,7 @@ const NationalAnthems = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'National Anthems | SMK Damansara Jaya';
+        document.title = 'National Anthems | SMKDJ';
     }, []);
 
     return (

@@ -23,7 +23,7 @@ const MajlisBacaanYassin = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Majlis Bacaan Yassin dan Tazkirah Untuk Murid SPM 2020 | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

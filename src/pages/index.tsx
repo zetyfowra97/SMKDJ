@@ -12,9 +12,33 @@ import Logo from '../components/Logo';
 import ProjectSlider from '../components/ProjectSlider';
 import CoreValue from '../components/CoreValue';
 import MdCert from '../components/MdCert';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import 'react-18-image-lightbox/style.css';
 
 const Index = (props: any) => {
-    document.title = 'Home | FPG Solution & Consultancy';
+  const [isOpen, setIsOpen] = useState<any>(false);
+      const [photoIndex, setPhotoIndex] = useState<any>(0);
+  
+      const location = useLocation();
+      const hash = location.hash;
+  
+      const handleClickScroll = () => {
+          const element = document.getElementById('section-1');
+          if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+          }
+      };
+  
+      useEffect(() => {
+          if (hash === '#section-1') {
+              setTimeout(() => handleClickScroll(), 800);
+          }
+      }, [hash]);
+  
+      useEffect(() => {
+          document.title = 'Home | SMKDJ';
+      }, []);
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 
     return (

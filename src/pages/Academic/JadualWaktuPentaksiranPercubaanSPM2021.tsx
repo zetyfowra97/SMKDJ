@@ -25,7 +25,7 @@ const JadualWaktuPentaksiranPercubaanSPM2021 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Jadual Waktu Pentaksiran Percubaan SPM 2021 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

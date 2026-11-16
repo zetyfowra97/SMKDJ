@@ -32,7 +32,7 @@ const Products = () => {
         }
     }, [hash]);
 
-    document.title = 'Products | FPG Solution & Consultancy';
+    document.title = 'Products | SMKDJ';
     const [activeTab, setActiveTab] = useState<string>('all');
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

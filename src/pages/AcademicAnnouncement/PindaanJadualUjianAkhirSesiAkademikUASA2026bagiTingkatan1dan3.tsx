@@ -25,7 +25,7 @@ const PindaanJadualUjianAkhirSesiAkademikUASA2026bagiTingkatan1dan3 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'Pindaan Jadual Ujian Akhir Sesi Akademik (UASA) 2026 bagi Tingkatan 1 – Tingkatan 3 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

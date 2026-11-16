@@ -20,7 +20,7 @@ const ThirtySeventhPetalingBearPride = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'SchoolEmblem | SMK Damansara Jaya';
+        document.title = '37th Petaling Bear Pride | SMKDJ';
     }, []);
 
     return (

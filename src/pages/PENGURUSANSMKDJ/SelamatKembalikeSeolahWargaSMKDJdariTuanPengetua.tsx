@@ -23,7 +23,7 @@ const SelamatKembalikeSeolahWargaSMKDJdariTuanPengetua = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Selamat Kembali ke Sekolah Warga SMKDJ dari Tuan Pengetua. | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

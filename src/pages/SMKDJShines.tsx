@@ -20,7 +20,7 @@ const SMKDJShines = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'SMKDJ SHINES AT THE MALAYSIA TECHNOLOGY EXPO 2025 | SMKDJ';
     }, []);
 
     return (

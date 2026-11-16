@@ -25,7 +25,7 @@ const SuratPeringatanTatacara = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Selamat Menduduki Peperiksaan | SMKDJ';
+        document.title = 'SURAT PERINGATAN TATACARA PENGURUSAN DAN PENGOPERASIAN PP SPM 2021 | SMKDJ';
     }, []);
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';

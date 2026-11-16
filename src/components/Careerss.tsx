@@ -22,7 +22,7 @@ const Careerss = () => {
         }
     };
 
-    document.title = 'Pentadbir | FPG Solution & Consultancy';
+    document.title = 'Careers | SMKDJ';
 
     useEffect(() => {}, []);
 

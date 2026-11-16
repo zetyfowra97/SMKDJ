@@ -23,7 +23,7 @@ const MaklumanPengoperasianSesiPersekolahan = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Makluman Pengoperasian Sesi Persekolahan Secara Bersemuka Bagi Calon Peperiksaan SPM 2020 dan Cuti Perayaan Tahun Baru Cina 2021 | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

@@ -26,7 +26,7 @@ const MaklumanPenutupanSekolahAktivitiakibatJerebu = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Makluman Penutupan Sekolah & Aktiviti akibat Jerebu | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl' ? true : false;
 

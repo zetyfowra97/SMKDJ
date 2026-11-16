@@ -21,7 +21,7 @@ const Shop = () => {
         }
     }, [hash]);
 
-    document.title = 'School Song | SMKDJ';
+    document.title = 'Shop | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 

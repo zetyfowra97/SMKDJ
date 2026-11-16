@@ -24,7 +24,7 @@ const BulanSabitMerahMalaysia = () => {
         }
     }, [hash]);
 
-    document.title = 'About Us | FPG Solution & Consultancy';
+    document.title = 'Bulan Sabit Merah Malaysia | SMKDJ';
 
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 

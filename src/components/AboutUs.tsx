@@ -3,6 +3,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../store';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import 'react-18-image-lightbox/style.css';
 
 const teamMembers = [
     { image: 'EN._AAMANU', name: 'AAMANU BIN IBRAHIM', role: 'PENGETUA' },
@@ -40,7 +43,25 @@ const socials = [
 ];
 
 const Aboutus = () => {
-    document.title = 'Health Care | Plurk – Tailwind CSS Multipurpose Landing Templates';
+    const location = useLocation();
+    const hash = location.hash;
+
+    const handleClickScroll = () => {
+        const element = document.getElementById('section-1');
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    useEffect(() => {
+        if (hash === '#section-1') {
+            setTimeout(() => handleClickScroll(), 800);
+        }
+    }, [hash]);
+
+    useEffect(() => {
+        document.title = 'About Us | SMKDJ';
+    }, []);
     const isRtl = useSelector((state: IRootState) => state.themeConfig.direction) === 'rtl';
 
     return (

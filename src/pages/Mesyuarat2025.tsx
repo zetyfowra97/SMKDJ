@@ -20,7 +20,7 @@ const Mesyuarat2025 = () => {
     }, [hash]);
 
     useEffect(() => {
-        document.title = 'Pentadbir | SMK Damansara Jaya';
+        document.title = 'MESYUARAT AGUNG TAHUNAN PIBG BIL. 42/2025 | SMKDJ';
     }, []);
 
     return (
