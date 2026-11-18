@@ -7,26 +7,19 @@ type Post = {
     to: string;
 };
 
-type Comment = {
-    id: number;
-    author: string;
-    postTitle: string;
-    to: string;
-};
-
 /* ------------------------------------------------------------------ */
 /* RECENT POSTS (automatic: the 5 latest posts from ANY category)      */
 /*                                                                     */
 /* HOW IT WORKS                                                        */
 /* 1. Vite reads the source text of every post file in src/pages/.     */
 /*    The path starts with "/src/pages" so it works from any folder.   */
-/* 2. Every file that has a category line is a post:                   */
-/*       <h6 className="!text-secondary">Facilities, Gallery</h6>      */
-/*    (or <CategoryLine names={['Facilities', 'Gallery']} />).         */
-/* 3. TITLE = the first <p>...</p> after the category line             */
-/*    (e.g. <p className="text-4xl font-bold text-black">Title</p>).   */
-/*    If none is found, the file name is used as a fallback.           */
-/* 4. DATE  = the first date found after the category line. These      */
+/* 2. A file is a post if it has ANY of these:                         */
+/*       - an <h6> category line (plain text OR clickable buttons)     */
+/*       - a <CategoryLine ... /> (or any <Category... />) component   */
+/*       - the big title: <p className="text-4xl font-bold ...">       */
+/* 3. TITLE = the big text-4xl <p>. If none, the first <p> after the   */
+/*    category area. If still none, the file name is used.             */
+/* 4. DATE  = the first date found after the category area. These      */
 /*    formats are understood (any year, 2027 and above too):           */
 /*       12 November 2020   |  March 10, 2025  |  10 Mac 2025          */
 /*       2025-03-10         |  10/03/2025                              */
@@ -47,18 +40,40 @@ const POST_SOURCES = import.meta.glob<string>(
 );
 
 const MONTHS: Record<string, number> = {
-    jan: 1, january: 1, januari: 1,
-    feb: 2, february: 2, februari: 2,
-    mar: 3, march: 3, mac: 3,
-    apr: 4, april: 4,
-    may: 5, mei: 5,
-    jun: 6, june: 6,
-    jul: 7, july: 7, julai: 7,
-    aug: 8, august: 8, ogos: 8,
-    sep: 9, sept: 9, september: 9,
-    oct: 10, october: 10, okt: 10, oktober: 10,
-    nov: 11, november: 11,
-    dec: 12, december: 12, dis: 12, disember: 12,
+    jan: 1,
+    january: 1,
+    januari: 1,
+    feb: 2,
+    february: 2,
+    februari: 2,
+    mar: 3,
+    march: 3,
+    mac: 3,
+    apr: 4,
+    april: 4,
+    may: 5,
+    mei: 5,
+    jun: 6,
+    june: 6,
+    jul: 7,
+    july: 7,
+    julai: 7,
+    aug: 8,
+    august: 8,
+    ogos: 8,
+    sep: 9,
+    sept: 9,
+    september: 9,
+    oct: 10,
+    october: 10,
+    okt: 10,
+    oktober: 10,
+    nov: 11,
+    november: 11,
+    dec: 12,
+    december: 12,
+    dis: 12,
+    disember: 12,
 };
 // longest names first so "september" is tried before "sep"
 const MONTH_RE = Object.keys(MONTHS)
@@ -82,15 +97,23 @@ const DATE_PATTERNS: { re: RegExp; read: (m: RegExpMatchArray) => [number, numbe
     { re: /\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})\b/, read: (m) => [+m[3], +m[2], +m[1]] },
 ];
 
-// True when the page has a category line (so it is a real post)
-const hasCategoryLine = (src: string): boolean => /<h6[^>]*text-secondary[^>]*>/.test(src) || /<CategoryLine/.test(src);
+// Big post title paragraph, e.g. <p className="text-4xl font-bold text-black">Title</p>
+const TITLE_RE = /<p[^>]*text-4xl[^>]*>([\s\S]*?)<\/p>/;
 
-// Where the category line ends (0 if the page has none)
+// A page is a post if it has a category area (h6 or a Category... component) or the big title
+const hasCategoryLine = (src: string): boolean => /<h6[\s>]/.test(src) || /<Category[A-Za-z]*[\s/>]/.test(src) || TITLE_RE.test(src);
+
+// Where the category area ends (works with plain h6 text, clickable buttons or a component)
 const categoryLineEnd = (src: string): number => {
-    const h6 = src.match(/<h6[^>]*text-secondary[^>]*>[\s\S]*?<\/h6>/);
+    const h6 = src.match(/<h6[\s\S]*?<\/h6>/);
     if (h6 && h6.index !== undefined) return h6.index + h6[0].length;
-    const line = src.match(/<CategoryLine[^>]*\/>/);
-    if (line && line.index !== undefined) return line.index + line[0].length;
+
+    const comp = src.match(/<Category[A-Za-z]*[\s\S]*?\/>/);
+    if (comp && comp.index !== undefined) return comp.index + comp[0].length;
+
+    const title = src.match(TITLE_RE);
+    if (title && title.index !== undefined) return title.index;
+
     return 0;
 };
 
@@ -103,14 +126,15 @@ const cleanText = (s: string) =>
         .replace(/\s+/g, ' ')
         .trim();
 
-// First <p> after the category line = the big post title
+// Title = big text-4xl <p> if present, otherwise the first <p> after the category area
 const readTitle = (src: string, fileName: string): string => {
-    const p = src.slice(categoryLineEnd(src)).match(/<p[^>]*>([\s\S]*?)<\/p>/);
+    const big = src.match(TITLE_RE);
+    const p = big || src.slice(categoryLineEnd(src)).match(/<p[^>]*>([\s\S]*?)<\/p>/);
     const title = p ? cleanText(p[1]) : '';
     return title || fileName.replace(/([a-z])([A-Z])/g, '$1 $2');
 };
 
-// First date after the category line, as a number like 20250310 (0 = not found)
+// First date after the category area, as a number like 20250310 (0 = not found)
 const readDate = (src: string): number => {
     const part = src.slice(categoryLineEnd(src));
     let best: { idx: number; value: number } | null = null;
@@ -135,16 +159,6 @@ const POSTS: Post[] = Object.entries(POST_SOURCES)
     .sort((a, b) => b.date - a.date || a.to.localeCompare(b.to))
     .slice(0, RECENT_COUNT)
     .map((p, i) => ({ id: i + 1, title: p.title, to: p.to }));
-
-// Replace the links with your real post URLs
-const COMMENTS: Comment[] = [
-    {
-        id: 1,
-        author: 'TJ Ooi',
-        postTitle: 'Program Sekolahku Sejahtera: Sepakat dan Selamat (Kesedaran Hentikan Buli).',
-        to: '/ProgramSekolahkuSejahtera',
-    },
-];
 
 const SectionTitle = ({ children }: { children: string }) => (
     <>
@@ -206,35 +220,11 @@ const SearchBox = () => {
     );
 };
 
-const RecentComments = () => {
-    return (
-        <div className="border-gray-200 rounded-xl border bg-white p-5 shadow-sm">
-            <SectionTitle>Recent Comments</SectionTitle>
-
-            {COMMENTS.length === 0 ? (
-                <p className="mt-6 text-base text-[#333]">No comments to show.</p>
-            ) : (
-                <ul className="mt-6 space-y-4">
-                    {COMMENTS.map((comment) => (
-                        <li key={comment.id} className="text-base leading-relaxed text-[#444]">
-                            {comment.author} on{' '}
-                            <Link to={comment.to} className="text-[#444] underline transition hover:text-[#e0832c]">
-                                {comment.postTitle}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
-};
-
 const Sidebar = () => {
     return (
         <aside className="space-y-6">
             <RecentPosts />
             <SearchBox />
-            <RecentComments />
         </aside>
     );
 };

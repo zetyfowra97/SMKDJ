@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import 'react-18-image-lightbox/style.css';
+import CategoryTags from '../../CategoryTags';
 
 const KoleksiVideoMajlisAnugerahCemerlang2020 = () => {
     const location = useLocation();
@@ -111,7 +112,7 @@ const KoleksiVideoMajlisAnugerahCemerlang2020 = () => {
             <section id="section-1" className="container mx-auto items-center justify-center gap-10 px-4 md:gap-16 lg:gap-20">
                 <div data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
-                        <h6 className="!text-secondary">Academic, Academic-Announcements, Choir, Main Page, PIBG, SPM</h6>
+                        <CategoryTags categories="Academic, Academic-Announcements, Choir, Main Page, PIBG, SPM" />
 
                         <p className="text-4xl font-bold text-black">Koleksi Video Majlis Anugerah Cemerlang 2020 & Mesyuarat Agung PIBG 38</p>
                     </div>

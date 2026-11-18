@@ -62,7 +62,7 @@ import PastYearExamPapers from '../components/PastYearExamPapers';
 import FormatSPM2021 from '../components/FormatSPM2021';
 import PercubaanJadualUjianLisan from '../pages/Academic/PercubaanJadualUjianLisan';
 import JadualWaktuPentaksiranPercubaanSPM2021 from '../pages/Academic/JadualWaktuPentaksiranPercubaanSPM2021';
-import SuratPeringatanTatacara from '../pages/Academic/SuratPeringatanTatacara';
+import SuratPeringatanTatacara from '../pages/SPM/SuratPeringatanTatacara';
 import KoleksiVideoMajlisAnugerahCemerlang2020 from '../pages/Academic/KoleksiVideoMajlisAnugerahCemerlang2020';
 import HariIniDalamSejarah from '../pages/Academic/HariIniDalamSejarah';
 
@@ -140,13 +140,25 @@ import MainPageList from '../pages/Category/MainPageList';
 import LibrarianList from '../pages/Category/LibrarianList';
 import ClubsSocietiesList from '../pages/Category/ClubsSocietiesList';
 import SchoolTimetableJan2021 from '../pages/Tingkatan1/SchoolTimetableJan2021';
-import SPM from '../pages/SPM/SPM';
 import AyunanRaket from '../pages/ClubsSocieties/AyunanRaket';
 import AGMSUKANPERMAINANSEPAKTAKRAW from '../pages/Galeri/AGMSUKANPERMAINANSEPAKTAKRAW';
 import PIBGFundraisingVideo from '../pages/PIBG/PIBGFundraisingVideo';
 import JubliDelimaDinner from '../pages/MainPage/JubliDelimaDinner';
 import NewAdditionstotheeLibrary from '../pages/Librarian/NewAdditionstotheeLibrary';
 import Careerss from '../components/Careerss';
+import SPM from '../pages/SPM/SPM';
+import PENGURUSANSMKDJLIST from '../pages/Category/PENGURUSANSMKDJLIST';
+import TaekwandoList from '../pages/Category/TaekwandoList';
+import MerejamLembingList from '../pages/Category/MerejamLembingList';
+import AdminAnnouncementsList from '../pages/Category/AdminAnnouncementsList';
+import UNESCOList from '../pages/Category/UNESCOList';
+import HalEhwalMuridList from '../pages/Category/HalEhwalMuridList';
+import RoboticsList from '../pages/Category/RoboticsList';
+import BMelayuList from '../pages/Category/BMelayuList';
+import EnglishList from '../pages/Category/EnglishList';
+import ChoirList from '../pages/Category/ChoirList';
+import FacilitiesList from '../pages/Category/FacilitiesList';
+import TenisList from '../pages/Category/TenisList';
 
 const Index = lazy(() => import('../pages/index'));
 const Products = lazy(() => import('../pages/Products'));
@@ -226,10 +238,6 @@ const routes = [
     {
         path: '/news-detail-3',
         element: <NewsDetail3 />,
-    },
-    {
-        path: '*',
-        element: <Error404 />,
     },
     {
         path: '/jobapply',
@@ -466,10 +474,7 @@ const routes = [
         path: '/FormatSPM2021',
         element: <FormatSPM2021 />,
     },
-    {
-        path: '/SPM',
-        element: <SPM />,
-    },
+
     {
         path: '/PercubaanJadualUjianLisan',
         element: <PercubaanJadualUjianLisan />,
@@ -525,10 +530,6 @@ const routes = [
     {
         path: '/Announcements',
         element: <Announcements />,
-    },
-    {
-        path: '/UniformUnits',
-        element: <UniformUnits />,
     },
     {
         path: '/UniformUnits',
@@ -597,10 +598,6 @@ const routes = [
     {
         path: '/KelabKerjaya',
         element: <KelabKerjaya />,
-    },
-    {
-        path: '/KHBKulinari',
-        element: <KHBKulinari />,
     },
     {
         path: '/KHBKulinari',
@@ -754,6 +751,8 @@ const routes = [
         path: '/PindaanJadualPenggiliranKehadiranMuridSemasaUjianBertuturBahasaInggerisUBBISPM2026',
         element: <PindaanJadualPenggiliranKehadiranMuridSemasaUjianBertuturBahasaInggerisUBBISPM2026 />,
     },
+
+    // ===== CATEGORY LIST PAGES (paths match src/categories.ts) =====
     {
         path: '/AcademicList',
         element: <AcademicList />,
@@ -782,7 +781,6 @@ const routes = [
         path: '/PIBGList',
         element: <PIBGList />,
     },
-
     {
         path: '/MainPageList',
         element: <MainPageList />,
@@ -795,6 +793,7 @@ const routes = [
         path: '/ClubsSocietiesList',
         element: <ClubsSocietiesList />,
     },
+
     {
         path: '/SchoolTimetableJan2021',
         element: <SchoolTimetableJan2021 />,
@@ -819,8 +818,64 @@ const routes = [
         path: '/Careerss',
         element: <Careerss />,
     },
-    
-    
+
+    // Keep the 404 catch-all LAST
+    {
+        path: '*',
+        element: <Error404 />,
+    },
+    {
+        path: '/SPM',
+        element: <SPM />,
+    },
+    {
+        path: '/PENGURUSANSMKDJLIST',
+        element: <PENGURUSANSMKDJLIST />,
+    },
+    {
+        path: '/TaekwandoList',
+        element: <TaekwandoList />,
+    },
+    {
+        path: '/MerejamLembingList',
+        element: <MerejamLembingList />,
+    },
+    {
+        path: '/AdminAnnouncementsList',
+        element: <AdminAnnouncementsList />,
+    },
+    {
+        path: '/UNESCOList',
+        element: <UNESCOList />,
+    },
+    {
+        path: '/HalEhwalMuridList',
+        element: <HalEhwalMuridList />,
+    },
+    {
+        path: '/RoboticsList',
+        element: <RoboticsList />,
+    },
+    {
+        path: '/BMelayuList',
+        element: <BMelayuList />,
+    },
+    {
+        path: '/EnglishList',
+        element: <EnglishList />,
+    },
+    {
+        path: '/ChoirList',
+        element: <ChoirList />,
+    },
+    {
+        path: '/FacilitiesList',
+        element: <FacilitiesList />,
+    },
+    {
+        path: '/TenisList',
+        element: <TenisList />,
+    },
 ];
 
 export { routes };

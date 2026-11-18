@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 
 const Makluman = () => {
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        document.title = 'Maklumat | SMKDJ';
+    }, []);
 
     const images = [
         '/assets/images/SuratMaklumanTaklimatPakejTingkatan4.jpeg',
@@ -17,10 +21,11 @@ const Makluman = () => {
             <div className="px-5 pt-20 pb-20 max-[366px]:px-3 max-[366px]:pt-12 max-[366px]:pb-12">
                 <div className="heading mb-10 text-center max-[366px]:mb-6">
                     <div className="heading mb-10 text-center max-[366px]:mb-6">
-                        <h6 className="text-gray-400 text-sm max-[366px]:text-[10px] max-[366px]:tracking-wide md:text-base"> HEBAHAN TERKINI</h6>
+                        <h6 className="text-gray-400 text-sm max-[366px]:text-[10px] max-[366px]:tracking-wide md:text-base">HEBAHAN TERKINI</h6>
+
                         <h1
                             className="mb-10 text-center text-5xl font-extrabold tracking-widest text-black
-                                   max-[366px]:mb-4 max-[366px]:text-[clamp(1.125rem,7vw,1.75rem)] max-[366px]:tracking-wide"
+                                       max-[366px]:mb-4 max-[366px]:text-[clamp(1.125rem,7vw,1.75rem)] max-[366px]:tracking-wide"
                         >
                             MAKLUMAT
                         </h1>

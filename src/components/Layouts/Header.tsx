@@ -83,6 +83,7 @@ type CategoryItem = { label: string; to: string; count: number; child?: boolean 
 /* 2. From each file it takes the category line:                       */
 /*       <h6 className="!text-secondary">Facilities, Gallery, PIBG</h6>*/
 /*    (or <CategoryLine names={['Facilities', 'Gallery', 'PIBG']} />). */
+/*    Clickable buttons / links / spans inside the h6 also work.       */
 /* 3. A post counts once for EVERY category it names, no matter if     */
 /*    that category is first, in the middle or last.                   */
 /* 4. The folder the file sits in also counts as one of its categories */
@@ -111,15 +112,18 @@ const keyOf = (s: string) =>
 // Pulls the category names out of one page's source text
 const extractTags = (src: string): string[] => {
     // 1) <h6 className="!text-secondary">Academic, Gallery, PIBG</h6>
-    const h6 = src.match(/<h6[^>]*text-secondary[^>]*>([\s\S]*?)<\/h6>/);
+    //    Prefers the text-secondary h6, otherwise uses the first <h6>.
+    //    Buttons / links / spans inside it are treated as separate names.
+    const h6 = src.match(/<h6[^>]*text-secondary[^>]*>([\s\S]*?)<\/h6>/) || src.match(/<h6[^>]*>([\s\S]*?)<\/h6>/);
     if (h6) {
-        return h6[1]
+        const tags = h6[1]
             .replace(/\{[^}]*\}/g, ' ') // drops things like {' '}
-            .replace(/<[^>]+>/g, ' ') // drops tags such as <span>
+            .replace(/<[^>]+>/g, ',') // every tag (button, Link, span) becomes a separator
             .replace(/&amp;/g, '&')
             .split(/[,·|;]/)
-            .map((t) => t.trim())
+            .map((t) => t.replace(/\s+/g, ' ').trim())
             .filter(Boolean);
+        if (tags.length) return tags;
     }
 
     // 2) <CategoryLine names={['Academic', 'Gallery']} />
@@ -153,10 +157,12 @@ const countByNames = (names: string[]): number => {
 /* RECENT POSTS (automatic: the 5 latest posts from ANY category)      */
 /*                                                                     */
 /* HOW IT WORKS                                                        */
-/* 1. Every post file that has a category line (see above) is a post.  */
-/* 2. TITLE = the first <p>...</p> after the category line             */
-/*    (e.g. <p className="text-4xl font-bold text-black">Title</p>).   */
-/*    If none is found, the file name is used as a fallback.           */
+/* 1. A file is a post if it has ANY of these:                         */
+/*       - an <h6> category line (plain text OR clickable buttons)     */
+/*       - a <CategoryLine ... /> component (with or without names)    */
+/*       - the big title <p className="text-4xl font-bold ...">        */
+/* 2. TITLE = the big text-4xl <p>. If none, the first <p> after the   */
+/*    category line. If still none, the file name is used.             */
 /* 3. DATE  = the first date found after the category line. These      */
 /*    formats are understood (any year, 2027 and above too):           */
 /*       12 November 2020   |  March 10, 2025  |  10 Mac 2025          */
@@ -229,12 +235,23 @@ const DATE_PATTERNS: { re: RegExp; read: (m: RegExpMatchArray) => [number, numbe
     { re: /\b(\d{1,2})[/.-](\d{1,2})[/.-](\d{4})\b/, read: (m) => [+m[3], +m[2], +m[1]] },
 ];
 
-// Where the category line ends (0 if the page has none)
+// Big post title paragraph, e.g. <p className="text-4xl font-bold text-black">Title</p>
+const TITLE_RE = /<p[^>]*text-4xl[^>]*>([\s\S]*?)<\/p>/;
+
+// A page is a post if it has a category line (h6 or CategoryLine) or the big title
+const isPost = (src: string): boolean => /<h6[\s>]/.test(src) || /<CategoryLine[\s/>]/.test(src) || TITLE_RE.test(src);
+
+// Where the category line ends (works for plain text, clickable buttons or a component)
 const categoryLineEnd = (src: string): number => {
-    const h6 = src.match(/<h6[^>]*text-secondary[^>]*>[\s\S]*?<\/h6>/);
+    const h6 = src.match(/<h6[^>]*text-secondary[^>]*>[\s\S]*?<\/h6>/) || src.match(/<h6[\s\S]*?<\/h6>/);
     if (h6 && h6.index !== undefined) return h6.index + h6[0].length;
-    const line = src.match(/<CategoryLine[^>]*\/>/);
+
+    const line = src.match(/<CategoryLine[\s\S]*?\/>/);
     if (line && line.index !== undefined) return line.index + line[0].length;
+
+    const title = src.match(TITLE_RE);
+    if (title && title.index !== undefined) return title.index;
+
     return 0;
 };
 
@@ -247,9 +264,9 @@ const cleanText = (s: string) =>
         .replace(/\s+/g, ' ')
         .trim();
 
-// First <p> after the category line = the big post title
+// Title = big text-4xl <p> if present, otherwise the first <p> after the category line
 const readTitle = (src: string, fileName: string): string => {
-    const p = src.slice(categoryLineEnd(src)).match(/<p[^>]*>([\s\S]*?)<\/p>/);
+    const p = src.match(TITLE_RE) || src.slice(categoryLineEnd(src)).match(/<p[^>]*>([\s\S]*?)<\/p>/);
     const title = p ? cleanText(p[1]) : '';
     return title || fileName.replace(/([a-z])([A-Z])/g, '$1 $2');
 };
@@ -271,7 +288,7 @@ const readDate = (src: string): number => {
 };
 
 const RECENT_POSTS: SidebarLink[] = Object.entries(POST_SOURCES)
-    .filter(([, src]) => extractTags(src).length > 0) // only real posts (they have a category line)
+    .filter(([, src]) => isPost(src)) // only real posts
     .map(([path, src]) => {
         const file = (path.split('/').pop() || '').replace(/\.tsx$/, '');
         return { label: readTitle(src, file), to: '/' + file, date: readDate(src) };

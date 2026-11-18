@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { useEffect } from 'react';
+import CategoryTags from '../../CategoryTags';
 
 const GuidetoWIFI = () => {
     const { hash } = useLocation();
@@ -33,7 +34,7 @@ const GuidetoWIFI = () => {
                 {/* TEXT SECTION */}
                 <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
-                        <h6 className="!text-secondary">Facilities, PIBG</h6>
+                        <CategoryTags categories="Facilities, PIBG" />
 
                         <p className="text-4xl font-bold text-black">Guide to WIFI @ DJ</p>
                         <div>

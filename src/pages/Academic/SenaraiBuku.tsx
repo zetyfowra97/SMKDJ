@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { useEffect } from 'react';
+import CategoryTags from '../../CategoryTags';
 
 const SenaraiBuku = () => {
     const { hash } = useLocation();
@@ -36,7 +37,7 @@ const SenaraiBuku = () => {
                 {/* TEXT SECTION */}
                 <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className={`heading mt-10 text-center ${isRtl ? 'rtl:lg:text-right' : 'ltr:lg:text-left'}`}>
-                        <h6 className="!text-secondary">Academic, Main Page, Tingkatan 1</h6>
+                        <CategoryTags categories="Academic, Main Page, Tingkatan 1" />
 
                         <p className="text-3xl font-bold text-black md:text-4xl">Senarai Buku dan Alat Tulis Tahun 2023</p>
 

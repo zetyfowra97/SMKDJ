@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { useEffect } from 'react';
+import CategoryTags from '../../CategoryTags';
 
 const PercubaanJadualUjianLisan = () => {
     const { hash } = useLocation();
@@ -40,7 +41,7 @@ const PercubaanJadualUjianLisan = () => {
                 {/* TEXT SECTION */}
                 <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className={`heading mt-10 text-center ${isRtl ? 'rtl:lg:text-right' : 'ltr:lg:text-left'}`}>
-                        <h6 className="!text-secondary">Academic, Academic-Announcements, B. Melayu, English, SPM</h6>
+                        <CategoryTags categories="Academic, Academic-Announcements, B. Melayu, English, SPM" />
 
                         <p className="text-3xl font-bold text-black md:text-4xl">Percubaan Jadual Ujian Lisan (Bertutur) dan Mendengar SPM 2021</p>
 

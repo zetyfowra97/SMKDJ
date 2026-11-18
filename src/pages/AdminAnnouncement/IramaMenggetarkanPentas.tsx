@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { IRootState } from '../store';
 import { useEffect } from 'react';
+import CategoryTags from '../../CategoryTags';
 
 const IramaMenggetarkanPentas = () => {
     const { hash } = useLocation();
@@ -32,7 +33,7 @@ const IramaMenggetarkanPentas = () => {
             <section id="section-1" className="items-center justify-center justify-items-center gap-10 md:gap-16 lg:gap-20">
                 <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className={`heading mt-10 text-center ${isRtl ? 'rtl:lg:text-right' : 'ltr:lg:text-left'}`}>
-                        <h6 className="!text-secondary">Admin-Announcements, UNESCO</h6>
+                        <CategoryTags categories="Admin-Announcements, UNESCO" />
 
                         <p className="text-3xl font-bold text-black md:text-4xl">Irama Menggetarkan Pentas</p>
 

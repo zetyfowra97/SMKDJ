@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import 'react-18-image-lightbox/style.css';
+import CategoryTags from '../../CategoryTags';
 
 const AyunanRaket = () => {
     const location = useLocation();
@@ -29,7 +30,8 @@ const AyunanRaket = () => {
                 {/* TEXT SECTION */}
                 <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
-                        <h6 className="!text-secondary">Clubs & Societies, Tenis</h6>
+                        <CategoryTags categories="Clubs & Societies, Tenis" />
+
                         <p className="text-4xl font-bold text-black">Ayunan Raket, Ayunan Kejayaan!</p>
                         <p className="mt-4 text-justify text-sm font-semibold text-black md:text-lg">
                             Tahniah diucapkan kepada atlet Tenis SMK Damansara Jaya kerana telah mengharumkan nama sekolah dalam Kejohanan Tenis MSSD Peringkat

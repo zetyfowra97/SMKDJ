@@ -22,7 +22,7 @@ const Careerss = () => {
         }
     };
 
-    document.title = 'Careers | SMKDJ';
+    document.title = 'Home | SMKDJ';
 
     useEffect(() => {}, []);
 

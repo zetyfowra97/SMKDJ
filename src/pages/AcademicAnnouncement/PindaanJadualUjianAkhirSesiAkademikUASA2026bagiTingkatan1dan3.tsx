@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { useEffect } from 'react';
+import CategoryTags from '../../CategoryTags';
 
 const PindaanJadualUjianAkhirSesiAkademikUASA2026bagiTingkatan1dan3 = () => {
     const { hash } = useLocation();
@@ -38,9 +39,11 @@ const PindaanJadualUjianAkhirSesiAkademikUASA2026bagiTingkatan1dan3 = () => {
                 {/* TEXT SECTION */}
                 <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
                     <div className={`heading mt-10 text-center ${isRtl ? 'rtl:lg:text-right' : 'ltr:lg:text-left'}`}>
-                        <h6 className="!text-secondary">Academic-Announcements</h6>
+                        <CategoryTags categories="Academic-Announcements" />
 
-                        <p className="text-3xl font-bold text-black md:text-4xl">Pindaan Jadual Ujian Akhir Sesi Akademik (UASA) 2026 bagi Tingkatan 1 – Tingkatan 3</p>
+                        <p className="text-3xl font-bold text-black md:text-4xl">
+                            Pindaan Jadual Ujian Akhir Sesi Akademik (UASA) 2026 bagi Tingkatan 1 – Tingkatan 3
+                        </p>
 
                         {/* AUTHOR AND DATE */}
                         <div className="mt-4 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
