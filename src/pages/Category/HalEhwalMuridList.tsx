@@ -236,6 +236,22 @@ const findDate = (text: string): { date: Date; text: string } | null => {
     return null;
 };
 
+// Removes every date from a piece of text, so a date can never sit inside the
+// author name. "NorAzila Awang | 2 July 2027" -> "NorAzila Awang"
+const removeDates = (text: string): string => {
+    let result = text;
+    for (let i = 0; i < 6; i++) {
+        const found = findDate(result);
+        if (!found) break;
+        result = result.replace(found.text, ' ');
+    }
+    return result
+        .replace(/\s+/g, ' ')
+        .replace(/^[\s|·•,;:–—-]+/, '')
+        .replace(/[\s|·•,;:–—-]+$/, '')
+        .trim();
+};
+
 /* ------------------------------- PAGE PARSING ------------------------------ */
 
 // Removes JSX leftovers so only readable text remains.
@@ -288,31 +304,49 @@ const splitTags = (text: string): string[] =>
         .map((tag) => tag.trim())
         .filter(Boolean);
 
-// All <h6> lines in the page (some pages have more than one).
-const readH6Lines = (source: string): { text: string; index: number }[] => {
-    const lines: { text: string; index: number }[] = [];
-    const regex = /<h6[^>]*>([\s\S]*?)<\/h6>/g;
+// List pages (like this one) contain code that looks like page markup. Never list them.
+const isListPage = (source: string) => source.includes('import.meta.glob');
+
+// Reads a string prop like  categories="..."  /  author='...'  /  author={"..."}
+// from a component tag such as <CategoryTags categories="..." /> or <AuthorTag author="..." />.
+const readComponentProp = (source: string, component: string, prop: string): { value: string; index: number; end: number } | null => {
+    const regex = new RegExp('<' + component + '\\b[^>]*?\\b' + prop + '\\s*=\\s*(?:\\{\\s*)?([\'"`])((?:\\\\.|(?!\\1)[\\s\\S])*?)\\1[^>]*>');
+    const m = regex.exec(source);
+    if (!m || m[2].includes('${')) return null;
+    const value = cleanText(m[2].replace(/\\(['"`\\])/g, '$1'));
+    return value ? { value, index: m.index, end: m.index + m[0].length } : null;
+};
+
+// All real <h6> lines in the page (some pages have more than one).
+// The <h6> must start like real JSX (after whitespace, "(", ">" or "{"), so an
+// "<h6" written inside a regex literal or a string is ignored.
+const readH6Lines = (source: string): { text: string; index: number; end: number }[] => {
+    const lines: { text: string; index: number; end: number }[] = [];
+    const regex = /(^|[\s(>{])<h6[^>]*>([\s\S]*?)<\/h6>/g;
     let m: RegExpExecArray | null;
     while ((m = regex.exec(source))) {
-        const text = cleanTagLine(m[1]);
-        if (text) lines.push({ text, index: m.index });
+        const text = cleanTagLine(m[2]);
+        if (text) lines.push({ text, index: m.index + m[1].length, end: m.index + m[0].length });
     }
     return lines;
 };
 
-// The category line(s) of a page. Normally the <h6>. If a page has no <h6>, short
-// text elements styled with "text-secondary" (the same blue used for the category
-// line) are used instead.
-const readCategoryLines = (source: string): { text: string; index: number }[] => {
-    const h6Lines = readH6Lines(source);
-    if (h6Lines.length > 0) return h6Lines;
+// The category line(s) of a page:
+//   1) <CategoryTags categories="..." />  (current pages)
+//   2) every real <h6>                    (older pages)
+// If a page has neither, short text elements styled with "text-secondary" (the same
+// blue used for the category line) are used instead.
+const readCategoryLines = (source: string): { text: string; index: number; end: number }[] => {
+    const lines = readH6Lines(source);
+    const fromTag = readComponentProp(source, 'CategoryTags', 'categories');
+    if (fromTag) lines.push({ text: fromTag.value, index: fromTag.index, end: fromTag.end });
+    if (lines.length > 0) return lines.sort((a, b) => a.index - b.index);
 
-    const lines: { text: string; index: number }[] = [];
     const regex = /<(p|span|h1|h2|h3|h4|h5)\b[^>]*text-secondary[^>]*>([\s\S]*?)<\/\1>/g;
     let m: RegExpExecArray | null;
     while ((m = regex.exec(source))) {
         const text = cleanTagLine(m[2]);
-        if (text && text.length <= 150) lines.push({ text, index: m.index });
+        if (text && text.length <= 150) lines.push({ text, index: m.index, end: m.index + m[0].length });
     }
     return lines;
 };
@@ -384,12 +418,12 @@ const readTitleVariable = (source: string): string => {
 };
 
 const readTitle = (source: string): { title: string; from: string } => {
-    const h6 = /<h6[^>]*>[\s\S]*?<\/h6>/.exec(source);
-    const afterH6 = h6 ? h6.index + h6[0].length : 0;
+    const header = readCategoryLines(source)[0];
+    const afterHeader = header ? header.end : 0;
 
-    // 1) Big <p> / heading. The first one AFTER the category <h6> wins:
+    // 1) Big <p> / heading. The first one AFTER the category line wins:
     //    <p className="text-4xl font-bold text-black">Full Title Here</p>
-    //    A big element found only BEFORE the <h6> is kept as a backup.
+    //    A big element found only BEFORE the category line is kept as a backup.
     const bigRegex = /<(p|h1|h2|h3|h4|h5)\b([^>]*)>([\s\S]*?)<\/\1>/g;
     let backup = '';
     let m: RegExpExecArray | null;
@@ -400,21 +434,21 @@ const readTitle = (source: string): { title: string; from: string } => {
         const text = cleanText(resolveExpressions(m[3], source));
         if (!text) continue;
 
-        if (m.index >= afterH6) {
-            return { title: text, from: h6 ? 'big title after <h6>' : 'first big heading' };
+        if (m.index >= afterHeader) {
+            return { title: text, from: header ? 'big title after category line' : 'first big heading' };
         }
         if (!backup) backup = text;
     }
-    if (backup) return { title: backup, from: 'big heading before <h6>' };
+    if (backup) return { title: backup, from: 'big heading before category line' };
 
-    // 2) The first <p> with text right after the <h6>, whatever its class
-    if (h6) {
+    // 2) The first <p> with text right after the category line, whatever its class
+    if (header) {
         const pRegex = /<p\b[^>]*>([\s\S]*?)<\/p>/g;
-        pRegex.lastIndex = afterH6;
+        pRegex.lastIndex = afterHeader;
         while ((m = pRegex.exec(source))) {
-            if (m.index - afterH6 > 2500) break;
+            if (m.index - afterHeader > 2500) break;
             const text = cleanText(resolveExpressions(m[1], source));
-            if (text) return { title: text, from: 'first <p> after <h6>' };
+            if (text) return { title: text, from: 'first <p> after category line' };
         }
     }
 
@@ -433,8 +467,24 @@ const readTitle = (source: string): { title: string; from: string } => {
     return { title: '', from: 'none' };
 };
 
+/* ------------------------------ AUTHOR & DATE ------------------------------ */
+
+// Author:
+//   1) <AuthorTag author="NorAzila Awang" />   (current pages)
+//   2) the <p> right after userimages.png      (older pages)
+// Any date found inside the author text is removed, so the card always shows
+// exactly one author and one date (the date comes only from readDate).
+const readAuthor = (source: string): string => {
+    const fromTag = readComponentProp(source, 'AuthorTag', 'author');
+    if (fromTag) return removeDates(fromTag.value);
+
+    const match = /userimages\.png[^>]*>\s*(?:<\/img>)?\s*<p[^>]*>([\s\S]*?)<\/p>/.exec(source);
+    return match ? removeDates(cleanText(match[1])) : '';
+};
+
 // Date: the text after the date icon. Falls back to the first real date close to
 // the page header if the icon block is missing or written differently.
+// Only ONE date is ever returned.
 const readDate = (source: string, headerIndex: number): { date: Date | null; text: string } => {
     const iconText = pick(source, /dateandtime\.png[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>/);
     const fromIcon = findDate(iconText);
@@ -444,10 +494,14 @@ const readDate = (source: string, headerIndex: number): { date: Date | null; tex
     const fromHeader = findDate(cleanText(source.slice(start, start + 2500)));
     if (fromHeader) return fromHeader;
 
-    return { date: null, text: iconText };
+    return { date: null, text: '' };
 };
 
+/* ------------------------------- BUILD ITEM -------------------------------- */
+
 const extractItem = (path: string, source: string, routes: RouteMaps): PageItem | null => {
+    if (isListPage(source)) return null;
+
     const parts = path.split('/');
     const folder = parts[parts.length - 2];
     const slug = parts[parts.length - 1].replace(/\.tsx$/, '');
@@ -469,7 +523,7 @@ const extractItem = (path: string, source: string, routes: RouteMaps): PageItem 
     // Neither in the folder nor tagged for this category -> skip the page.
     if (!inIncludedFolder && !exactTag && !looseTag) return null;
 
-    const author = pick(source, /userimages\.png[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>/);
+    const author = readAuthor(source);
     const { date, text: dateText } = readDate(source, categoryLines[0]?.index ?? 0);
 
     const to = routes.byKey[key] ?? routes.bySlug[slug];
@@ -505,8 +559,7 @@ const sortItems = (items: PageItem[]) =>
         return a.title.localeCompare(b.title);
     });
 
-const formatDate = (item: PageItem) =>
-    item.date ? item.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : item.dateText || 'No date';
+const formatDate = (item: PageItem) => (item.date ? item.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'No date');
 
 /* -------------------------------- COMPONENT -------------------------------- */
 
@@ -538,7 +591,7 @@ const HalEhwalMuridList = () => {
                     try {
                         const source = await loader();
                         const item = extractItem(path, source, routes);
-                        const related = import.meta.env.DEV && !item && mentionsCategory(source);
+                        const related = import.meta.env.DEV && !item && !isListPage(source) && mentionsCategory(source);
                         return {
                             path,
                             item,
@@ -560,7 +613,9 @@ const HalEhwalMuridList = () => {
 
             if (import.meta.env.DEV) {
                 console.info(`${LOG} ${matched.length} of ${entries.length} pages matched`);
-                console.table(matched.map((item) => ({ page: item.key, titleFrom: item.titleSource, title: item.title, date: formatDate(item) })));
+                console.table(
+                    matched.map((item) => ({ page: item.key, titleFrom: item.titleSource, title: item.title, author: item.author, date: formatDate(item) }))
+                );
 
                 const missed = results.filter((result) => result.related);
                 if (missed.length > 0) {
@@ -584,7 +639,9 @@ const HalEhwalMuridList = () => {
     const filtered = useMemo(() => {
         const q = query.trim().toLowerCase();
         if (!q) return items;
-        return items.filter((item) => item.title.toLowerCase().includes(q) || item.tags.some((tag) => tag.toLowerCase().includes(q)));
+        return items.filter(
+            (item) => item.title.toLowerCase().includes(q) || item.author.toLowerCase().includes(q) || item.tags.some((tag) => tag.toLowerCase().includes(q))
+        );
     }, [items, query]);
 
     const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));

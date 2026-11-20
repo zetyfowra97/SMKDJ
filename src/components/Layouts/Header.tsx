@@ -1,6 +1,6 @@
-import { useState, useRef, useLayoutEffect, useEffect, ReactNode, CSSProperties } from 'react';
+import { useState, useRef, useLayoutEffect, useEffect, useMemo, ReactNode, CSSProperties } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { toggleDirection } from '../../store/themeConfigSlice';
 
@@ -569,6 +569,256 @@ const MobileNode = ({ node, level = 0 }: { node: NavNode; level?: number }) => {
 };
 
 /* ------------------------------------------------------------------ */
+/* SITE SEARCH (automatic)                                             */
+/* Indexes: every post file (title, categories, body text), every      */
+/* menu page and every category. New post files are searchable at once.*/
+/* ------------------------------------------------------------------ */
+
+type SearchEntry = {
+    title: string;
+    to: string;
+    kind: 'Post' | 'Page' | 'Category';
+    trail: string; // e.g. "Important Updates › Academic"
+    external?: boolean;
+    plain?: boolean;
+    body: string; // original-case text, used for the snippet
+    titleL: string;
+    tagsL: string;
+    bodyL: string;
+    date: number;
+};
+
+const normalize = (s: string) =>
+    s
+        .toLowerCase()
+        .replace(/&amp;/g, '&')
+        .replace(/[^a-z0-9\u00C0-\u024F]+/g, ' ')
+        .trim();
+
+const flattenMenu = (nodes: NavNode[], trail: string[] = []): { node: NavNode; trail: string[] }[] =>
+    nodes.flatMap((n) => [{ node: n, trail }, ...(n.children ? flattenMenu(n.children, [...trail, n.label]) : [])]);
+
+const SEARCH_INDEX: SearchEntry[] = (() => {
+    const list: SearchEntry[] = [];
+    const seen = new Set<string>();
+
+    const add = (p: {
+        title: string;
+        to: string;
+        kind: SearchEntry['kind'];
+        trail?: string;
+        tags?: string;
+        body?: string;
+        date?: number;
+        external?: boolean;
+        plain?: boolean;
+    }) => {
+        const key = p.kind + '|' + p.to + '|' + (p.kind === 'Post' ? '' : p.title);
+        if (seen.has(key)) return;
+        seen.add(key);
+        list.push({
+            title: p.title,
+            to: p.to,
+            kind: p.kind,
+            trail: p.trail ?? '',
+            external: p.external,
+            plain: p.plain,
+            body: p.body ?? '',
+            titleL: normalize(p.title),
+            tagsL: normalize(p.tags ?? ''),
+            bodyL: normalize(p.body ?? ''),
+            date: p.date ?? 0,
+        });
+    };
+
+    // 1) Posts (all page files, title + categories + full text)
+    Object.entries(POST_SOURCES).forEach(([path, src]) => {
+        if (!isPost(src)) return;
+        const file = (path.split('/').pop() || '').replace(/\.tsx$/, '');
+        const body = cleanText(src.replace(/^\s*import .*$/gm, '')).slice(0, 8000);
+        add({
+            title: readTitle(src, file),
+            to: '/' + file,
+            kind: 'Post',
+            tags: extractTags(src).join(' '),
+            body,
+            date: readDate(src),
+        });
+    });
+
+    // 2) Menu pages (About, Events, Clubs, Sports, Library ...)
+    flattenMenu(MOBILE_MENU).forEach(({ node, trail }) =>
+        add({ title: node.label, to: node.to, kind: 'Page', trail: trail.join(' › '), external: node.external, plain: node.plain })
+    );
+
+    // 3) Categories
+    CATEGORY_DEFS.forEach((c) => add({ title: c.label, to: c.to, kind: 'Category', tags: c.match.join(' ') }));
+
+    return list;
+})();
+
+const makeSnippet = (body: string, terms: string[]) => {
+    if (!body) return '';
+    const lower = body.toLowerCase();
+    const idx = terms.map((t) => lower.indexOf(t)).find((i) => i >= 0) ?? -1;
+    if (idx < 0) return '';
+    const start = Math.max(0, idx - 40);
+    return (start > 0 ? '…' : '') + body.slice(start, idx + 100).trim() + '…';
+};
+
+type SearchHit = { entry: SearchEntry; score: number; snippet: string };
+
+const runSearch = (query: string): SearchHit[] => {
+    const full = normalize(query);
+    const terms = full.split(' ').filter(Boolean);
+    if (!terms.length) return [];
+
+    const hits: SearchHit[] = [];
+    for (const e of SEARCH_INDEX) {
+        let score = 0;
+        let ok = true;
+        for (const t of terms) {
+            if (e.titleL.includes(t)) score += 5;
+            else if (e.tagsL.includes(t)) score += 3;
+            else if (e.bodyL.includes(t)) score += 1;
+            else {
+                ok = false;
+                break;
+            }
+        }
+        if (!ok) continue;
+        if (e.titleL.includes(full)) score += 5;
+        if (e.kind !== 'Post') score += 1;
+        hits.push({ entry: e, score, snippet: e.kind === 'Post' ? makeSnippet(e.body, terms) : '' });
+    }
+
+    return hits.sort((a, b) => b.score - a.score || b.entry.date - a.entry.date).slice(0, 10);
+};
+
+const SearchBox = ({
+    variant,
+    autoFocus,
+    onDone,
+    onClose,
+}: {
+    variant: 'desktop' | 'mobile';
+    autoFocus?: boolean;
+    onDone?: () => void;
+    onClose?: () => void;
+}) => {
+    const navigate = useNavigate();
+    const boxRef = useRef<HTMLDivElement>(null);
+    const [q, setQ] = useState('');
+    const [active, setActive] = useState(0);
+    const [openList, setOpenList] = useState(false);
+
+    const results = useMemo(() => runSearch(q), [q]);
+
+    // close the list when clicking outside
+    useEffect(() => {
+        const onDown = (e: MouseEvent) => {
+            if (boxRef.current && !boxRef.current.contains(e.target as Node)) setOpenList(false);
+        };
+        document.addEventListener('mousedown', onDown);
+        return () => document.removeEventListener('mousedown', onDown);
+    }, []);
+
+    const go = (h: SearchHit) => {
+        const e = h.entry;
+        setQ('');
+        setOpenList(false);
+        onDone?.();
+        if (e.external) window.open(e.to, '_blank', 'noopener,noreferrer');
+        else if (e.plain) window.location.href = e.to;
+        else navigate(e.to);
+    };
+
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            setActive((i) => Math.min(i + 1, results.length - 1));
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            setActive((i) => Math.max(i - 1, 0));
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (results[active]) go(results[active]);
+        } else if (e.key === 'Escape') {
+            setQ('');
+            setOpenList(false);
+            onClose?.();
+        }
+    };
+
+    const showList = openList && q.trim().length > 0;
+
+    return (
+        <div ref={boxRef} className="relative">
+            <input
+                type="text"
+                value={q}
+                autoFocus={autoFocus}
+                placeholder="Search"
+                aria-label="Search the website"
+                onChange={(e) => {
+                    setQ(e.target.value);
+                    setActive(0);
+                    setOpenList(true);
+                }}
+                onFocus={() => setOpenList(true)}
+                onKeyDown={onKeyDown}
+                className="w-full border-b border-white bg-transparent py-1 text-white outline-none ltr:pl-2 ltr:pr-8 rtl:pl-8 rtl:pr-2"
+            />
+            {onClose ? (
+                <button
+                    type="button"
+                    aria-label="Close search"
+                    className="absolute top-1/2 -translate-y-1/2 text-white hover:text-primary ltr:right-0 rtl:left-0"
+                    onClick={onClose}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            ) : null}
+
+            {showList && (
+                <div
+                    className={`${
+                        variant === 'desktop' ? 'absolute left-0 right-0 top-full z-[60] mt-2 max-h-[70vh] shadow-2xl' : 'mt-3'
+                    } overflow-y-auto overscroll-contain rounded-md bg-white text-left text-[#3b3f4a]`}
+                >
+                    {results.length === 0 ? (
+                        <p className="px-4 py-3 text-sm text-gray-500">No results for “{q.trim()}”</p>
+                    ) : (
+                        <ul>
+                            {results.map((h, i) => (
+                                <li key={h.entry.kind + h.entry.to + h.entry.title}>
+                                    <button
+                                        type="button"
+                                        onMouseDown={(ev) => ev.preventDefault()}
+                                        onMouseEnter={() => setActive(i)}
+                                        onClick={() => go(h)}
+                                        className={`block w-full px-4 py-2.5 text-left ${i === active ? 'bg-[#fdf1e4]' : ''}`}
+                                    >
+                                        <span className="flex items-center gap-2">
+                                            <span className="text-sm font-semibold">{h.entry.title}</span>
+                                            <span className="rounded bg-[#e98f35] px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">{h.entry.kind}</span>
+                                        </span>
+                                        {h.entry.trail && <span className="block text-xs text-gray-500">{h.entry.trail}</span>}
+                                        {h.snippet && <span className="mt-0.5 block text-xs text-gray-600">{h.snippet}</span>}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};
+
+/* ------------------------------------------------------------------ */
 /* WEBSITE VIEW: TOP-LEVEL DROPDOWN (About, Important Updates, News)   */
 /*                                                                     */
 /* Same original look (group-hover + .submenu), but after you click    */
@@ -1038,32 +1288,13 @@ const Header = (props: any) => {
 
                                     {/* SEARCH BAR */}
                                     <li
-                                        className={`${showSearch ? '!w-full' : ''}
-                  search-bar absolute hidden w-0 overflow-hidden bg-black transition-all duration-500 ltr:right-0 rtl:left-0 lg:block`}
+                                        className={`search-bar absolute hidden w-0 bg-black transition-all duration-500 ltr:right-0 rtl:left-0 lg:block ${
+                                            showSearch ? '!w-full overflow-visible' : 'overflow-hidden'
+                                        }`}
                                     >
-                                        <form action="" className="relative">
-                                            <input
-                                                type="text"
-                                                placeholder="Search"
-                                                className="w-full border-b border-white bg-transparent py-1 outline-none ltr:pl-2 ltr:pr-8 rtl:pr-2 rtl:pl-8"
-                                            />
-                                            <button
-                                                type="button"
-                                                className="absolute top-1/2 -translate-y-1/2 hover:text-primary ltr:right-0 rtl:left-0"
-                                                onClick={() => toggleSearch()}
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    strokeWidth="1.5"
-                                                    stroke="currentColor"
-                                                    className="h-6 w-6"
-                                                >
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                                </svg>
-                                            </button>
-                                        </form>
+                                        {showSearch && (
+                                            <SearchBox variant="desktop" autoFocus onDone={() => setShowSearch(false)} onClose={() => setShowSearch(false)} />
+                                        )}
                                     </li>
                                 </ul>
                             </div>
@@ -1124,25 +1355,9 @@ const Header = (props: any) => {
                 </div>
 
                 {/* Search (same as the website) */}
-                <form action="" className="relative border-b border-white/10 px-4 py-3">
-                    <input
-                        type="text"
-                        placeholder="Search"
-                        className="w-full border-b border-white bg-transparent py-1 text-white outline-none ltr:pl-2 ltr:pr-8 rtl:pl-8 rtl:pr-2"
-                    />
-                    <button
-                        type="submit"
-                        aria-label="Search"
-                        className="absolute top-1/2 -translate-y-1/2 text-white hover:text-primary ltr:right-4 rtl:left-4"
-                    >
-                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M18.7363 17.4637L14.6512 13.3785C15.6799 12.0753 16.3 10.4347 16.3 8.65C16.3 4.4317 12.8683 1 8.65 1C4.4317 1 1 4.4317 1 8.65C1 12.8683 4.4317 16.3 8.65 16.3C10.4356 16.3 12.0754 15.6808 13.3786 14.6512L17.4637 18.7363C17.6392 18.9118 17.8696 19 18.1 19C18.3304 19 18.5608 18.9118 18.7363 18.7363C19.0882 18.3844 19.0882 17.8156 18.7363 17.4637ZM2.8 8.65C2.8 5.4244 5.4244 2.8 8.65 2.8C11.8756 2.8 14.5 5.4244 14.5 8.65C14.5 11.8756 11.8756 14.5 8.65 14.5C5.4244 14.5 2.8 11.8756 2.8 8.65Z"
-                                fill="currentColor"
-                            />
-                        </svg>
-                    </button>
-                </form>
+                <div className="border-b border-white/10 px-4 py-3">
+                    <SearchBox variant="mobile" onDone={closeMenu} />
+                </div>
 
                 {/* Full menu */}
                 <nav>

@@ -3,12 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { IRootState } from '../../store';
 import { useEffect } from 'react';
 import CategoryTags from '../../CategoryTags';
+import AuthorTag from '../../AuthorTag';
 
 const JEREBULINDUNGIDIRIJAGAKESIHATAN = () => {
     const { hash } = useLocation();
-    const pdfUrl =
-        'https://www.smkdj.edu.my/wp-content/uploads/2026/09/SURAT-SIARAN-KPM-BIL.1-TAHUN-2019.pdf';
-  
+    const pdfUrl = 'https://www.smkdj.edu.my/wp-content/uploads/2026/09/SURAT-SIARAN-KPM-BIL.1-TAHUN-2019.pdf';
 
     const handleClickScroll = () => {
         const element = document.getElementById('section-1');
@@ -35,7 +34,7 @@ const JEREBULINDUNGIDIRIJAGAKESIHATAN = () => {
         <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
             <section id="section-1" className="items-center justify-center justify-items-center gap-10 md:gap-16 lg:gap-20">
                 {/* TEXT SECTION */}
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <CategoryTags categories="PENGURUSAN SMKDJ" />
 
@@ -45,13 +44,11 @@ const JEREBULINDUNGIDIRIJAGAKESIHATAN = () => {
                             <div className="flex items-center gap-4">
                                 <div className="flex items-center gap-1">
                                     <img src="/assets/images/userimages.png" alt="user" className="h-6 w-6 object-contain" />
-                                    <p className="text-[12px] font-semibold text-black">SMKDJ</p>
+                                    <AuthorTag author="SMKDJ" />
                                 </div>
                                 <img src="/assets/images/dateandtime.png" alt="user" className="h-4 w-4 object-contain" />
                                 <p className="text-[12px] font-semibold text-black">September 9, 2026</p>
                             </div>
-
-                          
                         </div>
                     </div>
                 </div>
@@ -107,9 +104,7 @@ const JEREBULINDUNGIDIRIJAGAKESIHATAN = () => {
 
                     {/* PDF FOOTER */}
                     <div className="mt-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-                        <p className="text-gray-600 text-sm font-medium">
-                            SURAT SIARAN KPM BIL.1 TAHUN 2019
-                        </p>
+                        <p className="text-gray-600 text-sm font-medium">SURAT SIARAN KPM BIL.1 TAHUN 2019</p>
 
                         <div className="flex flex-wrap gap-3">
                             <a
@@ -130,7 +125,6 @@ const JEREBULINDUNGIDIRIJAGAKESIHATAN = () => {
                             </a>
                         </div>
                     </div>
-                    
                 </div>
             </section>
         </div>

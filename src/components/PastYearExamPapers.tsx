@@ -27,7 +27,7 @@ const PastYearExamPapers = () => {
         <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
             <section id="section-1" className="container items-center justify-center gap-10 md:gap-16 lg:gap-20">
                 {/* TEXT SECTION */}
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right ">
                         <h4 className="!text-secondary">Past Year Exam Papers</h4>
                         <p className="mt-4 text-justify text-sm font-semibold text-black underline underline-offset-1 md:text-lg">

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { IRootState } from '../store';
 import { useEffect } from 'react';
 import CategoryTags from '../../CategoryTags';
+import AuthorTag from '../../AuthorTag';
 
 const IramaMenggetarkanPentas = () => {
     const { hash } = useLocation();
@@ -31,7 +32,7 @@ const IramaMenggetarkanPentas = () => {
     return (
         <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
             <section id="section-1" className="items-center justify-center justify-items-center gap-10 md:gap-16 lg:gap-20">
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className={`heading mt-10 text-center ${isRtl ? 'rtl:lg:text-right' : 'ltr:lg:text-left'}`}>
                         <CategoryTags categories="Admin-Announcements, UNESCO" />
 
@@ -41,8 +42,7 @@ const IramaMenggetarkanPentas = () => {
                         <div className="mt-4 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
                             <div className="flex items-center gap-1">
                                 <img src="/assets/images/userimages.png" alt="Author" className="h-6 w-6 object-contain" />
-
-                                <p className="text-xs font-semibold text-black">SMKDJ</p>
+                                <AuthorTag author="SMKDJ" />
                             </div>
 
                             <div className="flex items-center gap-1">
@@ -91,13 +91,13 @@ const IramaMenggetarkanPentas = () => {
                     </div>
                 </div>
 
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="mt-4 text-justify text-sm font-semibold text-black md:text-lg">Tahniah 🌟👏</p>
                     </div>
                 </div>
 
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="mt-4 text-justify text-sm font-semibold text-black md:text-lg">
                             <br />
@@ -107,7 +107,7 @@ const IramaMenggetarkanPentas = () => {
                     </div>
                 </div>
 
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="text-4xl font-bold text-black">Nyanyian Duo</p>
 
@@ -122,7 +122,7 @@ const IramaMenggetarkanPentas = () => {
                     </div>
                 </div>
 
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="text-4xl font-bold text-black">Nyanyian Solo (L)</p>
 
@@ -133,7 +133,7 @@ const IramaMenggetarkanPentas = () => {
                         </p>
                     </div>
                 </div>
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="text-4xl font-bold text-black">Nyanyian Solo (P)</p>
 

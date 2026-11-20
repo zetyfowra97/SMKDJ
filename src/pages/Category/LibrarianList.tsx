@@ -14,12 +14,13 @@ const INCLUDE_FOLDERS = ['Librarian']; // every page in pages/Librarian is liste
 const PAGE_HEADING = 'Maklumat Pustakawan';
 const ROUTE_FALLBACK_BASE = ''; // only used if a page has no route in the router
 const PAGE_SIZE = 12;
+const LOG = '[LibrarianList]';
 // ---------------------------------------------------------------------------
 
 // Every .tsx file in every folder under pages/ (nested folders too), read as plain
 // text and never executed, so a broken page cannot crash this list.
-// The Category folder is excluded so list pages don't list themselves.
-const sourceLoaders = import.meta.glob<string>(['../**/*.tsx', '!../Category/**'], {
+// The Category folder and this file itself are excluded so list pages don't list themselves.
+const sourceLoaders = import.meta.glob<string>(['../**/*.tsx', '!../Category/**', '!../**/LibrarianList.tsx'], {
     query: '?raw',
     import: 'default',
 });
@@ -156,6 +157,12 @@ const makeDate = (year: number, month: number, day: number): Date | null => {
 
 const monthFromName = (name: string): number | undefined => MONTHS[name.toLowerCase()];
 
+// Words / symbols that join the two ends of a date range: "2-3", "2 – 3", "2 to 3",
+// "2 hingga 3", "2 & 3", "2 dan 3", "2, 3".
+const RANGE_SEP = '(?:-|–|—|to|hingga|sehingga|until|&|dan|and|,)';
+
+// Full dates (day + month + year). Any 4-digit year works (2027, 2028, 2050 ...).
+// Date ranges are read from their FIRST day.
 const DATE_PATTERNS: { regex: RegExp; read: (m: RegExpExecArray) => Date | null }[] = [
     {
         // July 2, 2027 | Jul 2 2027 | July 2nd, 2027 | Julai 2, 2027
@@ -166,7 +173,7 @@ const DATE_PATTERNS: { regex: RegExp; read: (m: RegExpExecArray) => Date | null 
         },
     },
     {
-        // 2 July 2027 | 2nd July 2027 | 2 Julai 2027 | 2 Okt 2027
+        // 2 July 2027 | 2nd July 2027 | 2 Julai 2027 | 2 Okt 2027 | 2 Jul, 2027
         regex: /\b(\d{1,2})(?:st|nd|rd|th)?\s+([A-Za-z]{3,9})\.?,?\s+(\d{4})\b/,
         read: (m) => {
             const month = monthFromName(m[2]);
@@ -174,8 +181,35 @@ const DATE_PATTERNS: { regex: RegExp; read: (m: RegExpExecArray) => Date | null 
         },
     },
     {
-        // 2027-07-02
-        regex: /\b(\d{4})-(\d{1,2})-(\d{1,2})\b/,
+        // Range in one month, day first: 2-3 July 2027 | 2 to 3 Julai 2027 | 2 & 3 Mei 2027
+        regex: new RegExp('\\b(\\d{1,2})(?:st|nd|rd|th)?\\s*' + RANGE_SEP + '\\s*\\d{1,2}(?:st|nd|rd|th)?\\s+([A-Za-z]{3,9})\\.?,?\\s+(\\d{4})\\b', 'i'),
+        read: (m) => {
+            const month = monthFromName(m[2]);
+            return month === undefined ? null : makeDate(Number(m[3]), month, Number(m[1]));
+        },
+    },
+    {
+        // Range across months, day first: 28 June - 2 July 2027 | 30 Jun to 1 Jul 2027
+        regex: new RegExp(
+            '\\b(\\d{1,2})(?:st|nd|rd|th)?\\s+([A-Za-z]{3,9})\\.?\\s*' + RANGE_SEP + '\\s*\\d{1,2}(?:st|nd|rd|th)?\\s+[A-Za-z]{3,9}\\.?,?\\s+(\\d{4})\\b',
+            'i'
+        ),
+        read: (m) => {
+            const month = monthFromName(m[2]);
+            return month === undefined ? null : makeDate(Number(m[3]), month, Number(m[1]));
+        },
+    },
+    {
+        // Range, month first: July 2-3, 2027 | Jul 2 to 3 2027
+        regex: new RegExp('\\b([A-Za-z]{3,9})\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?\\s*' + RANGE_SEP + '\\s*\\d{1,2}(?:st|nd|rd|th)?,?\\s+(\\d{4})\\b', 'i'),
+        read: (m) => {
+            const month = monthFromName(m[1]);
+            return month === undefined ? null : makeDate(Number(m[3]), month, Number(m[2]));
+        },
+    },
+    {
+        // 2027-07-02 | 2027/07/02 | 2027.07.02
+        regex: /\b(\d{4})[/.-](\d{1,2})[/.-](\d{1,2})\b/,
         read: (m) => makeDate(Number(m[1]), Number(m[2]) - 1, Number(m[3])),
     },
     {
@@ -185,15 +219,57 @@ const DATE_PATTERNS: { regex: RegExp; read: (m: RegExpExecArray) => Date | null 
     },
 ];
 
-// Finds the first real date anywhere inside a piece of text.
+// Finds the first real date anywhere inside a piece of text. When several formats
+// are mixed in the same text, the one that appears EARLIEST wins.
+// Last resort: "July 2027" (no day) is read as the 1st of that month.
 const findDate = (text: string): { date: Date; text: string } | null => {
+    const candidates: { date: Date; text: string; index: number }[] = [];
+
     for (const { regex, read } of DATE_PATTERNS) {
-        const match = regex.exec(text);
-        if (!match) continue;
-        const date = read(match);
-        if (date) return { date, text: match[0] };
+        const flags = regex.flags.includes('g') ? regex.flags : regex.flags + 'g';
+        const re = new RegExp(regex.source, flags);
+        let m: RegExpExecArray | null;
+        while ((m = re.exec(text))) {
+            const date = read(m);
+            if (date) {
+                candidates.push({ date, text: m[0], index: m.index });
+                break;
+            }
+        }
     }
+
+    if (candidates.length > 0) {
+        // Earliest in the text wins; on a tie the longer match (e.g. a full range) wins.
+        candidates.sort((a, b) => a.index - b.index || b.text.length - a.text.length);
+        return { date: candidates[0].date, text: candidates[0].text };
+    }
+
+    const monthYear = /\b([A-Za-z]{3,9})\.?,?\s+(\d{4})\b/g;
+    let my: RegExpExecArray | null;
+    while ((my = monthYear.exec(text))) {
+        const month = monthFromName(my[1]);
+        if (month === undefined) continue;
+        const date = makeDate(Number(my[2]), month, 1);
+        if (date) return { date, text: my[0] };
+    }
+
     return null;
+};
+
+// Removes every date from a piece of text, so a date can never sit inside the
+// author name. "NorAzila Awang | 2 July 2027" -> "NorAzila Awang"
+const removeDates = (text: string): string => {
+    let result = text;
+    for (let i = 0; i < 6; i++) {
+        const found = findDate(result);
+        if (!found) break;
+        result = result.replace(found.text, ' ');
+    }
+    return result
+        .replace(/\s+/g, ' ')
+        .replace(/^[\s|·•,;:–—-]+/, '')
+        .replace(/[\s|·•,;:–—-]+$/, '')
+        .trim();
 };
 
 /* ------------------------------- PAGE PARSING ------------------------------ */
@@ -215,6 +291,11 @@ const cleanText = (raw: string): string =>
         .replace(/\s+/g, ' ')
         .replace(/\s+([.,:;!?])/g, '$1') // no stray space before punctuation
         .trim();
+
+// Same as cleanText, but for tag lines: separate elements such as
+// <span>A</span><span>B</span> or <a>A</a> <a>B</a> are kept as separate tags.
+const cleanTagLine = (raw: string): string =>
+    cleanText(raw.replace(/<\/(span|a|b|strong|em|i|li|label|small)>\s*(?=<(?:span|a|b|strong|em|i|li|label|small)\b)/gi, ', '));
 
 const humanize = (slug: string) =>
     slug
@@ -276,14 +357,49 @@ const splitTags = (text: string): string[] =>
         .map((tag) => restoreNames(tag).trim())
         .filter(Boolean);
 
-// All <h6> lines in the page (some pages have more than one).
-const readH6Lines = (source: string): { text: string; index: number }[] => {
-    const lines: { text: string; index: number }[] = [];
-    const regex = /<h6[^>]*>([\s\S]*?)<\/h6>/g;
+// List pages (like this one) contain code that looks like page markup. Never list them.
+const isListPage = (source: string) => source.includes('import.meta.glob');
+
+// Reads a string prop like  categories="..."  /  author='...'  /  author={"..."}
+// from a component tag such as <CategoryTags categories="..." /> or <AuthorTag author="..." />.
+const readComponentProp = (source: string, component: string, prop: string): { value: string; index: number; end: number } | null => {
+    const regex = new RegExp('<' + component + '\\b[^>]*?\\b' + prop + '\\s*=\\s*(?:\\{\\s*)?([\'"`])((?:\\\\.|(?!\\1)[\\s\\S])*?)\\1[^>]*>');
+    const m = regex.exec(source);
+    if (!m || m[2].includes('${')) return null;
+    const value = cleanText(m[2].replace(/\\(['"`\\])/g, '$1'));
+    return value ? { value, index: m.index, end: m.index + m[0].length } : null;
+};
+
+// All real <h6> lines in the page (some pages have more than one).
+// The <h6> must start like real JSX (after whitespace, "(", ">" or "{"), so an
+// "<h6" written inside a regex literal or a string is ignored.
+const readH6Lines = (source: string): { text: string; index: number; end: number }[] => {
+    const lines: { text: string; index: number; end: number }[] = [];
+    const regex = /(^|[\s(>{])<h6[^>]*>([\s\S]*?)<\/h6>/g;
     let m: RegExpExecArray | null;
     while ((m = regex.exec(source))) {
-        const text = cleanText(m[1]);
-        if (text) lines.push({ text, index: m.index });
+        const text = cleanTagLine(m[2]);
+        if (text) lines.push({ text, index: m.index + m[1].length, end: m.index + m[0].length });
+    }
+    return lines;
+};
+
+// The category line(s) of a page:
+//   1) <CategoryTags categories="..." />  (current pages)
+//   2) every real <h6>                    (older pages)
+// If a page has neither, short text elements styled with "text-secondary" (the same
+// blue used for the category line) are used instead.
+const readCategoryLines = (source: string): { text: string; index: number; end: number }[] => {
+    const lines = readH6Lines(source);
+    const fromTag = readComponentProp(source, 'CategoryTags', 'categories');
+    if (fromTag) lines.push({ text: fromTag.value, index: fromTag.index, end: fromTag.end });
+    if (lines.length > 0) return lines.sort((a, b) => a.index - b.index);
+
+    const regex = /<(p|span|h1|h2|h3|h4|h5)\b[^>]*text-secondary[^>]*>([\s\S]*?)<\/\1>/g;
+    let m: RegExpExecArray | null;
+    while ((m = regex.exec(source))) {
+        const text = cleanTagLine(m[2]);
+        if (text && text.length <= 150) lines.push({ text, index: m.index, end: m.index + m[0].length });
     }
     return lines;
 };
@@ -297,12 +413,14 @@ const stripSiteName = (title: string) => title.replace(/\s*[|–—-]\s*(?:SMKDJ
 // or an arbitrary size of 24px / 1.5rem and up (text-[40px]). Small sizes such as
 // text-sm, text-lg or text-[12px] are NOT big, so author/date lines are never
 // mistaken for the title. Works with md:text-4xl, !text-4xl, className={`text-4xl`}.
+//
+// Capture groups: m[1] = named size (2xl...9xl), m[2] = number, m[3] = unit.
 const isBigClass = (attrs: string): boolean => {
-    const regex = /(?:^|[\s"'`:!{(,])text-(2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl|\[(\d+(?:\.\d+)?)(px|rem|em)\])(?=$|[\s"'`,)}])/g;
+    const regex = /(?:^|[\s"'`:!{(,])text-(?:(2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)|\[(\d+(?:\.\d+)?)(px|rem|em)\])(?=$|[\s"'`,)}])/g;
     let m: RegExpExecArray | null;
     while ((m = regex.exec(attrs))) {
-        if (!m[1].startsWith('[')) return true;
-        const size = Number(m[2]);
+        if (m[1]) return true; // text-2xl ... text-9xl
+        const size = Number(m[2]); // text-[40px] / text-[2rem]
         if (m[3] === 'px' ? size >= 24 : size >= 1.5) return true;
     }
     return false;
@@ -346,12 +464,12 @@ const readTitleVariable = (source: string): string => {
 };
 
 const readTitle = (source: string): { title: string; from: string } => {
-    const h6 = /<h6[^>]*>[\s\S]*?<\/h6>/.exec(source);
-    const afterH6 = h6 ? h6.index + h6[0].length : 0;
+    const header = readCategoryLines(source)[0];
+    const afterHeader = header ? header.end : 0;
 
-    // 1) Big <p> / heading. The first one AFTER the category <h6> wins:
+    // 1) Big <p> / heading. The first one AFTER the category line wins:
     //    <p className="text-4xl font-bold text-black">Full Title Here</p>
-    //    A big element found only BEFORE the <h6> is kept as a backup.
+    //    A big element found only BEFORE the category line is kept as a backup.
     const bigRegex = /<(p|h1|h2|h3|h4|h5)\b([^>]*)>([\s\S]*?)<\/\1>/g;
     let backup = '';
     let m: RegExpExecArray | null;
@@ -362,21 +480,21 @@ const readTitle = (source: string): { title: string; from: string } => {
         const text = cleanText(resolveExpressions(m[3], source));
         if (!text) continue;
 
-        if (m.index >= afterH6) {
-            return { title: text, from: h6 ? 'big title after <h6>' : 'first big heading' };
+        if (m.index >= afterHeader) {
+            return { title: text, from: header ? 'big title after category line' : 'first big heading' };
         }
         if (!backup) backup = text;
     }
-    if (backup) return { title: backup, from: 'big heading before <h6>' };
+    if (backup) return { title: backup, from: 'big heading before category line' };
 
-    // 2) The first <p> with text right after the <h6>, whatever its class
-    if (h6) {
+    // 2) The first <p> with text right after the category line, whatever its class
+    if (header) {
         const pRegex = /<p\b[^>]*>([\s\S]*?)<\/p>/g;
-        pRegex.lastIndex = afterH6;
+        pRegex.lastIndex = afterHeader;
         while ((m = pRegex.exec(source))) {
-            if (m.index - afterH6 > 2500) break;
+            if (m.index - afterHeader > 2500) break;
             const text = cleanText(resolveExpressions(m[1], source));
-            if (text) return { title: text, from: 'first <p> after <h6>' };
+            if (text) return { title: text, from: 'first <p> after category line' };
         }
     }
 
@@ -395,29 +513,49 @@ const readTitle = (source: string): { title: string; from: string } => {
     return { title: '', from: 'none' };
 };
 
+/* ------------------------------ AUTHOR & DATE ------------------------------ */
+
+// Author:
+//   1) <AuthorTag author="NorAzila Awang" />   (current pages)
+//   2) the <p> right after userimages.png      (older pages)
+// Any date found inside the author text is removed, so the card always shows
+// exactly one author and one date (the date comes only from readDate).
+const readAuthor = (source: string): string => {
+    const fromTag = readComponentProp(source, 'AuthorTag', 'author');
+    if (fromTag) return removeDates(fromTag.value);
+
+    const match = /userimages\.png[^>]*>\s*(?:<\/img>)?\s*<p[^>]*>([\s\S]*?)<\/p>/.exec(source);
+    return match ? removeDates(cleanText(match[1])) : '';
+};
+
 // Date: the text after the date icon. Falls back to the first real date close to
 // the page header if the icon block is missing or written differently.
+// Only ONE date is ever returned.
 const readDate = (source: string, headerIndex: number): { date: Date | null; text: string } => {
     const iconText = pick(source, /dateandtime\.png[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>/);
     const fromIcon = findDate(iconText);
     if (fromIcon) return fromIcon;
 
     const start = Math.max(0, headerIndex);
-    const fromHeader = findDate(source.slice(start, start + 2500));
+    const fromHeader = findDate(cleanText(source.slice(start, start + 2500)));
     if (fromHeader) return fromHeader;
 
-    return { date: null, text: iconText };
+    return { date: null, text: '' };
 };
 
+/* ------------------------------- BUILD ITEM -------------------------------- */
+
 const extractItem = (path: string, source: string, routes: RouteMaps): PageItem | null => {
+    if (isListPage(source)) return null;
+
     const parts = path.split('/');
     const folder = parts[parts.length - 2];
     const slug = parts[parts.length - 1].replace(/\.tsx$/, '');
     const key = `${folder}/${slug}`;
 
-    // Collect tags from every <h6> in the page, in any mix of separators.
-    const h6Lines = readH6Lines(source);
-    const tags = Array.from(new Set(h6Lines.flatMap((line) => splitTags(line.text))));
+    // Collect tags from every category line, in any mix of separators.
+    const categoryLines = readCategoryLines(source);
+    const tags = Array.from(new Set(categoryLines.flatMap((line) => splitTags(line.text))));
 
     const inIncludedFolder = parts.slice(0, -1).some((part) => INCLUDE_FOLDER_KEYS.includes(normalizeTag(part)));
     const hasTargetTag = tags.some((tag) => TARGET_TAGS.includes(normalizeTag(tag)));
@@ -425,17 +563,17 @@ const extractItem = (path: string, source: string, routes: RouteMaps): PageItem 
     // Neither in the folder nor tagged for this category -> skip the page.
     if (!inIncludedFolder && !hasTargetTag) return null;
 
-    const author = pick(source, /userimages\.png[\s\S]*?<p[^>]*>([\s\S]*?)<\/p>/);
-    const { date, text: dateText } = readDate(source, h6Lines[0]?.index ?? 0);
+    const author = readAuthor(source);
+    const { date, text: dateText } = readDate(source, categoryLines[0]?.index ?? 0);
 
     const to = routes.byKey[key] ?? routes.bySlug[slug];
     if (!to) {
-        console.warn(`[LibrarianList] No route found in router for "${key}", using ${ROUTE_FALLBACK_BASE}/${slug}`);
+        console.warn(`${LOG} No route found in router for "${key}", using ${ROUTE_FALLBACK_BASE}/${slug}`);
     }
 
     const { title, from } = readTitle(source);
     if (!title) {
-        console.warn(`[LibrarianList] Could not read a title from "${key}", using the file name instead`);
+        console.warn(`${LOG} Could not read a title from "${key}", using the file name instead`);
     }
 
     return {
@@ -461,8 +599,7 @@ const sortItems = (items: PageItem[]) =>
         return a.title.localeCompare(b.title);
     });
 
-const formatDate = (item: PageItem) =>
-    item.date ? item.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : item.dateText || 'No date';
+const formatDate = (item: PageItem) => (item.date ? item.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : 'No date');
 
 /* -------------------------------- COMPONENT -------------------------------- */
 
@@ -485,7 +622,7 @@ const LibrarianList = () => {
             try {
                 routes = buildRouteMaps();
             } catch (error) {
-                console.warn('[LibrarianList] Could not read router file', error);
+                console.warn(`${LOG} Could not read router file`, error);
             }
 
             const entries = Object.entries(sourceLoaders);
@@ -494,7 +631,7 @@ const LibrarianList = () => {
                     try {
                         return extractItem(path, await loader(), routes);
                     } catch (error) {
-                        console.warn(`[LibrarianList] Could not read ${path}`, error);
+                        console.warn(`${LOG} Could not read ${path}`, error);
                         return null;
                     }
                 })
@@ -503,8 +640,10 @@ const LibrarianList = () => {
             const matched = results.filter((item): item is PageItem => item !== null);
 
             if (import.meta.env.DEV) {
-                console.info(`[LibrarianList] ${matched.length} of ${entries.length} pages matched`);
-                console.table(matched.map((item) => ({ page: item.key, titleFrom: item.titleSource, title: item.title })));
+                console.info(`${LOG} ${matched.length} of ${entries.length} pages matched`);
+                console.table(
+                    matched.map((item) => ({ page: item.key, titleFrom: item.titleSource, title: item.title, author: item.author, date: formatDate(item) }))
+                );
             }
 
             if (!cancelled) {
@@ -522,7 +661,9 @@ const LibrarianList = () => {
     const filtered = useMemo(() => {
         const q = query.trim().toLowerCase();
         if (!q) return items;
-        return items.filter((item) => item.title.toLowerCase().includes(q) || item.tags.some((tag) => tag.toLowerCase().includes(q)));
+        return items.filter(
+            (item) => item.title.toLowerCase().includes(q) || item.author.toLowerCase().includes(q) || item.tags.some((tag) => tag.toLowerCase().includes(q))
+        );
     }, [items, query]);
 
     const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));

@@ -9,6 +9,7 @@ import { useLocation } from 'react-router-dom';
 import CookiesModal from '../CookiesModal';
 import Sidebar from '../Sidebar';
 import AqiModal from '../AqiModal';
+import { CommentsGate } from '../Comments';
 
 // Pages that should NOT show the sidebar (these also use the original background)
 const NO_SIDEBAR_PATHS = ['/'];
@@ -142,14 +143,19 @@ const DefaultLayout = ({ children }: PropsWithChildren) => {
                     {/* Homepage keeps one shared background for content + footer */}
                     <div className={isHome ? ORIGINAL_BG : ''}>
                         {isHome ? (
-                            // Homepage: full width, no sidebar
+                            // Homepage: full width, no sidebar, no comments
                             children
                         ) : (
                             // Other pages: white content area with Recent Posts on the right
                             <div className="bg-white">
                                 <div className="container py-10">
                                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px]">
-                                        <div className="min-w-0 bg-white">{children}</div>
+                                        <div className="min-w-0 bg-white">
+                                            {children}
+
+                                            {/* Comments: shown under the page content on every page except Home */}
+                                            <CommentsGate />
+                                        </div>
                                         <Sidebar />
                                     </div>
                                 </div>

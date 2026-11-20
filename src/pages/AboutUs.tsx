@@ -31,7 +31,7 @@ const Aboutus = () => {
         <div className="w-full bg-white bg-cover bg-bottom bg-no-repeat pb-20 pt-8">
             <section id="section-1" className="items-center justify-center justify-items-center gap-10 md:gap-16 lg:gap-20">
                 {/* TEXT SECTION */}
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="text-4xl font-bold text-black">About</p>
                         <p className="mt-4 text-justify text-sm font-semibold text-black md:text-lg">
@@ -63,7 +63,7 @@ const Aboutus = () => {
                 <div className="flex w-full flex-col justify-center gap-10 md:w-1/2" data-aos="fade-left" data-aos-duration="1500">
                     <img src="/assets/images/sekolah1.jpeg" alt="Pengetua" className="w-3/4 rounded-2xl object-cover shadow-lg sm:w-2/3 md:w-full" />
                 </div>
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="mt-4 text-justify text-sm font-semibold text-black md:text-lg">
                             In the first year it opened its doors to the public, it had 3 blocks, 6 classrooms, 24 teachers and a total of 189 students. Over
@@ -77,7 +77,7 @@ const Aboutus = () => {
                     <img src="/assets/images/sekolah2.jpeg" alt="Pengetua" className="w-3/4 rounded-2xl object-cover shadow-lg sm:w-2/3 md:w-full" />
                     <img src="/assets/images/sekolah3.jpeg" alt="Pengetua" className="w-3/4 rounded-2xl object-cover shadow-lg sm:w-2/3 md:w-full" />
                 </div>
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="mt-4 text-justify text-sm font-semibold text-black md:text-lg">
                             The construction of Block F was completed in 1992. A later development was the Bilik Bergerak. <br />
@@ -93,7 +93,7 @@ const Aboutus = () => {
                     <img src="/assets/images/sekolah4.jpeg" alt="Pengetua" className="w-3/4 rounded-2xl object-cover shadow-lg sm:w-2/3 md:w-full" />
                 </div>
 
-                <div className="w-full px-5 md:w-1/2 md:px-0" data-aos="fade-right" data-aos-duration="1500">
+                <div className="md:" data-aos="fade-right" data-aos-duration="1500">
                     <div className="heading mt-10 text-center ltr:lg:text-left rtl:lg:text-right">
                         <p className="text-4xl font-bold text-black">Bilingual Education</p>
 

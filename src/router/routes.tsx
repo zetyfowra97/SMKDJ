@@ -6,7 +6,7 @@ import Kejayaan from '../pages/Kejayaan';
 import SelamatBerkhidmat from '../pages/SelamatBerkhidmat';
 import SMKDJShines from '../pages/SMKDJShines';
 import RumahKesatria from '../pages/RumahKesatria';
-import Cemerlang from '../pages/Cemerlang';
+import Cemerlang from '../pages/AdminAnnouncement/Cemerlang';
 
 import Mesyuarat from '../pages/Mesyuarat';
 import Mesyuarat2025 from '../pages/Mesyuarat2025';
@@ -159,6 +159,11 @@ import EnglishList from '../pages/Category/EnglishList';
 import ChoirList from '../pages/Category/ChoirList';
 import FacilitiesList from '../pages/Category/FacilitiesList';
 import TenisList from '../pages/Category/TenisList';
+import NorAzilaAwangList from '../pages/Author/NorAzilaAwangList';
+import SMKDJList from '../pages/Author/SMKDJList';
+import TaekwandoAuthorList from '../pages/Author/TaekwandoAuthorList';
+import TjOoiList from '../pages/Author/TjOoiList';
+import MudzilMahamodList from '../pages/Author/MudzilMahamodList';
 
 const Index = lazy(() => import('../pages/index'));
 const Products = lazy(() => import('../pages/Products'));
@@ -875,6 +880,26 @@ const routes = [
     {
         path: '/TenisList',
         element: <TenisList />,
+    },
+    {
+        path: '/MudzilMahamodList',
+        element: <MudzilMahamodList />,
+    },
+    {
+        path: '/NorAzilaAwangList',
+        element: <NorAzilaAwangList />,
+    },
+    {
+        path: '/SMKDJList',
+        element: <SMKDJList />,
+    },
+    {
+        path: '/TaekwandoAuthorList',
+        element: <TaekwandoAuthorList />,
+    },
+    {
+        path: '/TjOoiList',
+        element: <TjOoiList />,
     },
 ];
 
