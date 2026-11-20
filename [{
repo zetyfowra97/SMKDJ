@@ -1,0 +1,8 @@
+[33mcommit 8baf948d361fcb4393bede8611528bf53b1df5d4[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: zetyfowra97 <135099915+zetyfowra97@users.noreply.github.com>
+Date:   Fri Nov 20 17:15:52 2026 +0800
+
+    Add SPA rewrite for Vercel
+
+ vercel.json | 5 [32m+++++[m
+ 1 file changed, 5 insertions(+)
