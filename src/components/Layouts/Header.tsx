@@ -789,7 +789,7 @@ const SearchBox = ({
                     } overflow-y-auto overscroll-contain rounded-md bg-white text-left text-[#3b3f4a]`}
                 >
                     {results.length === 0 ? (
-                        <p className="px-4 py-3 text-sm text-gray-500">No results for “{q.trim()}”</p>
+                        <p className="text-gray-500 px-4 py-3 text-sm">No results for “{q.trim()}”</p>
                     ) : (
                         <ul>
                             {results.map((h, i) => (
@@ -805,8 +805,8 @@ const SearchBox = ({
                                             <span className="text-sm font-semibold">{h.entry.title}</span>
                                             <span className="rounded bg-[#e98f35] px-1.5 py-0.5 text-[9px] font-bold uppercase text-white">{h.entry.kind}</span>
                                         </span>
-                                        {h.entry.trail && <span className="block text-xs text-gray-500">{h.entry.trail}</span>}
-                                        {h.snippet && <span className="mt-0.5 block text-xs text-gray-600">{h.snippet}</span>}
+                                        {h.entry.trail && <span className="text-gray-500 block text-xs">{h.entry.trail}</span>}
+                                        {h.snippet && <span className="text-gray-600 mt-0.5 block text-xs">{h.snippet}</span>}
                                     </button>
                                 </li>
                             ))}

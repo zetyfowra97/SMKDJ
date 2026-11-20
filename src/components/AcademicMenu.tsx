@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
-import { IRootState } from '../../store';
+import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { IRootState } from '../store';
 
 const AcademicMenu = () => {
     const { hash } = useLocation();

@@ -47,7 +47,6 @@ const Footer = () => {
                                     YouTube Channel
                                 </a>
                             </li>
-                           
                         </ul>
                     </div>
                 </div>
